@@ -1,0 +1,15 @@
+# Explicitly manual: no push/PR-triggered runner use in prelaunch.
+name: Workflow fixtures (manual)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixture-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deterministic packet and receipt fixtures
+        run: python3 -m unittest discover -s tests/workflow -v
