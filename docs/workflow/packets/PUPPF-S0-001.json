@@ -1,0 +1,103 @@
+{
+  "schema_version": "bounded-work-order/0.1",
+  "packet_version": 1,
+  "repository": "MarkDude-design/Puppy",
+  "source_base_commit": "f7a68d8884e297f10b8351a8b7b4992b1a5a5f13",
+  "source_base_role": "Clean main baseline preceding workflow-only changes; worker uses the named dispatch branch head, recorded separately",
+  "authority": {
+    "lead": "Meraki",
+    "coordinator_reviewer": "Z (Mistral Vibe)",
+    "implementation_worker": "Codex",
+    "worker_count": 1,
+    "assignment_status": "pending handoff",
+    "exception_reviewer": "Astra",
+    "merge_gate": "Mark",
+    "execution_gate": "Mark",
+    "spend_gate": "Mark",
+    "cost_cap_usd": null,
+    "metered_api_allowed": false
+  },
+  "worker_reads": [
+    "This packet + trusted handoff SHA256",
+    "tools/workflow/check_packet.py",
+    "docs/workflow/README.md",
+    "docs/workflow/receipt-template.json",
+    "named source files only"
+  ],
+  "no_silent_changes": [
+    "architecture",
+    "scope",
+    "workers",
+    "spending",
+    "merge",
+    "security claims"
+  ],
+  "receipt": {
+    "template": "docs/workflow/receipt-template.json",
+    "unknown_provider_usage_and_cost": null,
+    "first_completed_receipt_stops_work": true
+  },
+  "stop": [
+    "missing permissions or host dependencies -> BLOCKED receipt",
+    "need out-of-scope change -> BLOCKED receipt",
+    "budget gate -> BLOCKED receipt",
+    "after initial failure, at most two repair attempts then STOP",
+    "complete evidence -> STOP for Z review"
+  ],
+  "lineage": "Puppy Linux / Barry Kauler method credit; not designated Puppy fork or Fedora distro",
+  "legacy_pilot": "MarkDude-design/lightbringers-castle PR #7",
+  "task_id": "PUPPF-S0-001",
+  "track": "B-host-file-diode",
+  "objective": "Zero-cost host-only mock two-way spool diode with deterministic transcript, six-round STOP, schema and run-twice diff. No QEMU or model providers.",
+  "allowed_changes": [
+    "diode-s0/**",
+    "docs/workflow/runs/PUPPF-S0-001/**"
+  ],
+  "spec": {
+    "runtime": "host-side files and standard library only; no QEMU, network or API/model calls",
+    "spools": [
+      "a_to_b",
+      "b_to_a"
+    ],
+    "umask": "077",
+    "permissions": {
+      "dirs": "0700",
+      "files": "0600"
+    },
+    "wire": {
+      "encoding": "UTF-8",
+      "format": "one-line JSON with newline terminator",
+      "fields": {
+        "v": 0,
+        "round": "integer 1..6",
+        "kind": "MESSAGE",
+        "text": "string"
+      },
+      "unknown_fields": "reject",
+      "embedded_newlines": "reject",
+      "maximum_bytes_including_newline": 256
+    },
+    "transcript": "flat append-only newline-delimited deterministic ordered exchange record; no timestamp in canonical transcript; not tamperproof",
+    "max_rounds": 6,
+    "stop_file": "STOP; once present, no new accepted exchanges",
+    "mock": "Fixed seed, deterministic A/B mock responses, fresh isolated spool setup for each test",
+    "comparison": "Run exact mock scenario twice; canonical transcript bytes identical with no unreported normalization",
+    "later": "Tier 0 local OSS models then separately budgeted Groq Tier 1; guest transplant later packet"
+  },
+  "acceptance": [
+    "Mock test has no QEMU, provider or network dependency",
+    "Two 0700 spools and 0600 messages, STOP and transcript recorded",
+    "Tests reject oversize, extra fields, embedded newline, wrong sequence/round, missing STOP enforcement and seventh round",
+    "Transcript appends without wiping prior entries; reject post-STOP attempts",
+    "Test stale/interrupt spool and max six rounds",
+    "Two fresh seeded runs produce byte-identical canonical transcripts with SHA256",
+    "Receipt/logs/tests preserve actual evidence; no hardened isolation/model success claim"
+  ],
+  "outputs": [
+    "diode-s0/README.md",
+    "diode-s0/ host-only scripts and fixtures",
+    "docs/workflow/runs/PUPPF-S0-001/test-results.json",
+    "docs/workflow/runs/PUPPF-S0-001/receipt.json",
+    "Draft PR, unmerged"
+  ]
+}
