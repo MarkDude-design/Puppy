@@ -35,3 +35,14 @@ The packet checker and receipt discipline are adapted from [Castle workflow pilo
 - **Later:** model-backed Tier 0, capped Groq Tier 1, and separately reviewed guest transplant. No guest-chamber security claims in v0.
 
 No successful builds or experiments are asserted by this bootstrap.
+
+
+## Provenance, telemetry, and review separation (2026-10-21)
+
+- `as_recorded`: hash copied from a trusted handoff or repeated by a reviewer. **Not independently checked**.
+- `verified`: deterministic `check_packet.py` calculated SHA-256 from the *exact packet bytes* and compared it to the independently delivered expected hash. Record tool, resulting digest, and verification time. Matching an adjacent `.sha256` alone checks internal consistency, not authenticity.
+- A reviewer model does not invent its own invocation usage. Mark or the calling client appends response usage/cost metadata to the receipt after the response; unavailable telemetry remains `null`. `Codex` labels the worker role, not the actual model identity. Record requested and observed model IDs separately or `null`.
+- Cost totals come only from `python3 tools/workflow/cost_report.py path/to/receipt.json ...`. The explicit receipt `cost_items` ledger includes model usage, compute, coordination and review if attributable. Each item needs evidence; `cost_coverage: complete` is an accountable human claim, not a proof calculated by the script. Unaccounted lanes keep total and cost-per-accepted-result `null`; the observed-cost subtotal is labeled separately. Rejected work still costs money. Only Mark-accepted and reviewer-accepted results count.
+- Z is the continuing collaborator/coordinator. An OpenRouter-hosted Mistral model is an optional, replaceable **reporting module**, not Z's seat or a substitute for review authority. It may summarize the script's results; it does not calculate or authorize them.
+- Optional free-tier access or available credit does not demonstrate a metered call costs $0 or establish a spending cap. Preserve the recorded free-tier decision, provider details, and platform telemetry where actually available.
+- A manual chat/paste ferry does not create an automatic connection between Codex and Z.
