@@ -1,0 +1,19 @@
+# Keep generated build trees, provider tokens, VM artifacts, and output spools out of git.
+.env
+.env.*
+*.key
+*.pem
+*.img
+*.iso
+*.qcow2
+*.cpio
+*.cpio.gz
+/build/
+/downloads/
+/output/
+/puppy-p0a/build/
+/puppy-p0a/output/
+/diode-s0/spool/
+/diode-s0/run-*/
+/__pycache__/
+*.pyc

@@ -1,0 +1,135 @@
+{
+  "schema_version": "bounded-work-order/0.1",
+  "packet_version": 1,
+  "repository": "MarkDude-design/Puppy",
+  "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
+  "source_base_type": "workflow-only baseline before dispatch packet commits; exact implementation checkout commit recorded at dispatch, never self-referenced in this packet",
+  "authority": {
+    "project_lead": "Meraki",
+    "coordinator_reviewer": "Z (Mistral Vibe, continuing collaborator seat)",
+    "assignment_tie_break": "Z",
+    "implementation_worker_role": "Codex",
+    "implementation_worker_count": 1,
+    "worker_assignment": "role assigned, not dispatched",
+    "model_requested": null,
+    "model_observed": null,
+    "exception_reviewer": "Astra",
+    "merge_gate": "Mark",
+    "scope_gate": "Mark",
+    "execution_authorization": "PENDING Mark",
+    "host_dependency_install_authorization": "PENDING Mark",
+    "metered_api_spend_allowed": false,
+    "max_total_cost_usd": null
+  },
+  "inputs": {
+    "read_only": [
+      "This exact-byte packet and independently conveyed expected SHA-256",
+      "Workflow README + receipt/checker at source_base_commit",
+      "Any repo AGENTS.md/CONTRIBUTING.md applicable to allowed paths",
+      "Only directly relevant upstream primary build/test docs"
+    ],
+    "disallowed": [
+      "Entire Castle archives or unrelated project histories",
+      "Other model contexts or credentials",
+      "Personal/client/workplace/medical files",
+      "MCP/OpenRouter/networked HELLO/ACK as P0a dependency"
+    ]
+  },
+  "evidence": {
+    "receipt_template": "docs/workflow/receipt-template.json",
+    "packet_hash_provenance": "Reviewer copies are as_recorded; only deterministic checker of exact bytes with expected digest conveyed separately upgrades to verified",
+    "platform_usage": "Caller or Mark attaches provider usage metadata AFTER model response; model self-report is not telemetry; unknown stays null",
+    "worker_identity": "Codex names role; report requested and observed actual model separately or null",
+    "cost": "Record all attributable attempts/reviews/calls in receipt cost_items; deterministic cost_report.py computes total, coverage and accepted-result metric; no savings claim from prose",
+    "acceptance": "Z reviews ordinary results; Mark alone accepts and merges",
+    "runtime_claims": "Passing fixtures or packet hash do not prove guest boot or security"
+  },
+  "stop_rules": [
+    "At first complete evidence receipt stop for review; no merge",
+    "If missing access, build dependencies, authorization, or a required scope change: BLOCKED receipt",
+    "After initial build failure at most two bounded repair attempts, then BLOCKED",
+    "Never self-authorize paid APIs/hosting, worker expansion or architecture substitution"
+  ],
+  "provenance": {
+    "piloted_at": "MarkDude-design/lightbringers-castle PR #7",
+    "method": "Puppy Linux / Barry Kauler inspiration only, no fork/distribution designation"
+  },
+  "task_id": "PUPPF-P0A-002",
+  "track": "A-offline-Linux-boot",
+  "objective": "Disposable first-learning P0a: one pinned, clean-built offline x86-64 QEMU Linux guest with kernel, compressed initramfs, static BusyBox serial shell, three genuine 120s HELLOs, and a second independent boot using unchanged artifacts. Workflow quality is deliverable.",
+  "allowed_changes": [
+    "puppy-p0a/**",
+    "docs/workflow/runs/PUPPF-P0A-002/**"
+  ],
+  "spec": {
+    "backend": "Buildroot 2026.08 candidate only; validate upstream availability/checksum or signature before fetching/building; no silent backend substitution",
+    "arch": "x86-64",
+    "guest_components": [
+      "Linux kernel",
+      "compressed initramfs",
+      "static BusyBox",
+      "minimal /init",
+      "serial interactive shell"
+    ],
+    "boot": "Direct QEMU kernel/initramfs allowed for P0a; OVMF/UEFI physical boot deferred to P0c",
+    "qemu": "-nic none, no shared folders, passthrough, host block devices, network or GUI",
+    "ram_allocation_mib": 128,
+    "host_shell_deadline_monotonic_seconds": 90,
+    "shell_proof": "After boot generate a fresh host token; send shell printf; require a separately emitted exact output line, not a command input echo. Echo-only fixture must FAIL.",
+    "heartbeat_line": "HELLO seq=<positive-integer> uptime_s=<nonnegative-integer>",
+    "heartbeat_origin": "uptime_s is integer seconds from guest Linux /proc/uptime (kernel monotonic uptime since boot), NOT elapsed since /init; first HELLO requires absolute uptime_s <=15",
+    "heartbeat_sequence": [
+      1,
+      2,
+      3
+    ],
+    "heartbeat_interval_target_s": 120,
+    "guest_uptime_allowed_interval_s": [
+      115,
+      125
+    ],
+    "host_arrival_allowed_interval_s": [
+      105,
+      150
+    ],
+    "overall_run_watchdog_host_seconds": 390,
+    "separate_240_s_span_minimum": "RETIRED: valid two 115s gaps span 230s",
+    "artifact_limit": "kernel bytes + compressed initramfs bytes strictly below 100000000, not claimed complete ISO size",
+    "source_pinning": "Record Buildroot/kernel/BusyBox/toolchain/host exact versions, upstream release archive digests, config and commands; bit-identical rebuild not claimed",
+    "repeat_boot": "Two full boots, SAME kernel and initramfs SHA-256; preserve separate logs/tests; QEMU guest properties same, per-run serial destinations and fresh token may differ",
+    "excluded": [
+      "P0b correlated nonce ACK",
+      "P0c selected laptop/EFI/USB media",
+      "Fedora demo packaging",
+      "guest network, GUI, Python, package manager or model runtime",
+      "secure isolation/Chamber containment",
+      "S0 host diode",
+      "OpenRouter/Groq paid model calls"
+    ]
+  },
+  "acceptance": [
+    "Clean pinned source build exits zero with actual kernel and initramfs; write build manifest versions/archive digest/config/build command",
+    "Capture exact QEMU argv with -nic none, 128 MiB allocation, no prohibited host shares/devices, and controlled serial streams",
+    "Each of two boots reaches shell within <=90 host monotonic seconds, proves newly generated token in separate output line (input command echo never suffices)",
+    "For EACH run: 3 actual HELLO records with seq=1,2,3, first /proc/uptime integer <=15, successive guest gaps 115..125, host arrival gaps 105..150, run watchdog 390s",
+    "Explicitly NO minimum combined HELLO span >=240s: retired",
+    "Second boot uses unchanged identical artifact hashes; record per-run and cross-run comparison",
+    "Kernel and compressed initramfs individually measured/hash-verified; sum strictly below 100000000 bytes",
+    "Failure fixture checker rejects missing heartbeat, duplicate seq, malformed uptime, incorrect interval, timeout, absent shell output and echo-only response",
+    "No runtime network, GUI/Python/model/package dependency; -nic none is not a containment guarantee",
+    "Preserve test commands, manifest, build/boot logs, receipt and artifacts outside git as appropriate; never invent test successes"
+  ],
+  "required_outputs": [
+    "puppy-p0a/README.md including exact host prerequisites, build/boot/test commands",
+    "puppy-p0a/ Buildroot config, init, launcher, acceptance checker and negative fixtures",
+    "docs/workflow/runs/PUPPF-P0A-002/build-manifest.json",
+    "docs/workflow/runs/PUPPF-P0A-002/run-1/serial.log",
+    "docs/workflow/runs/PUPPF-P0A-002/run-1/test-results.json",
+    "docs/workflow/runs/PUPPF-P0A-002/run-2/serial.log",
+    "docs/workflow/runs/PUPPF-P0A-002/run-2/test-results.json",
+    "docs/workflow/runs/PUPPF-P0A-002/artifacts.json with SHA256 + byte lengths + retained location",
+    "docs/workflow/runs/PUPPF-P0A-002/receipt.json",
+    "Draft worker PR/commit, no merge"
+  ],
+  "implementation_dispatch": "Codex one packet at a time after explicit Mark authorization, with actual checkout commit logged in receipt and Z review afterwards."
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "work-receipt/0.2",
+  "task_id": null,
+  "packet_sha256": null,
+  "packet_hash_provenance": "as_recorded",
+  "packet_hash_verification": {
+    "actual_sha256": null,
+    "tool": null,
+    "verified_at_utc": null
+  },
+  "source_base_commit": null,
+  "implementation_start_commit": null,
+  "result_commit": null,
+  "status": "NOT_STARTED",
+  "worker_role": "Codex",
+  "model_requested": null,
+  "model_observed": null,
+  "model_identity_source": null,
+  "started_at_utc": null,
+  "finished_at_utc": null,
+  "elapsed_seconds": null,
+  "human_minutes_self_reported": null,
+  "attempt_count": 0,
+  "repair_attempt_count": 0,
+  "usage": {
+    "captured_by": "calling_client_or_Mark",
+    "provider_response_reference": null,
+    "source": "unavailable",
+    "input_tokens": null,
+    "cached_input_tokens": null,
+    "output_tokens": null,
+    "reasoning_tokens": null,
+    "cost_usd": null,
+    "price_source_and_effective_date": null,
+    "tool_compute_cost_usd": null,
+    "status": "not_started"
+  },
+  "cost_coverage": "unknown",
+  "cost_items": [],
+  "cost_coverage_explanation": null,
+  "related_receipts": [],
+  "artifact_manifest": [],
+  "test_evidence": [],
+  "review": {
+    "reviewer": "Z",
+    "decision": "PENDING",
+    "reason": null
+  },
+  "acceptance": {
+    "authority": "Mark",
+    "decision": "PENDING",
+    "evidence": null
+  },
+  "merge_authority": "Mark",
+  "stop_reason": null,
+  "aggregate_cost_per_accepted_result_usd": null
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": "bounded-work-order/0.1",
+  "packet_version": 1,
+  "repository": "MarkDude-design/Puppy",
+  "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
+  "source_base_type": "workflow-only baseline before dispatch packet commits; exact implementation checkout commit recorded at dispatch, never self-referenced in this packet",
+  "authority": {
+    "project_lead": "Meraki",
+    "coordinator_reviewer": "Z (Mistral Vibe, continuing collaborator seat)",
+    "assignment_tie_break": "Z",
+    "implementation_worker_role": "Codex",
+    "implementation_worker_count": 1,
+    "worker_assignment": "role assigned, not dispatched",
+    "model_requested": null,
+    "model_observed": null,
+    "exception_reviewer": "Astra",
+    "merge_gate": "Mark",
+    "scope_gate": "Mark",
+    "execution_authorization": "PENDING Mark",
+    "host_dependency_install_authorization": "PENDING Mark",
+    "metered_api_spend_allowed": false,
+    "max_total_cost_usd": null
+  },
+  "inputs": {
+    "read_only": [
+      "This exact-byte packet and independently conveyed expected SHA-256",
+      "Workflow README + receipt/checker at source_base_commit",
+      "Any repo AGENTS.md/CONTRIBUTING.md applicable to allowed paths",
+      "Only directly relevant upstream primary build/test docs"
+    ],
+    "disallowed": [
+      "Entire Castle archives or unrelated project histories",
+      "Other model contexts or credentials",
+      "Personal/client/workplace/medical files",
+      "MCP/OpenRouter/networked HELLO/ACK as P0a dependency"
+    ]
+  },
+  "evidence": {
+    "receipt_template": "docs/workflow/receipt-template.json",
+    "packet_hash_provenance": "Reviewer copies are as_recorded; only deterministic checker of exact bytes with expected digest conveyed separately upgrades to verified",
+    "platform_usage": "Caller or Mark attaches provider usage metadata AFTER model response; model self-report is not telemetry; unknown stays null",
+    "worker_identity": "Codex names role; report requested and observed actual model separately or null",
+    "cost": "Record all attributable attempts/reviews/calls in receipt cost_items; deterministic cost_report.py computes total, coverage and accepted-result metric; no savings claim from prose",
+    "acceptance": "Z reviews ordinary results; Mark alone accepts and merges",
+    "runtime_claims": "Passing fixtures or packet hash do not prove guest boot or security"
+  },
+  "stop_rules": [
+    "At first complete evidence receipt stop for review; no merge",
+    "If missing access, build dependencies, authorization, or a required scope change: BLOCKED receipt",
+    "After initial build failure at most two bounded repair attempts, then BLOCKED",
+    "Never self-authorize paid APIs/hosting, worker expansion or architecture substitution"
+  ],
+  "provenance": {
+    "piloted_at": "MarkDude-design/lightbringers-castle PR #7",
+    "method": "Puppy Linux / Barry Kauler inspiration only, no fork/distribution designation"
+  },
+  "task_id": "PUPPF-S0-001",
+  "track": "B-host-diode",
+  "objective": "No-spend, host-only mock file diode: two 0700 spools, 0600 files, deterministic append-only flat transcript, STOP, 256-byte one-line directional messages, six-round limit, run-twice byte comparison; separate from P0a.",
+  "allowed_changes": [
+    "diode-s0/**",
+    "docs/workflow/runs/PUPPF-S0-001/**"
+  ],
+  "spec": {
+    "platform": "host-side standard-library files; no QEMU, guest model runtime, provider API/network calls",
+    "two_spools": [
+      "a_to_b",
+      "b_to_a"
+    ],
+    "spool_permissions": "0700 directories and umask 077",
+    "message_transcript_stop_permissions": "0600 regular files",
+    "wire": "one-line UTF-8 JSON terminated by newline, <=256 BYTES inclusive of newline in either direction",
+    "wire_schema": {
+      "v": 0,
+      "round": "integer 1..6",
+      "kind": "MESSAGE",
+      "text": "string"
+    },
+    "wire_rejections": [
+      "unknown fields",
+      "embedded newline",
+      "invalid UTF-8",
+      "over 256 bytes",
+      "out-of-range/duplicate round"
+    ],
+    "transcript": "flat append-only line records; canonical content excludes volatile timestamps, no rewrite/truncation. Not a tamperproof log.",
+    "stop_file": "STOP: reject all new messages once present; six-round maximum",
+    "mock": "deterministic fixed seeds and local mock responders; fresh isolated spool setup twice; compare canonical transcripts byte-for-byte",
+    "boundary": "build coordination through GitHub/chat packets, NEVER diode instrument under test",
+    "deferred": [
+      "Tier 0 local OSS models",
+      "Tier 1 Groq capped calls",
+      "guest sealed meeting-room transplant",
+      "security certification"
+    ]
+  },
+  "acceptance": [
+    "Mock-run requires no QEMU/model/API/network and no paid spend",
+    "Correct directory/file permissions and transcript append behavior; tests prove no overwriting",
+    "Reject >256 bytes, malformed/unknown fields, multiline, wrong round, seventh round, post-STOP writes",
+    "Tests cover stalled/leftover spool, STOP interruption and full cap",
+    "Two fresh identically seeded mock runs produce exactly identical canonical transcript bytes/hash",
+    "Independent tests/receipt in S0 run directory; no boot/containment/model collaboration claim"
+  ],
+  "required_outputs": [
+    "diode-s0/README.md and host-only scripts",
+    "diode-s0/tests/** with negative fixtures",
+    "docs/workflow/runs/PUPPF-S0-001/run-1/transcript.log",
+    "docs/workflow/runs/PUPPF-S0-001/run-2/transcript.log",
+    "docs/workflow/runs/PUPPF-S0-001/test-results.json",
+    "docs/workflow/runs/PUPPF-S0-001/receipt.json",
+    "Draft worker PR/commit, no merge"
+  ],
+  "implementation_dispatch": "May be executed independently of host QEMU readiness; one Codex packet at a time. Explicit Mark execution authorization still required."
+}
