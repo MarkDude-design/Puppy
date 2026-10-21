@@ -1,0 +1,117 @@
+{
+  "schema_version": "bounded-work-order/0.1",
+  "packet_version": 1,
+  "repository": "MarkDude-design/Puppy",
+  "source_base_commit": "f7a68d8884e297f10b8351a8b7b4992b1a5a5f13",
+  "source_base_role": "Clean main baseline preceding workflow-only changes; worker uses the named dispatch branch head, recorded separately",
+  "authority": {
+    "lead": "Meraki",
+    "coordinator_reviewer": "Z (Mistral Vibe)",
+    "implementation_worker": "Codex",
+    "worker_count": 1,
+    "assignment_status": "pending handoff",
+    "exception_reviewer": "Astra",
+    "merge_gate": "Mark",
+    "execution_gate": "Mark",
+    "spend_gate": "Mark",
+    "cost_cap_usd": null,
+    "metered_api_allowed": false
+  },
+  "worker_reads": [
+    "This packet + trusted handoff SHA256",
+    "tools/workflow/check_packet.py",
+    "docs/workflow/README.md",
+    "docs/workflow/receipt-template.json",
+    "named source files only"
+  ],
+  "no_silent_changes": [
+    "architecture",
+    "scope",
+    "workers",
+    "spending",
+    "merge",
+    "security claims"
+  ],
+  "receipt": {
+    "template": "docs/workflow/receipt-template.json",
+    "unknown_provider_usage_and_cost": null,
+    "first_completed_receipt_stops_work": true
+  },
+  "stop": [
+    "missing permissions or host dependencies -> BLOCKED receipt",
+    "need out-of-scope change -> BLOCKED receipt",
+    "budget gate -> BLOCKED receipt",
+    "after initial failure, at most two repair attempts then STOP",
+    "complete evidence -> STOP for Z review"
+  ],
+  "lineage": "Puppy Linux / Barry Kauler method credit; not designated Puppy fork or Fedora distro",
+  "legacy_pilot": "MarkDude-design/lightbringers-castle PR #7",
+  "task_id": "PUPPF-P0A-001",
+  "track": "A-boot",
+  "objective": "Build and accept twice the SAME offline x86-64 QEMU kernel+initramfs+static BusyBox minimal guest with shell and timed HELLO; Buildroot 2026.08 provisional and disposable.",
+  "allowed_changes": [
+    "puppy-p0a/**",
+    "docs/workflow/runs/PUPPF-P0A-001/**"
+  ],
+  "spec": {
+    "source": "https://buildroot.org/download.html",
+    "buildroot_version": "2026.08",
+    "download_sha256": "MUST VERIFY AND RECORD, NOT YET KNOWN",
+    "pin": "Exact kernel, BusyBox, Buildroot, archive digests, toolchain, host and configs",
+    "image": "Linux kernel, compressed initramfs, static BusyBox, minimal /init, serial interactive shell",
+    "boot": "Direct QEMU -kernel/-initrd, UEFI deferred",
+    "qemu": "-nic none, no shared folders, host block devices, passthrough devices or network",
+    "guest_ram_mib": 128,
+    "shell_deadline_host_monotonic_s": 90,
+    "shell_proof": "Send fresh host-generated token via shell printf; separately emitted output must match exactly, never command echo",
+    "hello_line": "HELLO seq=<positive-integer> uptime_s=<nonnegative-integer>",
+    "hello_count": 3,
+    "hello_first_guest_uptime_max_s": 15,
+    "hello_gap_guest_monotonic_s": [
+      115,
+      125
+    ],
+    "hello_gap_host_arrival_s": [
+      105,
+      150
+    ],
+    "overall_host_watchdog_s": 390,
+    "minimum_span_s": null,
+    "minimum_span_reason": "240s floor explicitly retired; two 115s gaps total only 230s",
+    "repeat": "Two complete guest runs using unchanged artifact hashes",
+    "combined_kernel_initramfs_bytes_below": 100000000,
+    "excluded": [
+      "guest network",
+      "GUI",
+      "Python",
+      "model runtime",
+      "MCP",
+      "OpenRouter",
+      "P0b ACK",
+      "P0c physical boot",
+      "secure containment"
+    ]
+  },
+  "acceptance": [
+    "Pinned clean build generates real kernel and compressed initramfs; preserve manifest with exact source/tool versions/digests, commands, config",
+    "Run full shell+3 HELLO acceptance twice unchanged kernel/initramfs: log QEMU args and artifact SHA256",
+    "Both shell proofs within 90s via fresh token that is NOT command echo",
+    "Both sets of 3 HELLO records in order, first uptime <=15, guest intervals 115-125s, host arrivals 105-150s, hard watchdog 390s",
+    "128 MiB allocation recorded, not claimed to be actual resident RAM minimum",
+    "Kernel+initramfs combined bytes strictly below 100000000; report separate bytes and SHA256",
+    "Checker reject fixtures for missing HELLO, duplicate sequence, bad uptime/interval, absent or echoed shell proof and timeout",
+    "Review runtime and QEMU args for -nic none and no host/device mount access; not a security guarantee",
+    "No binaries over normal Git limits committed without artifact-storage decision"
+  ],
+  "outputs": [
+    "puppy-p0a/README.md",
+    "puppy-p0a/ config, build, guest init, host checker, failure fixtures",
+    "docs/workflow/runs/PUPPF-P0A-001/build-manifest.json",
+    "docs/workflow/runs/PUPPF-P0A-001/serial-boot-1.log",
+    "docs/workflow/runs/PUPPF-P0A-001/serial-boot-2.log",
+    "docs/workflow/runs/PUPPF-P0A-001/test-results.json",
+    "docs/workflow/runs/PUPPF-P0A-001/receipt.json",
+    "Artifact download location + SHA256",
+    "Draft PR, unmerged"
+  ]
+}
