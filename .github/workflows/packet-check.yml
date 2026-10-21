@@ -1,0 +1,15 @@
+# Opt-in manual workflow for first learning cycle. No automatic runner usage.
+name: Packet integrity (manual)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  packet-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check exact-byte packets and failure fixtures
+        run: python3 -m unittest discover -s tests/workflow -v
