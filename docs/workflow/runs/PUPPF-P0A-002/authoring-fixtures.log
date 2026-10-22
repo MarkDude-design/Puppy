@@ -1,0 +1,31 @@
+test_absolute_first_uptime_not_init_relative (test_acceptance.AcceptanceFixtures.test_absolute_first_uptime_not_init_relative) ... ok
+test_duplicate_and_extra_heartbeat (test_acceptance.AcceptanceFixtures.test_duplicate_and_extra_heartbeat) ... ok
+test_duplicate_shell_output (test_acceptance.AcceptanceFixtures.test_duplicate_shell_output) ... ok
+test_echo_only_is_not_output (test_acceptance.AcceptanceFixtures.test_echo_only_is_not_output) ... ok
+test_guest_interval (test_acceptance.AcceptanceFixtures.test_guest_interval) ... ok
+test_host_interval_independent_of_guest (test_acceptance.AcceptanceFixtures.test_host_interval_independent_of_guest) ... ok
+test_invalid_host_clock_data (test_acceptance.AcceptanceFixtures.test_invalid_host_clock_data) ... ok
+test_launcher_has_no_network_or_shares (test_acceptance.AcceptanceFixtures.test_launcher_has_no_network_or_shares) ... ok
+test_malformed_and_negative_uptime (test_acceptance.AcceptanceFixtures.test_malformed_and_negative_uptime) ... ok
+test_missing_and_late_prompt (test_acceptance.AcceptanceFixtures.test_missing_and_late_prompt) ... ok
+test_missing_heartbeat (test_acceptance.AcceptanceFixtures.test_missing_heartbeat) ... ok
+test_missing_shell_output (test_acceptance.AcceptanceFixtures.test_missing_shell_output) ... ok
+test_output_before_probe_cannot_pass (test_acceptance.AcceptanceFixtures.test_output_before_probe_cannot_pass) ... ok
+test_probe_input_cannot_echo_full_token (test_acceptance.AcceptanceFixtures.test_probe_input_cannot_echo_full_token) ... ok
+test_qemu_exit_is_failure (test_acceptance.AcceptanceFixtures.test_qemu_exit_is_failure) ... ok
+test_reboot_and_panic (test_acceptance.AcceptanceFixtures.test_reboot_and_panic) ... ok
+test_reordered_heartbeat (test_acceptance.AcceptanceFixtures.test_reordered_heartbeat) ... ok
+test_retired_240_second_floor_is_not_reintroduced (test_acceptance.AcceptanceFixtures.test_retired_240_second_floor_is_not_reintroduced) ... ok
+test_valid_control (test_acceptance.AcceptanceFixtures.test_valid_control) ... ok
+test_watchdog (test_acceptance.AcceptanceFixtures.test_watchdog) ... ok
+test_archive_cannot_extract_outside_release (test_source_and_harness.SourceAndHarnessFailures.test_archive_cannot_extract_outside_release) ... ok
+test_archive_rejects_escaping_symlink (test_source_and_harness.SourceAndHarnessFailures.test_archive_rejects_escaping_symlink) ... ok
+test_changed_checker_is_blocked (test_source_and_harness.SourceAndHarnessFailures.test_changed_checker_is_blocked) ... ok
+test_missing_qemu_saves_failure_not_success (test_source_and_harness.SourceAndHarnessFailures.test_missing_qemu_saves_failure_not_success) ... ok
+test_signature_requires_validsig_and_expected_signer (test_source_and_harness.SourceAndHarnessFailures.test_signature_requires_validsig_and_expected_signer) ... ok
+test_version_pin_accepts_upstream_export_syntax (test_source_and_harness.SourceAndHarnessFailures.test_version_pin_accepts_upstream_export_syntax) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.015s
+
+OK

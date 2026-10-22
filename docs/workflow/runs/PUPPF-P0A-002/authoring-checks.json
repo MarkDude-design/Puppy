@@ -1,0 +1,55 @@
+{
+  "kind": "authoring_self_checks_only",
+  "commands": [
+    {
+      "argv": [
+        "bash",
+        "-n",
+        "puppy-p0a/ci/run-ci.sh"
+      ],
+      "exit_code": 0,
+      "log": "docs/workflow/runs/PUPPF-P0A-002/bash-syntax.log"
+    },
+    {
+      "argv": [
+        "sh",
+        "-n",
+        "puppy-p0a/buildroot-external/overlay/init"
+      ],
+      "exit_code": 0,
+      "log": "docs/workflow/runs/PUPPF-P0A-002/init-syntax.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "puppy-p0a/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "docs/workflow/runs/PUPPF-P0A-002/authoring-fixtures.log"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/workflow/check_packet.py",
+        "docs/workflow/packets/PUPPF-P0A-002.json",
+        "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b"
+      ],
+      "exit_code": 0,
+      "log": "docs/workflow/runs/PUPPF-P0A-002/packet-check.json"
+    }
+  ],
+  "tests_executed": 26,
+  "tests_passed": 26,
+  "tests_failed": 0,
+  "guest_boots": 0,
+  "builds": 0,
+  "shellcheck": "NOT_RUN: unavailable",
+  "python_ast": "PASS",
+  "observed_at_utc": "2026-10-22T06:06:35.644693+00:00"
+}

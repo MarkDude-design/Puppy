@@ -1,0 +1,1 @@
+# No extra packages: the spike reuses Linux, musl and BusyBox.

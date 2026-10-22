@@ -1,0 +1,45 @@
+{
+  "kind": "authoring_evidence_only",
+  "files": [
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/PR-DRAFT.md",
+      "sha256": "7b1e61cd7607be3af6f4ba1354f8597d36f8538b66c0b6b5cf6e5770df03b385",
+      "bytes": 2833
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/authoring-checks.json",
+      "sha256": "dbabec9cf6e1a91d5947904a15f492b47016c794f3217063ca2256748278a161",
+      "bytes": 1263
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/authoring-fixtures.log",
+      "sha256": "5c5e91b880a6d7d6970eb06958645aba96667218ce760783b11a2e3b461ef655",
+      "bytes": 3067
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/bash-syntax.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/init-syntax.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/packet-check.json",
+      "sha256": "51e933ef928e5e64b278e2f16fa102efcf9b0830aeed992bd89fe844e90924f9",
+      "bytes": 143
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/pr-creation-blocker.json",
+      "sha256": "8d72afe1dab6bfb2ad45014335bcfdd7da9c29861a3c2aac628283a056ff0831",
+      "bytes": 1295
+    },
+    {
+      "path": "docs/workflow/runs/PUPPF-P0A-002/receipt.json",
+      "sha256": "5e6fc58ac103e138c237dea0620ffe870b95ec1d3dd89a63926bdfc8fefedb51",
+      "bytes": 6687
+    }
+  ]
+}

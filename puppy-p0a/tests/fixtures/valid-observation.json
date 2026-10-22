@@ -1,0 +1,16 @@
+{
+  "token": "PUPPF_TOKEN_0123456789abcdef0123456789abcdef",
+  "prompt_at": 2.0,
+  "token_sent_at": 2.1,
+  "elapsed": 242.0,
+  "timed_out": false,
+  "qemu_exited": false,
+  "events": [
+    {"at_s": 0.5, "text": "PUPPF_INIT"},
+    {"at_s": 1.0, "text": "HELLO seq=1 uptime_s=1"},
+    {"at_s": 2.0, "text": "PUPPF# "},
+    {"at_s": 3.0, "text": "PUPPF_TOKEN_0123456789abcdef0123456789abcdef"},
+    {"at_s": 121.0, "text": "HELLO seq=2 uptime_s=121"},
+    {"at_s": 241.0, "text": "HELLO seq=3 uptime_s=241"}
+  ]
+}

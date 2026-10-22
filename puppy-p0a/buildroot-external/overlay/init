@@ -1,0 +1,28 @@
+#!/bin/sh
+# PID 1 for a disposable serial-only proof, not a containment boundary.
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+exec </dev/ttyS0 >/dev/ttyS0 2>&1
+stty -echo
+printf '\nPUPPF_INIT\n'
+
+heartbeat() {
+    seq=1
+    while :; do
+        read -r uptime rest </proc/uptime
+        # Absolute kernel uptime; wall-clock synchronization is irrelevant.
+        printf '\nHELLO seq=%s uptime_s=%s\n' "$seq" "${uptime%%.*}"
+        seq=$((seq + 1))
+        sleep 120
+    done
+}
+heartbeat &
+export PS1='PUPPF# '
+while :; do
+    # Give the shell a controlling serial terminal while PID 1 reaps it.
+    setsid cttyhack /bin/sh -i || true
+    printf '\nPUPPF_SHELL_RESTART\n'
+done

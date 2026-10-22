@@ -1,0 +1,48 @@
+{
+  "scope": "GitHub draft PR creation only; not a Buildroot/QEMU result",
+  "implementation_commit": "e1656ae970d4c9cc1b1089fe85c18027e06dbb66",
+  "branch": "work/puppf-p0a-002-ci-impl",
+  "git_push": "SUCCEEDED",
+  "pr_created": false,
+  "command": [
+    "gh",
+    "pr",
+    "create",
+    "--repo",
+    "MarkDude-design/Puppy",
+    "--base",
+    "main",
+    "--head",
+    "work/puppf-p0a-002-ci-impl",
+    "--draft",
+    "--title",
+    "Implement P0a Buildroot and two-boot QEMU CI entrypoint",
+    "--body-file",
+    "/tmp/puppf-p0a-ci-pr-body.md"
+  ],
+  "exit_code": 1,
+  "observed_error": "Post \"https://api.github.com/graphql\": Forbidden",
+  "independent_transport_check": {
+    "command": [
+      "curl",
+      "--head",
+      "--silent",
+      "--show-error",
+      "--max-time",
+      "15",
+      "https://api.github.com"
+    ],
+    "exit_code": 56,
+    "observed_error": "CONNECT tunnel failed, response 403"
+  },
+  "policy_api_host_allowed": false,
+  "network_draft": {
+    "added_domain": "api.github.com",
+    "saved": true,
+    "runtime_applied": false,
+    "requires_publish": true
+  },
+  "prepared_body": "PR-DRAFT.md",
+  "create_pr_url": "https://github.com/MarkDude-design/Puppy/pull/new/work/puppf-p0a-002-ci-impl",
+  "observed_at_utc": "2026-10-22T06:09:07.072465+00:00"
+}
