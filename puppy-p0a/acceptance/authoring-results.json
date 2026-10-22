@@ -1,0 +1,71 @@
+{
+  "schema_version": "mock-acceptance-authoring/1",
+  "status": "MOCK_TESTS_PASSED",
+  "source_base_commit": "5176d9167f20c5ec8d56b7abcdd5f4ada710a4ec",
+  "observed_at_utc": "2026-10-22T08:19:09.268969+00:00",
+  "command": [
+    "/workspace/.puppf-acceptance-venv/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "puppy-p0a/acceptance/tests",
+    "puppy-p0a/tests",
+    "-q",
+    "--junitxml=/tmp/puppf-no-model-pytest.xml"
+  ],
+  "pytest_version": "8.4.2",
+  "outcomes": {
+    "passed": 120,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_suite_tests": 94,
+  "existing_ci_checker_tests": 26,
+  "evidence_kind": "pure checks and mock backends only",
+  "qemu_started": false,
+  "image_build_performed": false,
+  "guest_acceptance_claimed": false,
+  "frozen_packet_sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b",
+  "workflow_files_changed": false,
+  "files": [
+    {
+      "path": "puppy-p0a/acceptance/README.md",
+      "sha256": "a0ca60432bb9ef57d7a2c44de71695dc1bad95c780d856401b6f1bf1aca20524"
+    },
+    {
+      "path": "puppy-p0a/acceptance/boot_backend.py",
+      "sha256": "260a3138928a5a55853a035a65d9303a7c72623389b205eecdde880cacf9f939"
+    },
+    {
+      "path": "puppy-p0a/acceptance/no_model_acceptance.py",
+      "sha256": "3443e9148fa702a75492bc98c9348715682e28e80801c6ae9201c2835974c85a"
+    },
+    {
+      "path": "puppy-p0a/acceptance/requirements-test.txt",
+      "sha256": "a0377cde7e8f24eb9e1d5de9be94be6bd7c7b10186f862dc134305adde240a3a"
+    },
+    {
+      "path": "puppy-p0a/acceptance/tests/conftest.py",
+      "sha256": "5304ee5bfdb9cac1d7288cf7ecfc7534e844cea22a8d4f3e2e41c78029a5d860"
+    },
+    {
+      "path": "puppy-p0a/acceptance/tests/test_boot_wrapper.py",
+      "sha256": "1eeb9b1ab6d43c97ac3d0fa0613d8ccc1d2563e7a20c004ae904b75c396f5e91"
+    },
+    {
+      "path": "puppy-p0a/acceptance/tests/test_cli.py",
+      "sha256": "804997113b1fb0894505c3fd961497fb4e9b86f96b3152e2b9af7c67a8ba3e88"
+    },
+    {
+      "path": "puppy-p0a/acceptance/tests/test_nonce_ack.py",
+      "sha256": "73e09cf4246c58fa09c38f38626f9d803d4c2249bac0a6c490423259b667881a"
+    },
+    {
+      "path": "puppy-p0a/acceptance/tests/test_size_and_log.py",
+      "sha256": "5bbf755a8657a62804b6c0630fa8a3e0b3f4719e4a39048a2a19637c4ffc71ea"
+    }
+  ]
+}
