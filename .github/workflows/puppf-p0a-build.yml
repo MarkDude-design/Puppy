@@ -65,6 +65,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          exec > >(tee -a "$PUPPF_EVIDENCE_DIR/apt-install.log") 2>&1
           sudo apt-get update
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
             build-essential bc bison bzip2 cpio file flex git libncurses-dev patch \
@@ -75,6 +76,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          exec > >(tee -a "$PUPPF_EVIDENCE_DIR/build-console.log") 2>&1
           test -f puppy-p0a/ci/run-ci.sh || { echo 'BLOCKED: Codex has not supplied puppy-p0a/ci/run-ci.sh'; exit 2; }
           bash puppy-p0a/ci/run-ci.sh
 
