@@ -1,0 +1,88 @@
+# Puppf P0a: manual GitHub-hosted runner, not a substitute for evidence.
+# Requires Mark to merge, then explicitly dispatch from the Actions tab.
+name: Puppf P0a — hosted preflight and boot (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "preflight checks only, or complete pinned build + two real QEMU boots"
+        required: true
+        type: choice
+        options:
+          - preflight
+          - build
+        default: preflight
+
+permissions:
+  contents: read
+
+concurrency:
+  group: puppf-p0a-manual-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  p0a:
+    name: "P0a ${{ inputs.mode }} — ubuntu-24.04"
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    env:
+      PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
+      PUPPF_EXPECTED_PACKET_SHA256: b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b
+      PUPPF_MODE: ${{ inputs.mode }}
+    steps:
+      - name: Checkout reviewed code (no saved credentials)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+
+      - name: Runner preflight and exact packet hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$PUPPF_EVIDENCE_DIR"
+          exec > >(tee -a "$PUPPF_EVIDENCE_DIR/runner-preflight.log") 2>&1
+          printf 'utc=%s\n' "$(date -u +%FT%TZ)"
+          printf 'run_id=%s\ncommit=%s\nmode=%s\n' "$GITHUB_RUN_ID" "$GITHUB_SHA" "$PUPPF_MODE"
+          uname -a
+          df -h "$GITHUB_WORKSPACE" "$RUNNER_TEMP"
+          free -h
+          python3 --version
+          python3 tools/workflow/check_packet.py docs/workflow/packets/PUPPF-P0A-002.json "$PUPPF_EXPECTED_PACKET_SHA256"
+          printf 'Buildroot candidate reachability (HEAD is only a diagnostic):\n'
+          curl --head --location --fail --silent --show-error --max-time 20 https://buildroot.org/downloads/buildroot-2026.08.tar.xz || echo 'HEAD failed: record blocker, do not infer GET or signature is good'
+          for bin in qemu-system-x86_64 cpio rsync bc flex bison gcc g++ make; do
+            if command -v "$bin" >/dev/null 2>&1; then
+              printf 'host_tool=%s path=%s\n' "$bin" "$(command -v "$bin")"
+            else
+              printf 'host_tool=%s missing\n' "$bin"
+            fi
+          done
+
+      - name: Install build dependencies inside disposable GitHub-hosted VM
+        if: ${{ inputs.mode == 'build' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential bc bison bzip2 cpio file flex git libncurses-dev patch \
+            perl python3 qemu-system-x86 rsync tar unzip wget xz-utils
+
+      - name: Execute actual build and two-boot acceptance
+        if: ${{ inputs.mode == 'build' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f puppy-p0a/ci/run-ci.sh || { echo 'BLOCKED: Codex has not supplied puppy-p0a/ci/run-ci.sh'; exit 2; }
+          bash puppy-p0a/ci/run-ci.sh
+
+      - name: Upload runner evidence even on failure
+        if: ${{ always() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: puppf-p0a-${{ github.run_id }}-${{ inputs.mode }}
+          path: ${{ runner.temp }}/puppf-evidence/
+          if-no-files-found: warn
+          retention-days: 3
