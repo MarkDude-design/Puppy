@@ -1,0 +1,25 @@
+{
+  "buildroot": {
+    "version": "2026.08",
+    "archive_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz",
+    "signature_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz.sign",
+    "signer_fingerprint": "F0A589A56CFE2C6D68E9471AED04E0FBE016E856",
+    "public_key_url": "https://keys.openpgp.org/vks/v1/by-fingerprint/F0A589A56CFE2C6D68E9471AED04E0FBE016E856",
+    "upstream_tag_object": "813cbac680a73092e1ebb86da72972c44573145c",
+    "upstream_commit": "d5180309b1b66ef3b8eaccca70ad69be8e0729a1",
+    "trust_provenance": "Fingerprint read from the annotated 2026.08 release tag in the upstream buildroot/buildroot GitHub mirror. Archive verification is deliberately deferred to the runner, not claimed from tag inspection."
+  },
+  "linux": {
+    "version": "6.18.7",
+    "archive": "linux-6.18.7.tar.xz",
+    "sha256": "b726a4d15cf9ae06219b56d87820776e34d89fbc137e55fb54a9b9c3015b8f1e",
+    "provenance": "board/qemu/patches/linux/linux.hash in the pinned Buildroot release"
+  },
+  "busybox": {
+    "version": "1.38.0",
+    "archive": "busybox-1.38.0.tar.bz2",
+    "sha256": "34f9ea6ff8636f2c9241153b9114eefa9e65674a45318ae1ef95bb5f31c53bb2",
+    "provenance": "package/busybox/busybox.hash in the pinned Buildroot release"
+  },
+  "packet_checker_sha256": "4287793c49e32589d71536d22f5cf311b8652106fc47c4e622d3cf8fe9c75de2"
+}

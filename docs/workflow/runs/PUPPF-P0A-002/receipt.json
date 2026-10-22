@@ -1,0 +1,176 @@
+{
+  "schema_version": "work-receipt/0.2",
+  "task_id": "PUPPF-P0A-002",
+  "packet_sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b",
+  "packet_hash_provenance": "verified",
+  "packet_hash_verification": {
+    "actual_sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b",
+    "tool": "tools/workflow/check_packet.py",
+    "checker_sha256": "4287793c49e32589d71536d22f5cf311b8652106fc47c4e622d3cf8fe9c75de2",
+    "verified_at_utc": "2026-10-22T06:06:35.644693+00:00"
+  },
+  "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
+  "implementation_start_commit": "5af56727d8c1a21acf38ae608a5291de83f667c4",
+  "result_commit": null,
+  "status": "AUTHORED_NOT_RUN",
+  "worker_role": "Codex",
+  "model_requested": null,
+  "model_observed": null,
+  "model_identity_source": "Calling-client runtime identity telemetry unavailable",
+  "started_at_utc": null,
+  "finished_at_utc": "2026-10-22T06:06:35.644693+00:00",
+  "elapsed_seconds": null,
+  "human_minutes_self_reported": null,
+  "attempt_count": 1,
+  "repair_attempt_count": 0,
+  "usage": null,
+  "cost_coverage": "unknown",
+  "cost_items": [],
+  "cost_coverage_explanation": "Codex subscription/provider usage and host cost telemetry unavailable; no zero-cost or savings claim.",
+  "related_receipts": [],
+  "artifact_manifest": [
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/README.md",
+      "sha256": "288366de1c62f4b3de8413cd37721a57e9549b05656d613262cf7b1373f15551",
+      "bytes": 8214
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/Config.in",
+      "sha256": "756a8234d3e4c53ab010536ba6adb3fd64a38c17cd6f53a5fbaa1551543782fd",
+      "bytes": 63
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/busybox.config",
+      "sha256": "3beb543a859344bfd07032302e46ae642b3309cad9f20e5ba04c1493635bdf11",
+      "bytes": 719
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/configs/puppf_defconfig",
+      "sha256": "0d6189a03c89a9232b019866350e7cdada000c7c7e0ced4bc64322480ecff8d3",
+      "bytes": 1001
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/external.desc",
+      "sha256": "1b930a56881d9e729ce8d4e599034d9f5e2e78fb49577503ae7adfa3c5efc03e",
+      "bytes": 71
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/external.mk",
+      "sha256": "363039f26b348c2ee69a61b30526490e0b3ba181b3181985fbdbd8df9ea22e0b",
+      "bytes": 76
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/linux.config",
+      "sha256": "8943471716c563a9ca8ede2f93ba3eb707d98c9d12691463a020c56388feb371",
+      "bytes": 615
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/buildroot-external/overlay/init",
+      "sha256": "a997a8fbc853f3204514949cce80b63582e55bba03e994a4694c136f67a77310",
+      "bytes": 765
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/ci/acceptance.py",
+      "sha256": "d47ce8746a00a9de6d2149f22444f246bd5104f2cdffb2170be2091cad3b0a00",
+      "bytes": 3667
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/ci/boot.py",
+      "sha256": "d8304e062cf6f4c17bdb7274736b0dde02431252fb792028df2275cb70c04526",
+      "bytes": 6485
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/ci/driver.py",
+      "sha256": "719e53a777a72ecfe614eff5b56d0742ecd666357bff823d8f83f9fcb71e73b1",
+      "bytes": 21058
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/ci/run-ci.sh",
+      "sha256": "b52f6fd8a1735daf2acd733d47ab5a292bcf8b353d55664c409def1c3b31f505",
+      "bytes": 223
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/source-lock.json",
+      "sha256": "e9b78d296d2a49fe4525390ec877469653439f73e80fbdf2428b2716333e6212",
+      "bytes": 1359
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/tests/fixtures/valid-observation.json",
+      "sha256": "471b0bdd4d4640018c03a69b9eb50533450431fce6b3f4eac9e4811469ececd7",
+      "bytes": 511
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/tests/test_acceptance.py",
+      "sha256": "4fda34dba7a5b40b0c014535ac0e3a46db284e5ad501933c11588fbd9912de34",
+      "bytes": 5751
+    },
+    {
+      "kind": "implementation_source",
+      "path": "puppy-p0a/tests/test_source_and_harness.py",
+      "sha256": "94674f144a117c1e45d57f88ce5cd1027d2f1df29592ec846b7983124742c3d4",
+      "bytes": 3295
+    }
+  ],
+  "test_evidence": [
+    {
+      "kind": "synthetic_checker_tests",
+      "status": "PASS",
+      "tests_executed": 26,
+      "reference": "authoring-fixtures.log",
+      "proves_guest_boot": false
+    },
+    {
+      "kind": "shell_syntax_and_python_parse",
+      "status": "PASS",
+      "reference": "authoring-checks.json"
+    },
+    {
+      "kind": "actual_build_and_two_boot_acceptance",
+      "status": "NOT_RUN",
+      "reference": null
+    }
+  ],
+  "review": {
+    "reviewer": "Z",
+    "decision": "PENDING",
+    "reason": null
+  },
+  "acceptance": {
+    "authority": "Mark",
+    "decision": "PENDING",
+    "evidence": null
+  },
+  "merge_authority": "Mark",
+  "stop_reason": "Implementation authored with local checker fixtures and syntax checks only. STOP for Z review, Mark merge and manual hosted build dispatch; no local build or workflow dispatch.",
+  "aggregate_cost_per_accepted_result_usd": null,
+  "dispatch_route": "PUPPF-P0A-CI-001",
+  "packet_checker_sha256": "4287793c49e32589d71536d22f5cf311b8652106fc47c4e622d3cf8fe9c75de2",
+  "build_attempt_count": 0,
+  "qemu_boots_performed": 0,
+  "honest_gaps": [
+    "Release archive/keyserver reachability and signature validation not exercised",
+    "Buildroot Kconfig resolution and compilation not exercised",
+    "Hosted runner disk fit and target payload sizes unmeasured",
+    "Real serial shell and both boots/timing not exercised",
+    "Shellcheck unavailable",
+    "A route-owned dependency/preflight failure before entrypoint has workflow logs but cannot have the driver receipt"
+  ],
+  "runtime_receipt_location": "$PUPPF_EVIDENCE_DIR/receipt.json",
+  "prior_blocked_commit": "ea0465207a5394d27e8b1383168bb368d8ce4553",
+  "result_commit_note": "The enclosing implementation commit and PR supply the result SHA; no self-referential commit is invented."
+}
