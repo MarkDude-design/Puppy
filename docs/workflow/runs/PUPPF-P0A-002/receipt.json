@@ -11,7 +11,7 @@
   },
   "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
   "implementation_start_commit": "5af56727d8c1a21acf38ae608a5291de83f667c4",
-  "result_commit": null,
+  "result_commit": "e1656ae970d4c9cc1b1089fe85c18027e06dbb66",
   "status": "AUTHORED_NOT_RUN",
   "worker_role": "Codex",
   "model_requested": null,
@@ -172,5 +172,11 @@
   ],
   "runtime_receipt_location": "$PUPPF_EVIDENCE_DIR/receipt.json",
   "prior_blocked_commit": "ea0465207a5394d27e8b1383168bb368d8ce4553",
-  "result_commit_note": "The enclosing implementation commit and PR supply the result SHA; no self-referential commit is invented."
+  "result_commit_note": "Implementation commit; subsequent documentation-only handoff records GitHub PR API denial.",
+  "pull_request_creation": {
+    "status": "BLOCKED_BY_NETWORK_POLICY",
+    "pr_url": null,
+    "evidence": "pr-creation-blocker.json",
+    "body": "PR-DRAFT.md"
+  }
 }
