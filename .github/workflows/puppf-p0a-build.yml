@@ -27,7 +27,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
-      PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
       PUPPF_EXPECTED_PACKET_SHA256: b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b
       PUPPF_MODE: ${{ inputs.mode }}
     steps:
@@ -39,6 +38,8 @@ jobs:
 
       - name: Runner preflight and exact packet hash
         shell: bash
+        env:
+          PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
         run: |
           set -euo pipefail
           mkdir -p "$PUPPF_EVIDENCE_DIR"
@@ -63,6 +64,8 @@ jobs:
       - name: Install build dependencies inside disposable GitHub-hosted VM
         if: ${{ inputs.mode == 'build' }}
         shell: bash
+        env:
+          PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
         run: |
           set -euo pipefail
           exec > >(tee -a "$PUPPF_EVIDENCE_DIR/apt-install.log") 2>&1
@@ -74,6 +77,8 @@ jobs:
       - name: Execute actual build and two-boot acceptance
         if: ${{ inputs.mode == 'build' }}
         shell: bash
+        env:
+          PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
         run: |
           set -euo pipefail
           exec > >(tee -a "$PUPPF_EVIDENCE_DIR/build-console.log") 2>&1
