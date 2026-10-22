@@ -1,0 +1,117 @@
+{
+  "cgroup_cpu_max": "400000 100000",
+  "cgroup_memory_max": "34359738368",
+  "kvm_present": false,
+  "machine": "x86_64",
+  "missing_executables": [
+    "qemu-system-x86_64",
+    "cpio",
+    "flex",
+    "bison",
+    "rsync",
+    "bc"
+  ],
+  "notes": [
+    "No compilation or QEMU invocation performed.",
+    "Buildroot kernel recipe supplies host-bison and host-flex; cpio, rsync and bc are mandatory host prerequisites."
+  ],
+  "observed_at_utc": "2026-10-22T03:46:07.513363+00:00",
+  "os_release": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.6\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+  "tools": [
+    {
+      "name": "qemu-system-x86_64",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "gcc",
+      "path": "/usr/bin/gcc",
+      "present": true
+    },
+    {
+      "name": "g++",
+      "path": "/usr/bin/g++",
+      "present": true
+    },
+    {
+      "name": "make",
+      "path": "/usr/bin/make",
+      "present": true
+    },
+    {
+      "name": "cpio",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "flex",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "bison",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "rsync",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "bc",
+      "path": null,
+      "present": false
+    },
+    {
+      "name": "git",
+      "path": "/usr/local/bin/git",
+      "present": true
+    },
+    {
+      "name": "python3",
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "present": true
+    },
+    {
+      "name": "perl",
+      "path": "/usr/bin/perl",
+      "present": true
+    },
+    {
+      "name": "tar",
+      "path": "/usr/bin/tar",
+      "present": true
+    },
+    {
+      "name": "unzip",
+      "path": "/usr/bin/unzip",
+      "present": true
+    },
+    {
+      "name": "wget",
+      "path": "/usr/bin/wget",
+      "present": true
+    },
+    {
+      "name": "gpg",
+      "path": "/usr/bin/gpg",
+      "present": true
+    },
+    {
+      "name": "sha256sum",
+      "path": "/usr/bin/sha256sum",
+      "present": true
+    }
+  ],
+  "uid": 1000,
+  "versions": {
+    "g++": "g++ (Debian 14.2.0-19) 14.2.0",
+    "gcc": "gcc (Debian 14.2.0-19) 14.2.0",
+    "git": "git version 2.52.0",
+    "gpg": "gpg (GnuPG) 2.4.7",
+    "make": "GNU Make 4.4.1",
+    "python3": "Python 3.12.14"
+  },
+  "workspace_disk_free_bytes": 32033542144
+}

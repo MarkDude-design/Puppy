@@ -1,0 +1,138 @@
+{
+  "acceptance": {
+    "authority": "Mark",
+    "decision": "PENDING",
+    "evidence": null
+  },
+  "aggregate_cost_per_accepted_result_usd": null,
+  "artifact_manifest": [
+    {
+      "bytes": 3272,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/PRECHECK.md",
+      "sha256": "467cb003ff6a4110c8d66665202ed21dc9200deb9b1bbf73f67f921c101a2de0"
+    },
+    {
+      "bytes": 375,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/cost-report.json",
+      "sha256": "ca4731493ae6409e34b9ce347d73d4b37f67280b554e2dbf218e4f6ecd623497"
+    },
+    {
+      "bytes": 2650,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/host-prerequisites.json",
+      "sha256": "ee47af64ec3fa993b2dee6ff5c1a0a49dd6e546156a3e0da5fe942b459f957fc"
+    },
+    {
+      "bytes": 1314,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/network-blockers.json",
+      "sha256": "c23068d7c0810227a1d07c893d89c813655903bfe68c88c1509d65efb0d2f4ba"
+    },
+    {
+      "bytes": 312,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/packet-check-command.json",
+      "sha256": "95aa90cb6bb6940cb9f217df57b476d1f6817fc2c8d86401b630700eb4032936"
+    },
+    {
+      "bytes": 143,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/packet-check.stdout.json",
+      "sha256": "51e933ef928e5e64b278e2f16fa102efcf9b0830aeed992bd89fe844e90924f9"
+    },
+    {
+      "bytes": 1611,
+      "kind": "host_or_workflow_evidence",
+      "path": "docs/workflow/runs/PUPPF-P0A-002/provisioning-attempts.json",
+      "sha256": "9d7b6479f1c4e9cbb2e36d5262c50b274ea67a9d5b39f72c53230639f7f10f8e"
+    }
+  ],
+  "attempt_count": 1,
+  "branch": "work/puppf-p0a-002-20261022",
+  "build_attempt_count": 0,
+  "build_performed": false,
+  "cost_coverage": "unknown",
+  "cost_coverage_explanation": "Worker/model and host-compute telemetry are unavailable. No metered external API calls were made; this does not establish zero total cost.",
+  "cost_items": [
+    {
+      "cost_usd": null,
+      "evidence": "Provider/platform cost telemetry unavailable.",
+      "label": "Codex authorized dispatch and host provisioning investigation"
+    },
+    {
+      "cost_usd": null,
+      "evidence": "Host billing telemetry unavailable.",
+      "label": "Host compute attributable to this attempt"
+    }
+  ],
+  "elapsed_seconds": null,
+  "execution_authorization": {
+    "authority": "Mark",
+    "host_dependencies_install": true,
+    "metered_api_spend_allowed": false,
+    "p0a_execution": true,
+    "packet_order": "P0a first; S0 not started.",
+    "source": "User message: Mark authorization \u2014 PUPPF dispatch, 2026-10-22; user agrees with Z."
+  },
+  "finished_at_utc": "2026-10-22T03:46:07.514607+00:00",
+  "host_provisioning_attempt_count": 2,
+  "human_minutes_self_reported": null,
+  "implementation_start_commit": "9eb25ebbc80e8086fe12eccdf1f65abb323c2b33",
+  "merge_authority": "Mark",
+  "model_identity_source": "No independently observed runtime model ID or provider response telemetry exposed.",
+  "model_observed": null,
+  "model_requested": null,
+  "packet_hash_provenance": "verified",
+  "packet_hash_verification": {
+    "actual_sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b",
+    "tool": "python3 tools/workflow/check_packet.py",
+    "verified_at_utc": "2026-10-22T03:46:07.471526+00:00"
+  },
+  "packet_sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b",
+  "qemu_boots_performed": 0,
+  "related_receipts": [],
+  "repair_attempt_count": 0,
+  "result_commit": null,
+  "result_commit_note": "No implementation result exists; enclosing evidence commit is supplied in the final handoff.",
+  "review": {
+    "decision": "PENDING",
+    "reason": null,
+    "reviewer": "Z"
+  },
+  "s0_started": false,
+  "schema_version": "work-receipt/0.2",
+  "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
+  "started_at_utc": null,
+  "status": "BLOCKED",
+  "stop_reason": "Host prerequisites remain missing: system APT requires unavailable write privileges, workspace-local APT receives proxy 403 for snapshot.debian.org, and Buildroot release endpoint is also denied. Stop for Z review per packet; no build or boot attempted.",
+  "task_id": "PUPPF-P0A-002",
+  "test_evidence": [
+    {
+      "command_reference": "packet-check-command.json",
+      "kind": "packet_integrity",
+      "output_reference": "packet-check.stdout.json",
+      "result": "PASS"
+    },
+    {
+      "kind": "guest_build_and_acceptance",
+      "reason": "Host provisioning and network prerequisites blocked.",
+      "result": "NOT_RUN"
+    }
+  ],
+  "usage": {
+    "cached_input_tokens": null,
+    "captured_by": "calling_client_or_Mark",
+    "cost_usd": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "price_source_and_effective_date": null,
+    "provider_response_reference": null,
+    "reasoning_tokens": null,
+    "source": "unavailable",
+    "status": "unavailable",
+    "tool_compute_cost_usd": null
+  },
+  "worker_role": "Codex"
+}

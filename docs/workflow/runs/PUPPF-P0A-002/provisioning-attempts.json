@@ -1,0 +1,42 @@
+{
+  "attempts": [
+    {
+      "argv": [
+        "apt-get",
+        "update"
+      ],
+      "exit_code": 100,
+      "outcome": "System APT metadata is not writable; execution remained UID 1000.",
+      "output_excerpt": [
+        "Reading package lists...",
+        "W: Unable to read /etc/apt/apt.conf.d/80-applied-apt-retries - open (13: Permission denied)",
+        "E: List directory /var/lib/apt/lists/partial is missing. - Acquire (13: Permission denied)"
+      ],
+      "requested_execution_mode": "require_escalated"
+    },
+    {
+      "argv": [
+        "apt-get",
+        "-o",
+        "Dir::State::lists=/workspace/.puppf-host/apt/lists",
+        "-o",
+        "Dir::Cache::archives=/workspace/.puppf-host/apt/archives",
+        "-o",
+        "Dir::Log=/workspace/.puppf-host/apt/log",
+        "update"
+      ],
+      "exit_code": 0,
+      "outcome": "FAILED to acquire signed repository metadata despite process exit zero. No usable package indexes; no installation attempted.",
+      "output_excerpt": [
+        "Invalid response from proxy: HTTP/1.1 403 Forbidden",
+        "W: Failed to fetch https://snapshot.debian.org/archive/debian/20260925T181338Z/dists/trixie/InRelease",
+        "W: Some index files failed to download. They have been ignored, or old ones used instead."
+      ]
+    }
+  ],
+  "output_provenance": "Observed tool-output excerpts transcribed during this authorized dispatch; excerpts are not complete raw logs.",
+  "package_sources_changed": false,
+  "package_verification_disabled": false,
+  "packages_installed": [],
+  "recorded_at_utc": "2026-10-22T03:46:07.514001+00:00"
+}

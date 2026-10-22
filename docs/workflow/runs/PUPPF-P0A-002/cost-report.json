@@ -1,0 +1,16 @@
+{
+  "accepted_result_count": 0,
+  "cost_coverage": "incomplete_or_unknown",
+  "cost_per_accepted_result_usd": null,
+  "known_cost_subtotal_usd": "0",
+  "receipt_count": 1,
+  "receipts": [
+    {
+      "accepted": false,
+      "coverage_complete": false,
+      "known_cost_subtotal_usd": "0",
+      "task_id": "PUPPF-P0A-002"
+    }
+  ],
+  "total_attributable_cost_usd": null
+}

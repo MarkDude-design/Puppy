@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "bytes": 3272,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/PRECHECK.md",
+      "sha256": "467cb003ff6a4110c8d66665202ed21dc9200deb9b1bbf73f67f921c101a2de0"
+    },
+    {
+      "bytes": 375,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/cost-report.json",
+      "sha256": "ca4731493ae6409e34b9ce347d73d4b37f67280b554e2dbf218e4f6ecd623497"
+    },
+    {
+      "bytes": 2650,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/host-prerequisites.json",
+      "sha256": "ee47af64ec3fa993b2dee6ff5c1a0a49dd6e546156a3e0da5fe942b459f957fc"
+    },
+    {
+      "bytes": 1314,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/network-blockers.json",
+      "sha256": "c23068d7c0810227a1d07c893d89c813655903bfe68c88c1509d65efb0d2f4ba"
+    },
+    {
+      "bytes": 312,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/packet-check-command.json",
+      "sha256": "95aa90cb6bb6940cb9f217df57b476d1f6817fc2c8d86401b630700eb4032936"
+    },
+    {
+      "bytes": 143,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/packet-check.stdout.json",
+      "sha256": "51e933ef928e5e64b278e2f16fa102efcf9b0830aeed992bd89fe844e90924f9"
+    },
+    {
+      "bytes": 1611,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/provisioning-attempts.json",
+      "sha256": "9d7b6479f1c4e9cbb2e36d5262c50b274ea67a9d5b39f72c53230639f7f10f8e"
+    },
+    {
+      "bytes": 5165,
+      "path": "docs/workflow/runs/PUPPF-P0A-002/receipt.json",
+      "sha256": "52e53b96fd9cc9ffa1f733b3e737be339fcbde8371d8c0bbf7719c58590ebf3e"
+    }
+  ],
+  "scope": "Evidence files only; no kernel/initramfs artifacts exist."
+}

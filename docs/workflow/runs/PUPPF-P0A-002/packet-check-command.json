@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python3",
+    "tools/workflow/check_packet.py",
+    "docs/workflow/packets/PUPPF-P0A-002.json",
+    "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b"
+  ],
+  "cwd": "/workspace/Puppy",
+  "exit_code": 0,
+  "observed_at_utc": "2026-10-22T03:46:07.471526+00:00",
+  "stderr": ""
+}

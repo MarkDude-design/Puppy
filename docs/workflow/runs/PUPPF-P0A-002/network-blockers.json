@@ -1,0 +1,40 @@
+{
+  "draft_update": {
+    "custom_allowed_domains": [
+      "buildroot.org",
+      "snapshot.debian.org"
+    ],
+    "draft_id": "93bcfeef-c0f7-48fc-bc69-2323b45432f8~cecfgdraft_6ad98696ea88819fbc7c3e2312352285",
+    "requires_publish": true,
+    "runtime_applied": false,
+    "status": "saved"
+  },
+  "notes": [
+    "Draft saving does not apply policy or publish the environment.",
+    "No direct/proxy bypass or alternate package source was used.",
+    "Further source domains depend on the eventual configuration and have not been declared."
+  ],
+  "observed_denials": [
+    {
+      "destination": "buildroot.org",
+      "exit_code": 56,
+      "output_excerpt": [
+        "HTTP/1.1 403 Forbidden",
+        "curl: (56) CONNECT tunnel failed, response 403"
+      ],
+      "request": "HEAD https://buildroot.org/downloads/buildroot-2026.08.tar.xz"
+    },
+    {
+      "destination": "snapshot.debian.org",
+      "output_excerpt": [
+        "Invalid response from proxy: HTTP/1.1 403 Forbidden"
+      ],
+      "request": "APT signed InRelease metadata from the existing configured snapshot sources"
+    }
+  ],
+  "policy": "restricted, enforced",
+  "recorded_at_utc": "2026-10-22T03:46:07.514195+00:00",
+  "release_archive_downloaded": false,
+  "release_signature_verified": false,
+  "verified_archive_sha256": null
+}
