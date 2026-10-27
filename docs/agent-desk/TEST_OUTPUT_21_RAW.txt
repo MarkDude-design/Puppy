@@ -1,0 +1,26 @@
+test_bad_failover_target (test_desk.DeskTests.test_bad_failover_target) ... ok
+test_cli_preview_combo (test_desk.DeskTests.test_cli_preview_combo) ... ok
+test_cli_rehearsal (test_desk.DeskTests.test_cli_rehearsal) ... ok
+test_cli_validate (test_desk.DeskTests.test_cli_validate) ... ok
+test_combo_invalid_route_rejected (test_desk.DeskTests.test_combo_invalid_route_rejected) ... ok
+test_combo_preview_no_calls (test_desk.DeskTests.test_combo_preview_no_calls) ... ok
+test_duplicate_json_key (test_desk.DeskTests.test_duplicate_json_key) ... ok
+test_failover_copies_precise_question_and_inputs (test_desk.DeskTests.test_failover_copies_precise_question_and_inputs) ... ok
+test_initial_two_plus_one (test_desk.DeskTests.test_initial_two_plus_one) ... ok
+test_reject_duplicate_ids (test_desk.DeskTests.test_reject_duplicate_ids) ... ok
+test_reject_fake_usage (test_desk.DeskTests.test_reject_fake_usage) ... ok
+test_reject_provider_in_non_dispatch (test_desk.DeskTests.test_reject_provider_in_non_dispatch) ... ok
+test_reject_ready_reserve_without_named_target (test_desk.DeskTests.test_reject_ready_reserve_without_named_target) ... ok
+test_reject_reserve_different_question (test_desk.DeskTests.test_reject_reserve_different_question) ... ok
+test_reject_reserve_wrong_blocked_peer (test_desk.DeskTests.test_reject_reserve_wrong_blocked_peer) ... ok
+test_reject_same_slot (test_desk.DeskTests.test_reject_same_slot) ... ok
+test_reject_spend_authority (test_desk.DeskTests.test_reject_spend_authority) ... ok
+test_reject_third_ready_without_blocked (test_desk.DeskTests.test_reject_third_ready_without_blocked) ... ok
+test_reject_unsigned_base_ref (test_desk.DeskTests.test_reject_unsigned_base_ref) ... ok
+test_simulate_h1_to_reserve (test_desk.DeskTests.test_simulate_h1_to_reserve) ... ok
+test_simulate_h2_to_reserve_no_mutation (test_desk.DeskTests.test_simulate_h2_to_reserve_no_mutation) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 2.885s
+
+OK

@@ -1,0 +1,58 @@
+{
+  "schema_version": "puppf-agent-desk/0",
+  "parent_task_id": "PUPPF-M0-ISSUE-13",
+  "source_commit": "2eabc0e96b846d1f83235350c820c71a286d04a7",
+  "active_limit": 2,
+  "paid_calls_allowed": false,
+  "tasks": [
+    {
+      "task_id": "PUPPF-DESK-H1-001",
+      "slot": "H1",
+      "state": "READY",
+      "question": "Inspect the earliest actually observed P0a failure and compare it against exact packet constraints and current acceptance code. Return at most 3 concrete contradictions and quote evidence paths.",
+      "inputs": [
+        "docs/workflow/packets/PUPPF-P0A-002.json",
+        ".github/workflows/puppf-p0a-build.yml",
+        "puppy-p0a/acceptance/README.md"
+      ],
+      "read_only": true,
+      "max_words": 450,
+      "provider": null,
+      "model_requested": null,
+      "model_observed": null,
+      "cost_usd": null
+    },
+    {
+      "task_id": "PUPPF-DESK-H2-001",
+      "slot": "H2",
+      "state": "READY",
+      "question": "Independently identify one falsifiable check to distinguish GitHub-runner/Buildroot environment failure from actual guest/serial implementation failure; do not assume tests prove a boot.",
+      "inputs": [
+        "docs/workflow/packets/PUPPF-P0A-002.json",
+        ".github/workflows/puppf-p0a-build.yml",
+        "puppy-p0a/ci/run-ci.sh"
+      ],
+      "read_only": true,
+      "max_words": 450,
+      "provider": null,
+      "model_requested": null,
+      "model_observed": null,
+      "cost_usd": null
+    },
+    {
+      "task_id": "PUPPF-DESK-R-001",
+      "slot": "R",
+      "state": "STANDBY",
+      "question": "Only if H1 or H2 blocks, take over precisely its current one bounded question. Do not add a third simultaneous call; report substitution.",
+      "inputs": [
+        "docs/workflow/packets/PUPPF-P0A-002.json"
+      ],
+      "read_only": true,
+      "max_words": 450,
+      "provider": null,
+      "model_requested": null,
+      "model_observed": null,
+      "cost_usd": null
+    }
+  ]
+}
