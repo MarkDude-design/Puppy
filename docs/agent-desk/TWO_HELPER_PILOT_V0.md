@@ -32,6 +32,18 @@
 - Puppf's frozen `PUPPF-P0A-002` source packet and real QEMU double-boot acceptance **do not change**. The helper desk cannot turn fixture passes into real boot passes.
 - The public GitHub branch is NOT a private notebook. Never put credentials, customer data, private journals or personal observations in a consultation. A simple string secret filter is not proof of safe disclosure.
 
+## Offline exercises before enabling real agents
+
+```sh
+python3 tools/agent_desk/desk.py validate docs/agent-desk/queue.json
+python3 tools/agent_desk/desk.py simulate-failover docs/agent-desk/queue.json --blocked H2
+python3 tools/agent_desk/desk.py preview-combo docs/agent-desk/queue.json --h1-route native_subagent --h2-route api_consult
+python3 tools/agent_desk/desk.py preview-combo docs/agent-desk/queue.json --h1-route api_consult --h2-route native_ferry
+python3 -m unittest discover -s tests/agent_desk -v
+```
+
+These commands validate/sample routing choices without actually calling any agents, modifying the queue, revealing credentials, or authorizing API bills. `native_subagent` is conditional on the active Codex execution environment actually supporting subagents; `api_consult` needs a separately authorized provider/model/key cap; `native_ferry` needs a human invocation. Changing route is not proof of model independence.
+
 ## Experiment knobs, *not* a giant model roster
 
 Pilot A: H1 detail-review + H2 independent CI failure triage; compare findings. Pilot B after recording A: swap the helper **routes** while keeping identical task criteria; preserve provider/model changes as confounds. Pilot C: intentionally mark H2 BLOCKED and exercise reserve R **instead**; inspect receipts and continuity. Avoid a hardcoded default list of model versions. Different API providers/models can be substituted only by an approved dispatch choice.
