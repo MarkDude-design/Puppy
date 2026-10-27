@@ -4,7 +4,7 @@
 
 ## Outcome and honest baseline
 
-First user-visible deliverable: one downloadably documented **x86-64 bootable RAM-first Linux image** that actually reaches a serial shell in QEMU, reports genuine uptime HELLOs, passes twice-boot acceptance with unchanged image hashes, and has a repeatable launch command. It is *not* yet a polished Puppy Linux distribution, GUI desktop, laptop image, or secure meeting chamber.
+**Mark's explicit 2026-10-27 product choice: SERIAL/TERMINAL SHELL FIRST.** First user-visible deliverable: one documented **x86-64 bootable RAM-first Linux image** that actually reaches an **interactive serial/terminal shell in QEMU**, reports genuine uptime HELLOs, passes twice-boot acceptance with unchanged image hashes, and has a repeatable launch command. The user must be able to type a command, see its real response, and exit cleanly. A GUI, desktop environment, mouse support, window manager, graphical boot, physical laptop/USB boot, networking, package manager, persistent storage, or secure meeting chamber is **not required** and must not delay M1.
 
 Already present: reviewed packets `PUPPF-P0A-002` and `PUPPF-S0-001`, exact-byte verification checker and receipts, host provisioning BLOCKED evidence, hosted Actions preflight route, and new **no-model** nonce/size/state/ACK mock acceptance scripts. Those mock tests are useful but are not actual boot results. A prior GitHub workflow runner-context startup failure was corrected in PR #9. Validate actual hosted run history and real artifact presence before claiming progress beyond this.
 
@@ -15,13 +15,13 @@ Sister repo `MarkDude-design/ALLurbaseRnotbelong2us` has a real Python OpenRoute
 | Milestone | What the user can do | Acceptance |
 |---|---|---|
 | M0 — ground truth | Read one actual repo status/blocked/runnable matrix | Exact main SHA, tool paths, observed CI run IDs, failing command/output and missing artifacts; no guessed result |
-| M1 — real P0a | Boot/download/reproduce a minimal Linux shell demo | Frozen P0a acceptance: pinned Buildroot source, static BusyBox/initramfs, `-nic none`, 128MiB, 90s serial shell with fresh non-echo token, 3 real HELLOs at 120s cadence using absolute `/proc/uptime`, two boots, unchanged artifact SHA256, per-run logs, sum kernel+initramfs strictly <100000000 bytes |
-| M2 — friendly use | One-command launcher, documented tested host requirements and download link | Third person follows README; launch, interact and shut down; no root-required host writes unless clearly justified |
+| M1 — real P0a (terminal FIRST) | Boot a tiny image in QEMU; type commands at the serial shell and see guest output | **Unchanged frozen P0a acceptance**: pinned Buildroot source, static BusyBox/initramfs, `-nic none`, 128MiB, 90s serial shell with fresh non-echo token, 3 real HELLOs at 120s cadence using absolute `/proc/uptime`, two boots, unchanged artifact SHA256, per-run logs, sum kernel+initramfs strictly <100000000 bytes. **No GUI required.** |
+| M2 — easy terminal use | One-command QEMU launcher, tested host requirements, verified artifact location/link and short terminal demo | Someone unfamiliar with the build runs the launcher, types `uname -a`, reads `/proc/uptime`, sees real guest output, and exits/shuts down cleanly. No root-required host writes unless clearly justified; GUI remains a *later optional* milestone. |
 | M3 — communication instrument | Host-only S0 mock file diode | Two spool dirs, permission checks, 256-byte JSON, six-round STOP, append-only deterministic twice-run transcript; **separate packet and acceptance** |
 | M4 — model team | Codex calls bounded helper endpoints to inspect logs/propose patches | Provider ID and client usage logged; readonly review first, explicit per-run dollars, retries and cap; Z independently reviews |
 | M5 — guest meeting room | Host models exchange controlled messages with the VM through limited guest-visible doors | Separate design/packet, deterministic safety/privacy tests, no security claim from `-nic none` alone |
 
-M1 and M3 do not share acceptance. M4 is useful for implementation but is **not a prerequisite** to M1.
+**Priority order:** M0 truth audit → M1 real terminal-shell boot → M2 one-command terminal demo → optional GUI planning, S0, and helper services. No graphical dependencies in M1 or M2. M1 and M3 do not share acceptance. M4 is useful for implementation but is **not a prerequisite** to M1. Nothing in this paragraph changes the frozen P0a packet or its hash.
 
 ## Codex Agent Kit v0.1: minimal rather than an orchestration platform
 
@@ -73,12 +73,12 @@ Then open one M1 branch and PR, implement only permitted P0a/CI evidence paths w
 
 ## Explicit questions for Mark (no blocker to M0)
 
-1. For **M2**, is the first user-visible demo **terminal-only** acceptable, or does "usable" mean a simple GUI from day one? Default = real terminal shell with one-command QEMU launcher; GUI is later.
-2. For any later optional M4 API calls, should the model receive **public code/log excerpts only**? Default = yes, no private notebook/material.
-3. For eventually shipping an image, use GitHub Actions artifacts for initial proofs; a public GitHub Release only after Mark's separate publication approval.
+**Resolved by Mark:** serial/terminal shell is the first usable milestone (2026-10-27). This is a deliberate decision, not a temporary unanswered preference. The near-term demo is interactive text, with a simple QEMU launcher; a graphical follow-up requires a separate scope/packet after terminal evidence exists.
+
+**Remaining non-blocking defaults:** for optional M4 API calls share *public code/log excerpts only*, not private notebook material. Keep initial build artifacts as reviewable GitHub Actions artifacts; a public GitHub Release still needs Mark's separate publication approval.
 
 ## Transition to a fresh chat
 
-Start a new ChatGPT conversation within the **Puppf project** and paste or link `docs/SPRINT_USABLE_001.md`. This preserves the working source of truth in GitHub and avoids treating one giant chat as the scheduler. Request "Meraki: execute M0 and draft a bounded M1 Codex handoff; keep merge, spend, publication gates with me." No assumption that creating this document has created a new ChatGPT conversation.
+Start a new ChatGPT conversation within the **Puppf project** and paste or link `docs/SPRINT_USABLE_001.md`. This preserves the working source of truth in GitHub and avoids treating one giant chat as the scheduler. Request "Meraki: execute M0 and draft a bounded M1 Codex handoff for the **terminal-first interactive serial shell**; do not require a GUI; keep merge, spend, publication gates with me." No assumption that creating this document has created a new ChatGPT conversation.
 
 **Current approval:** This is an architecture proposal, not an execution, API spending, build or merge authorization. Review by Z/Mark before expanding implementation scope.
