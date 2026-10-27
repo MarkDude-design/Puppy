@@ -40,6 +40,33 @@ class DeskTests(unittest.TestCase):
         result = desk.simulate_failover(sample(), "H1")
         self.assertEqual(result["validation"]["planned_busy_slots"], ["H2", "R"])
 
+    def test_failover_copies_precise_question_and_inputs(self):
+        data = sample()
+        result = desk.simulate_failover(data, "H2")
+        items = {x["slot"]: x for x in result["proposal"]["tasks"]}
+        self.assertEqual(items["R"]["question"], items["H2"]["question"])
+        self.assertEqual(items["R"]["inputs"], items["H2"]["inputs"])
+        self.assertEqual(items["R"]["max_words"], items["H2"]["max_words"])
+        self.assertEqual(items["R"]["replaces"], "H2")
+
+    def test_reject_ready_reserve_without_named_target(self):
+        data = desk.simulate_failover(sample(), "H2")["proposal"]
+        del data["tasks"][2]["replaces"]
+        with self.assertRaises(desk.InvalidDesk):
+            desk.validate(data)
+
+    def test_reject_reserve_different_question(self):
+        data = desk.simulate_failover(sample(), "H2")["proposal"]
+        data["tasks"][2]["question"] = "Different problem entirely"
+        with self.assertRaises(desk.InvalidDesk):
+            desk.validate(data)
+
+    def test_reject_reserve_wrong_blocked_peer(self):
+        data = desk.simulate_failover(sample(), "H2")["proposal"]
+        data["tasks"][2]["replaces"] = "H1"
+        with self.assertRaises(desk.InvalidDesk):
+            desk.validate(data)
+
     def test_reject_third_ready_without_blocked(self):
         data = sample()
         data["tasks"][2]["state"] = "READY"
