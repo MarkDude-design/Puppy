@@ -87,10 +87,16 @@ def validate(doc):
         raise InvalidDesk("must have H1 H2 R slots")
     if len(busy) > doc["active_limit"]:
         raise InvalidDesk("more than two ready or active helpers")
-    if any(task["slot"] == "R" and task["state"] in BUSY for task in tasks):
-        if not any(task["slot"] in {"H1", "H2"} and task["state"] == "BLOCKED"
-                   for task in tasks):
-            raise InvalidDesk("reserve may only substitute for blocked H1 or H2")
+    items = {task["slot"]: task for task in tasks}
+    reserve = items["R"]
+    if reserve["state"] in BUSY:
+        replaced = reserve.get("replaces")
+        if replaced not in ("H1", "H2") or items[replaced]["state"] != "BLOCKED":
+            raise InvalidDesk("reserve requires its exact named blocked peer")
+        original = items[replaced]
+        for field in ("question", "inputs", "max_words", "read_only"):
+            if reserve[field] != original[field]:
+                raise InvalidDesk("reserve cannot widen or change inherited task: " + field)
     return {"schema_version": SCHEMA, "valid": True,
             "planned_busy_slots": sorted(busy),
             "standby_slots": sorted(x["slot"] for x in tasks if x["state"] == "STANDBY"),
@@ -111,6 +117,8 @@ def simulate_failover(doc, blocked_slot):
     items[blocked_slot]["state"] = "BLOCKED"
     items["R"]["state"] = "READY"
     items["R"]["replaces"] = blocked_slot
+    for field in ("question", "inputs", "max_words", "read_only"):
+        items["R"][field] = items[blocked_slot][field]
     result = validate(proposed)
     return {"simulation_only": True, "blocked": blocked_slot,
             "reserve_replaces": blocked_slot, "proposal": proposed, "validation": result}
