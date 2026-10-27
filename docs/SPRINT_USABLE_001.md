@@ -44,11 +44,16 @@ Stop after the first verifiable receipt, uncertain model/provider identity, exha
 
 Adopt AllUrBase's **event vocabulary** (`start/turn/retry/error/stop`) and error-report usability as inspiration, but keep Puppf's **packet/receipt ledger** as authority. A future versioned projector can show both without rewriting raw bus events or letting the experimental instrument coordinate its own construction. Use run-local sequence, actor, UTC, source ref, packet SHA provenance, and optional error code; don't invent a global order from timestamps.
 
-## Budget policy — Mark's $50 cap (not automatic purchases)
+## Budget policy — separate Puppf envelope, possible later expansion (not automatic purchases)
 
 Total *new discretionary* spend across this Puppf sprint may be **up to $50 with Mark's explicit per-service approval**; it is not an open-ended API key permission. Initial allocation: $0 to GitHub-hosted public-repo standard Actions, $0 to S0 mock, $0 to native Markdown ferry. Keep remainder as reserve. If needed, propose a single capped API-helper pilot (suggested **$5 maximum**) only after provider availability, current exact model ID, price/cost evidence, storage/data policy and a key-enforced limit are confirmed with Mark. No permanent VM rental yet; choose it if hosted storage/timeout/debug interaction demonstrably becomes the gate. AllUrBase's existing $10 proxy budget stays separate.
 
 **Cost honesty:** unavailable subscription usage or host billing = `null`, not free; caller collects telemetry *after* model response; record actual accepted result and rejected attempts; use deterministic receipt arithmetic.
+
+
+**Budget clarification (Mark, 2026-10-27):** Puppf's earlier $50 initial discretionary envelope is separate from AllUrBase's existing money and Island's independent funding plans. Mark sees potential Puppf support of roughly **$500**, partly through donated work/cycles/services; Island might reach roughly **$1,000 by Christmas 2026**, but none of those are confirmed deposits, hard budgets, or spending authority. Do not co-mingle provider keys, receipts, pre-existing credit, donated capacity, or project cost reports. Each new paid provider still needs a named task and specific cap.
+
+**Agent staffing correction (Mark, 2026-10-27):** Build support should have **at least two additional bounded helper-agent lanes** besides Codex's implementation lane, with a **reserve backup** and Z-desk coordination for small independent tasks. Do not add more than two simultaneously active outside helpers in the first trial. See the separate sandbox branch `experiment/puppf-two-helper-desk-v0`. This does not delay terminal-first M1; helpers are accountable for concrete source/log findings, not prose-only success claims.
 
 ## Immediate worker assignment: M0 before implementation
 
