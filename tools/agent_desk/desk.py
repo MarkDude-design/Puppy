@@ -116,11 +116,34 @@ def simulate_failover(doc, blocked_slot):
             "reserve_replaces": blocked_slot, "proposal": proposed, "validation": result}
 
 
+ROUTES = {"native_subagent", "api_consult", "native_ferry"}
+ROUTE_NOTES = {
+    "native_subagent": "Requires verified access to native Codex subagent capability.",
+    "api_consult": "Needs separate model/provider, authorization, enforced key cap and usage receipts.",
+    "native_ferry": "Human-mediated GitHub handoff only; does not wake a native chat.",
+}
+
+
+def preview_combo(doc, h1_route, h2_route):
+    """Non-executing comparison of two possible helper transport routes."""
+    validate(doc)
+    if h1_route not in ROUTES or h2_route not in ROUTES:
+        raise InvalidDesk("unsupported helper route")
+    return {"simulation_only": True, "actual_agent_calls": 0,
+            "planned_slots": {"H1": h1_route, "H2": h2_route, "R": "STANDBY"},
+            "route_caveats": {"H1": ROUTE_NOTES[h1_route],
+                             "H2": ROUTE_NOTES[h2_route]},
+            "independence_claim": "not established until actual model/provider evidence",
+            "paid_calls_allowed": False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["validate", "simulate-failover"])
+    parser.add_argument("command", choices=["validate", "simulate-failover", "preview-combo"])
     parser.add_argument("queue", type=Path)
     parser.add_argument("--blocked", choices=["H1", "H2"])
+    parser.add_argument("--h1-route", choices=sorted(ROUTES))
+    parser.add_argument("--h2-route", choices=sorted(ROUTES))
     args = parser.parse_args()
     try:
         doc = load(args.queue)
@@ -128,6 +151,10 @@ def main():
             if args.blocked is None:
                 parser.error("--blocked H1|H2 required for simulation")
             result = simulate_failover(doc, args.blocked)
+        elif args.command == "preview-combo":
+            if args.h1_route is None or args.h2_route is None:
+                parser.error("--h1-route and --h2-route required")
+            result = preview_combo(doc, args.h1_route, args.h2_route)
         else:
             result = validate(doc)
     except (OSError, ValueError, TypeError) as exc:
