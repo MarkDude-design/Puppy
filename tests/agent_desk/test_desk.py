@@ -97,6 +97,27 @@ class DeskTests(unittest.TestCase):
         self.assertEqual(run.returncode, 0, run.stderr)
         self.assertEqual(json.loads(run.stdout)["actual_dispatches"], 0)
 
+    def test_combo_preview_no_calls(self):
+        src = sample()
+        orig = copy.deepcopy(src)
+        result = desk.preview_combo(src, "api_consult", "native_subagent")
+        self.assertTrue(result["simulation_only"])
+        self.assertEqual(result["actual_agent_calls"], 0)
+        self.assertFalse(result["paid_calls_allowed"])
+        self.assertEqual(src, orig)
+
+    def test_combo_invalid_route_rejected(self):
+        with self.assertRaises(desk.InvalidDesk):
+            desk.preview_combo(sample(), "unknown", "native_ferry")
+
+    def test_cli_preview_combo(self):
+        run = subprocess.run([sys.executable, str(TOOL), "preview-combo",
+                              str(QUEUE), "--h1-route", "native_ferry",
+                              "--h2-route", "api_consult"],
+                             check=False, capture_output=True, text=True, timeout=10)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        self.assertEqual(json.loads(run.stdout)["actual_agent_calls"], 0)
+
     def test_cli_rehearsal(self):
         run = subprocess.run([sys.executable, str(TOOL), "simulate-failover",
                               str(QUEUE), "--blocked", "H2"],
