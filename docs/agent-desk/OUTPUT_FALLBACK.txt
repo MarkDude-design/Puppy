@@ -1,0 +1,38 @@
+PUPPF / TEAM OUTPUT FALLBACK v0
+Saved 2026-10-27 — Mark's Windows client sometimes displays "response couldn't load".
+Status: proposed team practice, not proof of a platform bug or a permanent UI fix.
+
+When a response, widget, artifact preview or tool result fails to render:
+1. Continue safely through the existing GitHub issue/PR and local text file paths.
+2. Present a short, legible answer in normal chat AND write a UTF-8 .txt copy
+   of substantive receipts/results when useful. Text should work independently
+   of rich components, tables and client-specific previews.
+3. Keep a stable source pointer: repository, branch and exact commit/PR/comment
+   or Actions job/run ID, actual command and exit code, observations, blockers,
+   and source hash/provenance where independently measured.
+4. Do not replace missing evidence with confident prose. Mark UI_RENDER_UNKNOWN
+   when only the chat display fails; distinguish that from BUILD_BLOCKED or FAIL.
+5. Prefer raw plain text and small downloads over rebuilding complex layouts.
+   Retain the full raw output where privacy rules permit; never publish secrets,
+   private notebooks, provider credentials or sensitive logs to public GitHub.
+6. Do not require re-uploading material already saved in GitHub merely because
+   one client could not render. Other clients (e.g. Android) may work, but that
+   is a diagnostic option, not an assumption or requirement.
+7. If an output file exists only in this chat's sandbox, mirror a concise
+   evidence summary to a verified stable repo issue/PR. A sandbox file is not
+   GitHub persistence and may not exist in a future session.
+
+EXAMPLE — two-helper offline test evidence:
+Repo: MarkDude-design/Puppy
+PR: https://github.com/MarkDude-design/Puppy/pull/14
+Receipt: docs/agent-desk/TEST_RECEIPT_2026-10-27.md
+Command: python3 -m unittest discover -s tests/agent_desk -v
+Python: 3.13.5
+Observed output: Ran 21 tests in 2.885s ; OK ; exit 0.
+Scope: exact-source offline queue/failover checker, not two real LLM calls.
+Next: Z review disposition; specific Codex P0a build-key investigation
+      at https://github.com/MarkDude-design/Puppy/issues/15.
+No new API calls, CI runs, spending, merges or release authorization follows
+from a text fallback.
+
+This convention is reusable by other projects only when their owner adopts it.
