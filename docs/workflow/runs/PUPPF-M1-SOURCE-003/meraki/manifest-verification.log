@@ -1,0 +1,6 @@
+gpg: Signature made Fri Sep  4 08:34:35 2026 PDT
+gpg:                using DSA key AB07D806D2CE741FB886EE50B025BA8B59C36319
+gpg: Good signature from "Peter Korsgaard <jacmet@uclibc.org>" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: AB07 D806 D2CE 741F B886  EE50 B025 BA8B 59C3 6319

@@ -1,0 +1,23 @@
+{
+  "archive_basename": "buildroot-2026.08.tar.xz",
+  "archive_sha256": "b549e030895daec3a3a58e73981433e17d9949281e08a97b4ee689e6d9a2984e",
+  "files": {
+    "buildroot-2026.08.tar.xz.b64": "3201f5cab3062285f9b406b80611cadc1edfba023681d64c0175279cb6d7e1b0",
+    "duplicate-conflicting.sign": "4a1f9183951f3808715a3a5fce05d11d419580c258637174546cdd86fb423a83",
+    "duplicate-identical.sign": "c67d3756c3165b841bdce4f5c169c150f689752bc1dbf469b187a86dd583f796",
+    "fixture-public-key.asc": "31987f86f1fb3b0caef6e3a30062323941f849c8aa34da4e28f84ab280377453",
+    "malformed.sign": "0bb36c7199b18aa4367309642e734885ccc44fa5026c33ee627a9191151c56bd",
+    "missing.sign": "6af28e0ab0fd48333dad3a98b34889d551eb35ffdef4694d8080caa8c8f9021f",
+    "other-public-key.asc": "10120e59fbcb49bd85e9385cd3ec4ff83360d149e3a0c4070e17c0f04df030fa",
+    "path-name.sign": "ef0030a48161e7f0a439d520bd929f2724087b42b2e900ea75ce904ba247d107",
+    "valid.sign": "546843b1e03b0f163189a861ebd6fde9bb6fe5f65d7f5d164916252d8336efc4",
+    "wrong-hash.sign": "25b1c6364317851cd6d0253f3cfef7d926764060da52f9a34ea8f2f6e6c19cf6",
+    "wrong-name.sign": "26bbeb6f4993ad00a0676a8fa16d460d11447ce61c00c95cac64bb39881f8bfe",
+    "wrong-signer.sign": "9afbe1401ddfdb86b74416b898290291c6d8e2d1fd425679b979d11644b5299a"
+  },
+  "generator": "PGPy0.6.0; ephemeral RSA2048; no private keys retained",
+  "kind": "synthetic fixtures, not upstream release authentication",
+  "other_fingerprint": "5B96D2B843508EB1282E2A616D58CA37FAC945E8",
+  "public_key_sha256": "31987f86f1fb3b0caef6e3a30062323941f849c8aa34da4e28f84ab280377453",
+  "signer_fingerprint": "9D57097D78D8D1821D4A3957FB68B74466B4C432"
+}

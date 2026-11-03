@@ -1,0 +1,21 @@
+{
+  "build_started": false,
+  "guest_boots": 0,
+  "host_tools": {
+    "bc": false,
+    "bison": false,
+    "cpio": false,
+    "flex": false,
+    "gcc": true,
+    "gpg": true,
+    "make": true,
+    "qemu-system-x86_64": false,
+    "rsync": true,
+    "tar": true,
+    "unzip": true,
+    "wget": true
+  },
+  "hosted_workflow_dispatched": false,
+  "next_gate": "Mark review/merge and one manual build-mode workflow run; capture build and two guest boots under frozen acceptance.",
+  "runner_identity_spoofed": false
+}

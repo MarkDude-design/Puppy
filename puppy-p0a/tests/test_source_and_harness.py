@@ -29,7 +29,10 @@ class SourceAndHarnessFailures(unittest.TestCase):
         key = "F" * 40
         self.assertFalse(valid_signature("[GNUPG:] GOODSIG arbitrary\n", key))
         self.assertFalse(valid_signature("[GNUPG:] VALIDSIG " + "0" * 40 + " rest\n", key))
-        self.assertTrue(valid_signature("[GNUPG:] VALIDSIG " + key + " rest\n", key))
+        self.assertFalse(valid_signature("[GNUPG:] VALIDSIG " + key + " rest\n", key))
+        status = ("[GNUPG:] PLAINTEXT 74 0\n[GNUPG:] NEWSIG\n[GNUPG:] GOODSIG fixture\n"
+                  "[GNUPG:] VALIDSIG " + key + " 2026-10-01 1790812800 0 4 0 1 8 01 " + key + "\n")
+        self.assertTrue(valid_signature(status, key))
 
     def test_archive_cannot_extract_outside_release(self):
         with tempfile.TemporaryDirectory() as temp:

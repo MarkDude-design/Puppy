@@ -1,0 +1,7 @@
+gpg: keybox '/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/gnupg/pubring.kbx' created
+gpg: /workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/gnupg/trustdb.gpg: trustdb created
+pub:-:1024:17:B025BA8B59C36319:1232050183:::-:::scESC::::::::0:
+fpr:::::::::AB07D806D2CE741FB886EE50B025BA8B59C36319:
+uid:-::::1232050183::79A5B0E2530019AFB14BA611AC0F0261B69A5932::Peter Korsgaard <jacmet@uclibc.org>::::::::::0:
+sub:-:2048:16:4414052045428075:1232050183::::::e:::::::
+fpr:::::::::353ADF84982CD8E352F623784414052045428075:

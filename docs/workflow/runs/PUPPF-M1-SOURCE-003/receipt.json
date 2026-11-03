@@ -1,0 +1,101 @@
+{
+  "authority": {
+    "hosted_build_dispatch": "Mark",
+    "merge": "Mark",
+    "release": "Mark",
+    "spending": "Mark"
+  },
+  "base_commit": "394a6ae4b4ca925611641d846d2c6699df7b663f",
+  "boots": 0,
+  "build_started": false,
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "puppy-p0a/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "core-tests.txt"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/workflow",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "workflow-tests.txt"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/agent_desk",
+        "-v"
+      ],
+      "exit_code": 0,
+      "log": "agent-desk-tests.txt"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "puppy-p0a/acceptance/tests",
+        "-q"
+      ],
+      "exit_code": 0,
+      "log": "acceptance-tests.txt"
+    },
+    {
+      "command": [
+        "python",
+        "tools/workflow/check_packet.py",
+        "docs/workflow/packets/PUPPF-P0A-002.json",
+        "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b"
+      ],
+      "exit_code": 0,
+      "log": "packet-check.txt"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "diff-check.txt"
+    }
+  ],
+  "external_metered_model_api_invoked": false,
+  "frozen_packet": {
+    "bytes": 7865,
+    "sha256": "b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b"
+  },
+  "implementer": "Meraki / root Codex",
+  "independent_reviewer": "Astra / gpt-6-astra; shared tools and workspace; separate fresh upstream fetch and extraction",
+  "provider_billing_usage": "unknown",
+  "recorded_at_utc": "2026-11-03T23:46:46.020708+00:00",
+  "repository": "MarkDude-design/Puppy",
+  "status": "SOURCE_AUTHENTICATED_AND_EXTRACTED; BUILD_AND_BOOTS_NOT_RUN",
+  "task": "PUPPF-M1-SOURCE-003",
+  "test_counts": {
+    "agent_desk": 21,
+    "core": 59,
+    "frozen_acceptance": 94,
+    "total": 182,
+    "workflow": 8
+  }
+}
