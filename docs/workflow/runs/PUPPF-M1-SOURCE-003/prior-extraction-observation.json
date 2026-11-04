@@ -1,0 +1,10 @@
+{
+  "exception": "tarfile.AbsoluteLinkError",
+  "historical_actions_failure_unchanged": "https://github.com/MarkDude-design/Puppy/actions/runs/39736301403",
+  "later_pass": "meraki/result.json",
+  "member": "buildroot-2026.08/package/skeleton-init-openrc/skeleton/etc/runlevels/default/sysv-rcs",
+  "observation": "The first actual driver source run authenticated the archive, then Python data_filter rejected its absolute guest skeleton symlink.",
+  "original_local_evidence_directory": "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/driver-source-check",
+  "target": "/etc/init.d/sysv-rcs",
+  "type": "recorded observation; not a captured traceback"
+}

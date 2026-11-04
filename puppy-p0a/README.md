@@ -1,9 +1,11 @@
 # Puppf P0a — disposable Buildroot/QEMU implementation
 
-This is implementation code awaiting Z review and Mark's manual GitHub Actions
-dispatch. No successful source authentication, Buildroot build, payload size,
-memory-use measurement or guest boot is asserted by this document. Synthetic
-fixture results are checker self-tests only.
+This implementation awaits Mark's merge/manual GitHub Actions build decision.
+The November 3 source repair was checked by Meraki and Astra against the real
+release archive, including authentication and extraction. Compilation, payload
+size, memory-use measurement and guest boots remain unproven. Synthetic fixture
+results are checker self-tests only and remain separate from that real-source
+verification evidence.
 
 Puppy Linux and Barry Kauler inform the small, rebuildable method. This artifact
 is not designated a Puppy/Fedora distribution or a security containment system.
@@ -43,21 +45,35 @@ does not edit the workflow to conceal or work around that boundary.
 repository packet checker's SHA-256. The checker is hashed **before** execution;
 its actual digest and verification time are also recorded in the receipt.
 
-Buildroot's release archive and detached signature come from `buildroot.org`.
-Its release public key comes from `keys.openpgp.org` and must match fingerprint
-`F0A589A56CFE2C6D68E9471AED04E0FBE016E856`. This fingerprint was extracted from
-upstream's annotated release tag object
-`813cbac680a73092e1ebb86da72972c44573145c` (commit
-`d5180309b1b66ef3b8eaccca70ad69be8e0729a1`) in the
-[Buildroot upstream mirror](https://github.com/buildroot/buildroot/tree/2026.08).
-Z should review this trust anchor as part of the implementation diff.
+Buildroot's `.tar.xz.sign` is a **clearsigned checksum manifest** from
+`buildroot.org`, rather than a detached signature over the archive bytes. The
+reviewed release public key is stored in
+`trust/buildroot-2026.08-release-key.asc`, byte-pinned in `source-lock.json`, and
+sourced from the official `https://buildroot.org/~jacmet/pubkey.gpg` endpoint.
+Its manifest-signing fingerprint is
+`AB07D806D2CE741FB886EE50B025BA8B59C36319`. The different Git-tag fingerprint
+`F0A589A56CFE2C6D68E9471AED04E0FBE016E856` remains a separately labeled
+provenance field; it does not authorize the checksum manifest.
 
-The runner uses an isolated GnuPG keyring, verifies the exact downloaded archive
-signature and requires the pinned `VALIDSIG` signer before extracting anything.
-TLS remains enabled. There is no insecure/alternate-source fallback. Inaccessible
-key/signature/archive, wrong key or failed verification produces BLOCKED, not a
-fabricated archive digest. The authenticated archive's SHA-256 is then recorded.
-Availability and successful verification have **not** been tested locally.
+The runner checks key bytes, inspects the primary fingerprint, and dearmors the
+public key into an isolated keyring. It uses normal GPG verification without
+importing a key or starting `gpg-agent`. GPG must exit zero, and a dedicated status
+file must contain one acceptable exact-signer `VALIDSIG`, before quarantined
+plaintext is consumed. The manifest must contain exactly one well-formed SHA256
+entry for the exact expected archive basename. That digest, the reviewed archive
+pin, and the calculated downloaded-byte digest must agree before extraction.
+Missing/changed fixtures, bad signatures, ambiguous entries and hash mismatches
+fail closed. No GPG algorithm-policy overrides or alternate verification tools
+are used. The legacy upstream key is DSA1024; a host rejecting it remains blocked.
+
+The exact official source archive contains one absolute **guest skeleton**
+symlink. Extraction preflights all paths, preserves the data filter for regular
+files/directories, and creates all symlinks last. The sole absolute-link exception
+requires both its exact path/target and the archive's reviewed SHA256. Symlink
+ancestors, relative link graphs, escapes, hardlinks and special files are rejected.
+Repeated directory headers are allowed; conflicting/file/symlink duplicates are
+rejected. A fresh source root is required. See the dated source-authentication
+repair receipt under `docs/workflow/runs/` for actual verification evidence.
 
 The signed Buildroot distribution's QEMU Linux hash and BusyBox hash must match
 our lock. Buildroot's force-check-hashes option remains enabled for dependent

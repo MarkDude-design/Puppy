@@ -1,0 +1,100 @@
+{
+  "artifact_manifest": [],
+  "bit_identical_rebuild_tested": false,
+  "build_attempt_count": 0,
+  "commands": [
+    {
+      "argv": [
+        "gpg",
+        "--no-options",
+        "--homedir",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/gnupg",
+        "--batch",
+        "--no-autostart",
+        "--no-auto-key-retrieve",
+        "--with-colons",
+        "--import-options",
+        "show-only",
+        "--import",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-check-v2/source-verification/release-key.asc"
+      ],
+      "cwd": "/workspace/scratch/a9f884a0f071/puppf-m1",
+      "elapsed_seconds": 0.008459378999987166,
+      "exit_code": 0,
+      "log": "key-inspection.log",
+      "started_at_utc": "2026-11-03T23:40:50.675814+00:00",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "gpg",
+        "--no-options",
+        "--homedir",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/gnupg",
+        "--batch",
+        "--no-autostart",
+        "--no-auto-key-retrieve",
+        "--output",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/reviewed-public-keyring.gpg",
+        "--dearmor",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-check-v2/source-verification/release-key.asc"
+      ],
+      "cwd": "/workspace/scratch/a9f884a0f071/puppf-m1",
+      "elapsed_seconds": 0.016188731000056578,
+      "exit_code": 0,
+      "log": "key-dearmor.log",
+      "started_at_utc": "2026-11-03T23:40:50.684962+00:00",
+      "timeout_seconds": 120
+    },
+    {
+      "argv": [
+        "gpg",
+        "--no-options",
+        "--homedir",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/gnupg",
+        "--batch",
+        "--no-autostart",
+        "--no-auto-key-retrieve",
+        "--no-default-keyring",
+        "--keyring",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-work-v2/reviewed-public-keyring.gpg",
+        "--status-file",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-check-v2/source-verification/manifest-status.log",
+        "--output",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-check-v2/source-verification/checksums.quarantined.txt",
+        "--decrypt",
+        "/workspace/scratch/a9f884a0f071/puppf-m1-upstream/full-path-check-v2/source-verification/buildroot-2026.08.tar.xz.sign"
+      ],
+      "cwd": "/workspace/scratch/a9f884a0f071/puppf-m1",
+      "elapsed_seconds": 0.015890897000190307,
+      "exit_code": 0,
+      "log": "manifest-verification.log",
+      "started_at_utc": "2026-11-03T23:40:50.702228+00:00",
+      "timeout_seconds": 120
+    }
+  ],
+  "host": {},
+  "source_authentication": {
+    "archive_sha256": "87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34",
+    "archive_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz",
+    "authenticated_manifest_digest": "87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34",
+    "digest_algorithm": 8,
+    "key_fixture": "trust/buildroot-2026.08-release-key.asc",
+    "key_source_url": "https://buildroot.org/~jacmet/pubkey.gpg",
+    "manifest_sha256": "0a81dd0e2e19bf28c9306e454caef66cfebee599f8a28c00e64f4b41820f6ae6",
+    "method": "pinned public key; clearsigned SHA256 manifest; exact archive binding",
+    "primary_fingerprint": "AB07D806D2CE741FB886EE50B025BA8B59C36319",
+    "public_key_algorithm": 17,
+    "public_key_bits": 1024,
+    "public_key_sha256": "085d1b664bc0a900b2c33aa509a7e4d6fa3b6018009cd9d3f8c62a03d7adfa7a",
+    "signature_class": "01",
+    "signature_creation_date": "2026-09-04",
+    "signature_timestamp": 1788536075,
+    "signature_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz.sign",
+    "signer_fingerprint": "AB07D806D2CE741FB886EE50B025BA8B59C36319",
+    "status": "VERIFIED",
+    "verified_at_utc": "2026-11-03T23:40:50.728153+00:00"
+  },
+  "started_at_utc": "2026-11-03T23:40:40.688691+00:00",
+  "task_id": "PUPPF-P0A-002"
+}

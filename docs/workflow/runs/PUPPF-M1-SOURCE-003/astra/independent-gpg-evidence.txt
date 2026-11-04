@@ -1,0 +1,34 @@
+IMPORT_EXIT 2
+gpg: keybox '/tmp/astra-gnupg-xfs3jbcp/pubring.kbx' created
+gpg: /tmp/astra-gnupg-xfs3jbcp/trustdb.gpg: trustdb created
+gpg: key B025BA8B59C36319: public key "Peter Korsgaard <jacmet@uclibc.org>" imported
+gpg: error running '/usr/bin/gpg-agent': exit status 2
+gpg: failed to start gpg-agent '/usr/bin/gpg-agent': General error
+gpg: can't connect to the gpg-agent: General error
+gpg: Total number processed: 1
+gpg:               imported: 1
+
+DECRYPT_EXIT 0
+[GNUPG:] PLAINTEXT 74 0 
+[GNUPG:] NEWSIG
+gpg: Signature made Fri Sep  4 08:34:35 2026 PDT
+gpg:                using DSA key AB07D806D2CE741FB886EE50B025BA8B59C36319
+[GNUPG:] KEY_CONSIDERED AB07D806D2CE741FB886EE50B025BA8B59C36319 0
+[GNUPG:] SIG_ID ik+N5ssmQYZrDvpiGqfXRYUudJw 2026-09-04 1788536075
+[GNUPG:] GOODSIG B025BA8B59C36319 Peter Korsgaard <jacmet@uclibc.org>
+gpg: Good signature from "Peter Korsgaard <jacmet@uclibc.org>" [unknown]
+[GNUPG:] VALIDSIG AB07D806D2CE741FB886EE50B025BA8B59C36319 2026-09-04 1788536075 0 4 0 17 8 01 AB07D806D2CE741FB886EE50B025BA8B59C36319
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: AB07 D806 D2CE 741F B886  EE50 B025 BA8B 59C3 6319
+
+PLAINTEXT
+buildroot-2026.08.tar.xz released Fri, 04 Sep 2026 17:34:35 +0200
+
+SHA1: 3a100ff6dd1ebf50d6966be1e3dbdb0eeaf00cb7  buildroot-2026.08.tar.xz
+SHA256: 87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34  buildroot-2026.08.tar.xz
+
+To verify this signature, you can obtain the corresponding public
+key from https://buildroot.org/~jacmet/pubkey.gpg
+

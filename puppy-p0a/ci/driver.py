@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import posixpath
 import re
 import shutil
 import signal
@@ -16,6 +17,8 @@ import time
 import urllib.request
 
 from boot import boot_once, sha256
+from source_verification import (SourceVerificationError, authenticate_archive,
+                                 valid_signature)
 
 
 TASK = Path(__file__).resolve().parents[1]
@@ -68,15 +71,6 @@ def download(url, path, maximum_bytes):
         raise Blocked(f"source download failed ({url}): {exc}") from exc
 
 
-def valid_signature(status, fingerprint):
-    for line in status.splitlines():
-        fields = line.split()
-        if len(fields) >= 3 and fields[:2] == ["[GNUPG:]", "VALIDSIG"]:
-            if fingerprint in (fields[2], fields[-1]):
-                return True
-    return False
-
-
 def is_release_makefile(text):
     return bool(re.search(r"^(?:export\s+)?BR2_VERSION\s*:?=\s*2026\.08$", text, re.M))
 
@@ -89,12 +83,73 @@ def check_checker(path, expected):
 
 
 def unpack_release(archive, destination):
+    # The exact official source contains one absolute guest-skeleton symlink.
+    # Permit that inert link only for the reviewed archive bytes, and write all
+    # links last. Never turn off the data filter for ordinary archive writes.
+    release_name = "buildroot-2026.08"
+    destination = Path(destination).resolve()
+    root = destination / release_name
+    if root.exists() or root.is_symlink():
+        raise Blocked("source extraction requires a fresh release root")
+    reviewed_archive = "87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34"
+    guest_links = {release_name + "/package/skeleton-init-openrc/skeleton/etc/runlevels/default/sysv-rcs":
+                   "/etc/init.d/sysv-rcs"}
     with tarfile.open(archive, "r:xz") as stream:
-        for member in stream.getmembers():
-            if Path(member.name).parts[0] != "buildroot-2026.08":
-                raise Blocked("unexpected Buildroot archive root")
-        stream.extractall(destination, filter="data")
-    return Path(destination) / "buildroot-2026.08"
+        members = stream.getmembers()
+        seen, links = {}, []
+        for member in members:
+            name = member.name.rstrip("/")
+            parts = name.split("/")
+            if (not name or parts[0] != release_name or any(part in ("", ".", "..") for part in parts)
+                    or name != posixpath.normpath(name)):
+                raise Blocked("unexpected, non-normal or duplicate source archive path")
+            if name in seen and not (seen[name] and member.isdir()):
+                raise Blocked("duplicate file, symlink or conflicting archive path")
+            seen[name] = member.isdir()
+            if name == release_name and not member.isdir():
+                raise Blocked("release root must be a directory")
+            if not (member.isdir() or member.isfile() or member.issym()):
+                raise Blocked("source archive contains a hardlink or special file")
+            if member.issym():
+                links.append(member)
+                if member.linkname.startswith("/"):
+                    if guest_links.get(name) != member.linkname or sha256(archive) != reviewed_archive:
+                        raise tarfile.AbsoluteLinkError(member)
+                else:
+                    target = posixpath.normpath(posixpath.join(posixpath.dirname(name), member.linkname))
+                    if target != release_name and not target.startswith(release_name + "/"):
+                        raise tarfile.LinkOutsideDestinationError(member, target)
+                    tarfile.data_filter(member, str(destination))
+            else:
+                tarfile.data_filter(member, str(destination))
+        link_names = {member.name.rstrip("/") for member in links}
+        for member in members:
+            parts = member.name.rstrip("/").split("/")
+            if any("/".join(parts[:i]) in link_names for i in range(1, len(parts))):
+                raise Blocked("archive member has a symlink ancestor")
+        for member in links:
+            if member.linkname.startswith("/"):
+                continue  # Exact path/target and exact archive SHA already checked.
+            walk = posixpath.dirname(member.name).split("/")
+            for part in member.linkname.split("/"):
+                if part in ("", "."):
+                    continue
+                if part == "..":
+                    if len(walk) <= 1:
+                        raise tarfile.LinkOutsideDestinationError(member, member.linkname)
+                    walk.pop()
+                else:
+                    walk.append(part)
+                # Check BEFORE collapsing later '..': kernel symlink resolution
+                # can escape even when normpath of the text looks contained.
+                if "/".join(walk) in link_names:
+                    raise Blocked("relative link target traverses an archived symlink")
+        stream.extractall(destination, members=[m for m in members if not m.issym()], filter="data")
+        for member in links:
+            path = destination / member.name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.symlink_to(member.linkname)
+    return root
 
 
 class Run:
@@ -143,29 +198,21 @@ class Run:
         archive = work / "buildroot-2026.08.tar.xz"
         signature = verification / "buildroot-2026.08.tar.xz.sign"
         key = verification / "release-key.asc"
+        fixture = TASK / release["public_key_path"]
+        if not fixture.is_file() or sha256(fixture) != release["public_key_sha256"]:
+            raise Blocked("missing or changed reviewed release public-key fixture")
+        shutil.copyfile(fixture, key)
         download(release["archive_url"], archive, 100_000_000)
         download(release["signature_url"], signature, 1_000_000)
-        download(release["public_key_url"], key, 1_000_000)
-        homedir = work / "gnupg"
-        homedir.mkdir(mode=0o700)
-        gpg = ["gpg", "--homedir", str(homedir), "--batch", "--no-auto-key-retrieve"]
-        listing = self.command(gpg + ["--with-colons", "--import-options", "show-only",
-                                      "--import", str(key)], "key-inspection.log", blocked=True)
-        fingerprints = [line.split(":")[9] for line in listing.splitlines()
-                        if line.startswith("fpr:")]
-        if release["signer_fingerprint"] not in fingerprints:
-            raise Blocked("downloaded public key does not match pinned fingerprint")
-        self.command(gpg + ["--import", str(key)], "key-import.log", blocked=True)
-        status = self.command(gpg + ["--status-fd", "1", "--verify", str(signature), str(archive)],
-                              "archive-verification.log", blocked=True)
-        if not valid_signature(status, release["signer_fingerprint"]):
-            raise Blocked("release signature lacks expected VALIDSIG signer")
+        try:
+            authenticated = authenticate_archive(archive, signature, key, release,
+                                                 verification, work, self.command)
+        except (SourceVerificationError, OSError) as error:
+            raise Blocked("source authentication failed: " + str(error)) from error
         self.manifest["source_authentication"] = {
-            "status": "VERIFIED", "method": "detached OpenPGP signature with pinned fingerprint",
-            "archive_sha256": sha256(archive), "signature_sha256": sha256(signature),
-            "public_key_sha256": sha256(key), "signer_fingerprint": release["signer_fingerprint"],
-            "archive_url": release["archive_url"], "signature_url": release["signature_url"],
-            "key_url": release["public_key_url"], "verified_at_utc": utc()}
+            **authenticated, "archive_url": release["archive_url"],
+            "signature_url": release["signature_url"], "key_source_url": release["public_key_url"],
+            "key_fixture": release["public_key_path"], "verified_at_utc": utc()}
         self.save()
         return unpack_release(archive, work)
 

@@ -3,11 +3,16 @@
     "version": "2026.08",
     "archive_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz",
     "signature_url": "https://buildroot.org/downloads/buildroot-2026.08.tar.xz.sign",
-    "signer_fingerprint": "F0A589A56CFE2C6D68E9471AED04E0FBE016E856",
-    "public_key_url": "https://keys.openpgp.org/vks/v1/by-fingerprint/F0A589A56CFE2C6D68E9471AED04E0FBE016E856",
+    "archive_basename": "buildroot-2026.08.tar.xz",
+    "archive_sha256": "87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34",
+    "signer_fingerprint": "AB07D806D2CE741FB886EE50B025BA8B59C36319",
+    "tag_signer_fingerprint": "F0A589A56CFE2C6D68E9471AED04E0FBE016E856",
+    "public_key_url": "https://buildroot.org/~jacmet/pubkey.gpg",
+    "public_key_path": "trust/buildroot-2026.08-release-key.asc",
+    "public_key_sha256": "085d1b664bc0a900b2c33aa509a7e4d6fa3b6018009cd9d3f8c62a03d7adfa7a",
     "upstream_tag_object": "813cbac680a73092e1ebb86da72972c44573145c",
     "upstream_commit": "d5180309b1b66ef3b8eaccca70ad69be8e0729a1",
-    "trust_provenance": "Fingerprint read from the annotated 2026.08 release tag in the upstream buildroot/buildroot GitHub mirror. Archive verification is deliberately deferred to the runner, not claimed from tag inspection."
+    "trust_provenance": "The official HTTPS release checksum manifest is clear-signed by the jacmet release key, not the newer annotated-tag key. Public-key fixture bytes were obtained from the official buildroot.org/~jacmet/pubkey.gpg source and pinned by SHA256. The tag fingerprint is retained separately as historical provenance, not archive authorization. GPG must authenticate the manifest and bind its unique exact-basename SHA256 to the downloaded archive before extraction. This does not assert Web-of-Trust identity certification."
   },
   "linux": {
     "version": "6.18.7",

@@ -1,0 +1,17 @@
+{
+  "status": "EXTRACTED_AND_INVENTORY_MATCHED",
+  "archive_sha256": "87aaca4164ea9d5c8085854953018263f7963f07c22e73a2a2185cc98c581c34",
+  "release_root": "/workspace/scratch/a9f884a0f071/astra-puppf-extracted/buildroot-2026.08",
+  "regular_files": 14988,
+  "unique_directories_including_root": 4904,
+  "symlinks": 211,
+  "symlink_inventory_matches_archive": true,
+  "absolute_guest_symlink": {
+    "path": "buildroot-2026.08/package/skeleton-init-openrc/skeleton/etc/runlevels/default/sysv-rcs",
+    "target": "/etc/init.d/sysv-rcs",
+    "created_as_symlink_only": true
+  },
+  "release_makefile_matches_2026_08": true,
+  "elapsed_seconds": 12.37,
+  "scope": "independent actual official archive extraction; no build or boot; absolute guest target not opened"
+}
