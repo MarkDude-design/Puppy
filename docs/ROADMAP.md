@@ -35,10 +35,10 @@ The gallery of people who arrive to say 'well actually.' Each entry is answered 
 - **'Well actually — Go?'** Static binaries are genuinely nice; a Go runtime in an initramfs is a mismatch for the kernel-adjacent lane but fine for guest userspace tools. Go enters as a guest, not as the builder.
 - **'Well actually — Nix/Guix for reproducibility?'** The record already says: no bit-identical rebuild is claimed. Nix enters when reproducibility becomes a requirement instead of a flex; currently it is neither.
 - **'Well actually — why not Yocto/Alpine/just-use-X?'** Because the product is the method (pinned trust, two-boot evidence, honest receipts), not the distribution. X does not ship receipts.
-- **'Well actually — is this a Puppy Linux fork?'** No. Lineage inspiration only, per README: no fork designation, no affiliation, no endorsement implied.
+- **'Well actually — is this a Puppy Linux fork?'** No. Lineage inspiration only, per README: no fork designation, no affiliation, no endorsement implied. **OWNER SIDESTEP, RATIFIED (2026-11-04): 'Schrödinger's Puppy.'** The official answer is superposition — it is Puppy and not-Puppy at once, and the observer must open the box and decide for themselves; we never collapse the waveform for them.
 - **'Well actually — 48 minutes for CI is slow.'** TCG, one vCPU, no network, no display, on purpose. Speed is not a gate; evidence is. When the gates and the speed conflict, the speed loses.
 - **'Well actually — DSA-1024 is deprecated crypto.'** Known, recorded in the receipt, and explicitly NOT silently relaxed. A host that rejects it stays blocked, per fail-closed doctrine. The correct fix is an upstream key transition with fresh provenance receipts, not a policy override.
-- **'Well actually — you should vendor/mirror your sources.'** Real future risk (availability), accepted and recorded; but multiple mirrors do not equal identity, per the Oct-27 provenance work. A mirror enters when it is itself hash-and-signature pinned.
+- **'Well actually — you should vendor/mirror your sources.'** Real future risk (availability), accepted and recorded; but multiple mirrors do not equal identity, per the Oct-27 provenance work. A mirror enters when it is itself hash-and-signature pinned. **OWNER (2026-11-04): mirroring our own sources is 'reasonable at some point'** — direction endorsed; the pinning discipline stays when it enters.
 - **'Well actually — three rewrites by Christmas is unrealistic.'** See the maximal roadmap below, which covers this being both true and false simultaneously.
 
 ## 4. The totally unrealistic roadmap (the maximal ass-covering edition)
@@ -53,6 +53,7 @@ Owner-directed: a roadmap that covers every possible outcome in every way, shape
 - Rewrite in FORTRAN, COBOL, APL, or a Lisp machine emulator — yes (the roadmap sees no legal barrier and notes the receipts would be magnificent)
 - Rewrite in WebAssembly booting in a browser-emulated 386 — yes (the two-boot gates are architecture-agnostic in principle; the watchdog is not)
 - Rewrite by symbolic-regression-generated architecture no human has named yet — yes (the miss ledger will keep the fossil record)
+- Rewrite published as a hand-bound zine, boot log hand-lettered — yes (OWNER, 2026-11-04: 'epic'; the receipts become fold-out inserts)
 
 **Schedule universes:**
 - Three rewrites by Christmas — yes (OWNER plan of record)
