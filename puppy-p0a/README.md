@@ -156,6 +156,14 @@ missing/late/early/duplicate shell output, echo-only false positives, panic/rebo
 modified checker, incorrect signer, unsafe archive paths and missing QEMU.
 Its QEMU-launch failure test mocks the process; it does not start a guest.
 
+`test_serial_process.py` also exercises the real serial reader and process-group
+cleanup using a local Python child, real OS pipes and a host shell `printf`.
+A separate control pipe releases fragments under a scripted monotonic clock,
+so prompt/token fragmentation, echo-only rejection, deadline crossings, reader
+failure, early exit, duplicate HELLO, a partial panic and watchdog cleanup are
+tested without four-minute sleeps. These are harness integration fixtures,
+not QEMU execution, guest timing measurements or boot acceptance.
+
 ## Honest gaps before manual runner evidence
 
 Release/keyserver accessibility and archive signature validation, Buildroot
