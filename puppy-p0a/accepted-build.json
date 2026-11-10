@@ -1,0 +1,9 @@
+{
+  "run_url": "https://github.com/MarkDude-design/Puppy/actions/runs/41773110103",
+  "source_commit": "e0b5e0e4b206c30ca3bcbfcf08c764a2acf19808",
+  "evidence_zip_sha256": "dd333e9d6fd6a7e02e757488c872c3eb8edabe1b334b5345fdf2fd96426917b2",
+  "images": [
+    {"member": "artifacts/bzImage", "filename": "bzImage", "bytes": 3286016, "sha256": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7"},
+    {"member": "artifacts/rootfs.cpio.gz", "filename": "rootfs.cpio.gz", "bytes": 754850, "sha256": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"}
+  ]
+}

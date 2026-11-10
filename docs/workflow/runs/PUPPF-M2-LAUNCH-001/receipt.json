@@ -1,0 +1,70 @@
+{
+  "date_utc": "2026-11-04T12:43:01.041170+00:00",
+  "task": "PUPPF-M2-LAUNCH-001",
+  "status": "REVIEW_CANDIDATE; INTERACTIVE_QEMU_WRAPPER_DEMO_PENDING",
+  "owner_authorization": "https://github.com/MarkDude-design/Puppy/issues/15#issuecomment-6630735320",
+  "test_counts": {
+    "launcher": 15,
+    "core": 59,
+    "frozen_acceptance": 94,
+    "workflow": 8,
+    "agent_desk": 21,
+    "total": 197
+  },
+  "checks": [
+    {
+      "log": "launcher-tests.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "core-tests.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "workflow-tests.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "agent-desk-tests.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "acceptance-tests.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "packet-check.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "accepted-zip-check.txt",
+      "exit": 0,
+      "expected": 0
+    },
+    {
+      "log": "host-preflight.txt",
+      "exit": 2,
+      "expected": 2
+    },
+    {
+      "log": "diff-check.txt",
+      "exit": 0,
+      "expected": 0
+    }
+  ],
+  "actual_accepted_zip_verified": true,
+  "wrapper_qemu_boots": 0,
+  "qemu_host_preflight": "BLOCKED: qemu-system-x86_64 missing",
+  "new_hosted_runs": 0,
+  "acceptance": "M1 accepted; M2 not accepted",
+  "production_guest_or_frozen_packet_changed": false,
+  "code_validation_base_commit": "e0b5e0e4b206c30ca3bcbfcf08c764a2acf19808",
+  "branch_base_commit": "b24251d72e42833fbb707e566db87c62a584c9c3",
+  "concurrent_base_change": "Z added docs/ROADMAP.md; preserved unchanged; no code drift from accepted build"
+}

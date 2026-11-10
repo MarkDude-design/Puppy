@@ -13,11 +13,19 @@ This repository is not yet a finished distribution, fork, or release artifact. I
 
 ## Status
 
-This project is in an early bootstrap stage. Work is intentionally conservative and evidence-driven rather than release-oriented.
+M1 is accepted by Mark after Z's evidence review: [build #11](https://github.com/MarkDude-design/Puppy/actions/runs/41773110103)
+compiled successfully and passed two real QEMU serial-shell boots with unchanged
+image hashes. The kernel and initramfs total 4,040,866 bytes; QEMU allocated
+128 MiB. This establishes the small terminal milestone, not a finished release.
+
+M2 is a review candidate: [launch the accepted image locally](puppy-p0a/LAUNCH.md)
+with one Python command and a downloaded evidence ZIP. The wrapper's first-user
+interactive QEMU demo remains pending; artifact validation and local process
+cleanup tests are separate from the earlier hosted guest boots.
 
 ## Notes
 
-Puppf is a working name and educational foundation for experimentation, not a completed operating system distribution. Nothing in this README claims a successful build or guest boot.
+Puppf is a working name and educational foundation for experimentation, not a completed operating system distribution.
 
 ## Method lineage
 

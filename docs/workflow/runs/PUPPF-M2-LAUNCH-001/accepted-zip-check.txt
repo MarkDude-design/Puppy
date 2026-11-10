@@ -1,0 +1,4 @@
+$ python puppy-p0a/launch.py --evidence /workspace/scratch/a9f884a0f071/puppf-build-11-evidence.zip --verify-only
+Verified accepted build #11: kernel + initramfs = 4,040,866 bytes.
+
+exit_code=0
