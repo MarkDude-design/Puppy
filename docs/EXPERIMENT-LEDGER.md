@@ -34,7 +34,7 @@
 | experiment/meraki-m2-descendant-teardown-20261109 | Meraki | M2 descendant teardown | experiment lane | on branch |
 | experiment/meraki-m2-hosted-manual-plan-20261109 | Meraki | M2 hosted manual plan | experiment lane | on branch |
 | experiment/meraki-m2-parent-sigterm-20261109 | Meraki | M2 parent SIGTERM | experiment lane | on branch |
-| experiment/meraki-m2-term-resistant-child-20261109 | Meraki | M2 term-resistant child | experiment lane | on branch |
+| experiment/meraki-m2-term-resistant-child-20261109 | Meraki | M2 term resistant child | experiment lane | on branch |
 | experiment/puppf-m2-descendant-cleanup-20261109 | Meraki | M2 descendant cleanup | experiment lane | on branch |
 | experiment/puppf-m2-foreground-sigint-20261109 | Meraki | M2 foreground SIGINT | experiment lane | on branch |
 | proposal/puppf-kit-v0-20261027 | team | Puppf kit v0 proposal | historical | on branch |
@@ -50,3 +50,9 @@
 ## OWNER GATES (unchanged)
 
 Spend, secrets, publication, merges: Mark-clicked, always. This ledger changes the DEFAULT (branches are free), never the gates.
+
+
+## MECHANICAL PROTECTION OF MAIN (2026-11-10, owner-clicked)
+
+- Ruleset `main-protected` enforced on `main` by the owner: pull request required before merging, deletions restricted, force pushes blocked. Status checks to be named once they have run. Garden branches remain unprotected by design (charter: branch freedom, not canonical write access).
+- The charter line "NO merges to main - merging is owner-clicked, always" now has mechanical backing. No gates changed; this note records the enforcement receipt.
