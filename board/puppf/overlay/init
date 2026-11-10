@@ -1,0 +1,32 @@
+#!/bin/sh
+# Puppf sandbox — Gemini one-binary floor, round 2 (2026-11-10).
+# Z annotation (single change from received version): the stub-mode receipt
+# line corrected for honesty — the original printed "executed successfully
+# (stub mode)" while executing nothing. A receipt that claims an execution
+# that did not happen is the one class the bus cannot carry. Everything else
+# is verbatim from the proposal (sandbox/incoming/...v2-...md).
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+# Sandbox Gate Metric: Guest uptime at first agent output line (/proc/uptime)
+UPTIME_AT_START=$(cat /proc/uptime | awk '{print $1}')
+echo "=== PUPPF AGENT BOOT [TCG] ==="
+echo "First agent action output at uptime: ${UPTIME_AT_START}s"
+
+# Memory footprint at first action (/proc/meminfo)
+echo "--- /proc/meminfo snapshot ---"
+cat /proc/meminfo
+
+# Execute static agent binary or fallback to stub receipt
+if [ -x /bin/agent-core ]; then
+    /bin/agent-core
+else
+    echo "[receipt] /bin/agent-core ABSENT - stub mode, NO agent executed. This run validates boot + timing only."
+fi
+
+echo "=== PUPPF RECEIPT COMPLETE ==="
+# Define run's end: Force poweroff to close QEMU and finalize receipt log
+sync
+poweroff -f

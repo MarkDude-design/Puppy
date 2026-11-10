@@ -1,0 +1,121 @@
+# PUPPF SANDBOX — one-static-binary floor, round 2 (received 2026-11-10).
+# Source: Gemini seat proposal; verbatim (partial) copy: sandbox/incoming/gemini-one-binary-floor-v2-2026-11-10.md
+# Z annotations — the received paste was truncated mid-file (it ended at the
+# receipt-copy line; no upload step followed). Completed and hardened, all
+# additions listed; everything else kept as received:
+#   1. Added least-privilege permissions block and a 120-minute job timeout
+#      (a full Buildroot build on a hosted runner takes ~30-60 min).
+#   2. Added chmod +x on the overlay init — the GitHub contents API commits
+#      files mode 644, so without this /init would not be executable and the
+#      run would die on a mode bit, not on code.
+#   3. Added `set -o pipefail` so the QEMU|tee step reports QEMU's own exit
+#      status, not tee's.
+#   4. Completed the truncated final step: uptime gate computed and recorded
+#      as PASS/FAIL (non-blocking, per sandbox doctrine: the gate is measured
+#      honestly, it does not kill the run), artifact footprint measured
+#      against the 15 MB target, receipt uploaded via actions/upload-artifact
+#      with if: always() and 7-day retention.
+
+name: Puppf Sandbox Build & TCG Run
+
+on:
+  push:
+    branches: [ "sandbox/gemini-lab-20261110" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sandbox-build-and-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            libncurses-dev \
+            bc \
+            rsync \
+            cpio \
+            unzip \
+            wget \
+            git \
+            qemu-system-x86
+
+      - name: Build Buildroot Image Stack
+        run: |
+          git clone --depth 1 --branch 2026.08 https://git.buildroot.net/buildroot /tmp/buildroot
+          cp configs/puppy_agent_defconfig /tmp/buildroot/configs/
+
+          # Copy overlay into buildroot tree
+          mkdir -p /tmp/buildroot/board/puppf/overlay
+          cp -r board/puppf/overlay/* /tmp/buildroot/board/puppf/overlay/
+          chmod +x /tmp/buildroot/board/puppf/overlay/init
+
+          cd /tmp/buildroot
+          make puppy_agent_defconfig
+          make -j$(nproc)
+
+      - name: Execute QEMU TCG Acceptance Run & Generate Receipt
+        run: |
+          set -o pipefail
+          # Verify KVM capability (Expected: missing on GitHub runners)
+          [ -e /dev/kvm ] && echo "KVM available" || echo "Note: /dev/kvm absent, running pure TCG emulation."
+
+          # Run QEMU with serial capture to log output and test uptime gate (<5s)
+          qemu-system-x86_64 \
+            -kernel /tmp/buildroot/output/images/bzImage \
+            -initrd /tmp/buildroot/output/images/rootfs.cpio.gz \
+            -nographic \
+            -no-reboot \
+            -m 256M \
+            -append "console=ttyS0 panic=1" | tee qemu_run.log
+
+      - name: Validate Sandbox Gate & Record Receipt
+        if: always()
+        run: |
+          echo "=== ARTIFACT & RECEIPT METRICS ==="
+          if [ -f /tmp/buildroot/output/images/bzImage ]; then
+            ls -lh /tmp/buildroot/output/images/bzImage /tmp/buildroot/output/images/rootfs.cpio.gz
+            KERNEL_BYTES=$(stat -c%s /tmp/buildroot/output/images/bzImage)
+            INITRD_BYTES=$(stat -c%s /tmp/buildroot/output/images/rootfs.cpio.gz)
+            TOTAL_MB=$(awk -v k="$KERNEL_BYTES" -v i="$INITRD_BYTES" 'BEGIN{printf "%.1f", (k+i)/1048576}')
+            echo "Artifact footprint: ${TOTAL_MB} MB (target < 15 MB)"
+          else
+            echo "Build images missing - build failed before QEMU. See build log."
+          fi
+
+          # Extract uptime line from run log; compute gate PASS/FAIL (non-blocking)
+          if [ -f qemu_run.log ]; then
+            UPTIME_LINE=$(grep "First agent action output at uptime" qemu_run.log | head -n 1)
+            if [ -z "$UPTIME_LINE" ]; then
+              echo "GATE RESULT: FAIL (uptime marker missing - guest never reached first agent action)"
+            else
+              UPTIME_S=$(echo "$UPTIME_LINE" | grep -oE '[0-9.]+' | head -n 1)
+              GATE=$(awk -v u="$UPTIME_S" 'BEGIN{print (u < 5.0) ? "PASS" : "FAIL"}')
+              echo "GATE RESULT: $GATE (uptime_s=$UPTIME_S, target < 5.0 on TCG)"
+            fi
+          else
+            echo "GATE RESULT: NOT RUN (qemu_run.log absent)"
+          fi
+
+          # Archive logs as run receipt
+          mkdir -p sandbox/receipts
+          cp qemu_run.log sandbox/receipts/tcg-run-$(date +%s).log 2>/dev/null || true
+
+      - name: Upload run receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: puppf-sandbox-tcg-receipt
+          path: |
+            qemu_run.log
+            sandbox/receipts/
+          retention-days: 7
+          if-no-files-found: warn
