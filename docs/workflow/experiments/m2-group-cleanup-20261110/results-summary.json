@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-10",
+  "platform": "Linux",
+  "python": "3.13.5",
+  "runner": "synthetic PTY Python fixture, NOT QEMU",
+  "source_sha256": "4bb532dd2ec4ea2f185e3686a506d607f97bd3739443de4c674f12dc2a1271f9",
+  "result_sha256": "01cf7bcaf06577ca6515afd6a9102bf1a1d5147697df952bd37989f2c384a786",
+  "assertions": {
+    "negative_pid_linger": true,
+    "negative_pid_early_exit": true,
+    "group_linger_reaped": true,
+    "group_repeat_sigint_reaped": true,
+    "group_early_exit_reaped": true,
+    "all_terminals_restored": true,
+    "all_wrappers_exit_zero": true
+  },
+  "cases": [
+    {"strategy":"pid","mode":"linger","descendant_state":"S","live":true,"terminal_restored":true},
+    {"strategy":"pid","mode":"early_exit","descendant_state":"S","live":true,"terminal_restored":true},
+    {"strategy":"group","mode":"linger","descendant_state":"Z","live":false,"terminal_restored":true},
+    {"strategy":"group","mode":"linger","repeat_sigint":true,"descendant_state":"absent","live":false,"terminal_restored":true},
+    {"strategy":"group","mode":"early_exit","descendant_state":"Z","live":false,"terminal_restored":true}
+  ],
+  "controlling_pty": {
+    "result_file_sha256": "4c9aa16d948e573e268f1363ce5c832fefc35eaeeb7eff7c29e9ad32ce4d1349",
+    "group_interactive_input": true,
+    "group_ctrl_c_interrupts_wrapper": true,
+    "group_descendant_reaped": true,
+    "pid_control_descendant_live": false,
+    "pid_resistant_control_descendant_live": false,
+    "predicted_pid_resistant_leak": false,
+    "inference": "control countercase: no leak observed with controlling PTY; cause not isolated"
+  },
+  "qemu": "NOT_RUN",
+  "launcher_patch": "NOT_RUN"
+}
