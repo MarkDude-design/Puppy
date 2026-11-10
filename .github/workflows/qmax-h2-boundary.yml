@@ -1,0 +1,82 @@
+name: Qmax H2 Boundary Probe
+on:
+  push:
+    branches:
+      - 'sandbox/qmax-lab-20261110'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  boundary-probe:
+    # Guard the receipt-push loop: do not run if the actor is the bot
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # No ref: specified. Checks out the pushed branch automatically, fixing the lane collision.
+
+      - name: Install QEMU and tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-system-x86 wget bc
+
+      - name: Download test kernel
+        run: |
+          wget -q -O ./vmlinuz-test "https://archive.ubuntu.com/ubuntu/dists/jammy-updates/main/installer-amd64/current/legacy-images/netboot/ubuntu-installer/amd64/linux"
+          chmod +x ./tools/boundary_probe.sh
+
+      - name: Run Boundary Probe
+        id: probe
+        run: |
+          ./tools/boundary_probe.sh
+        env:
+          KERNEL_PATH: ./vmlinuz-test
+
+      - name: Splice Receipt and Publish
+        if: always()
+        run: |
+          HOST_TIME=$(cat ./evidence/host_time.txt 2>/dev/null || echo "0")
+          HOST_EXIT=$(cat ./evidence/host_exit.txt 2>/dev/null || echo "0")
+          HOST_LOG_SIZE=$(cat ./evidence/host_log_size.txt 2>/dev/null || echo "0")
+          
+          GUEST_TIME=$(cat ./evidence/guest_time.txt 2>/dev/null || echo "0")
+          GUEST_EXIT=$(cat ./evidence/guest_exit.txt 2>/dev/null || echo "0")
+          GUEST_LOG_SIZE=$(cat ./evidence/guest_log_size.txt 2>/dev/null || echo "0")
+          GUEST_HAS_DECOMP=$(cat ./evidence/guest_has_decomp.txt 2>/dev/null || echo "NO")
+          GUEST_STATUS=$(cat ./evidence/guest_status.txt 2>/dev/null || echo "FAIL")
+          
+          # Handle SKIPPED leg
+          if [ "$GUEST_STATUS" == "SKIPPED" ]; then
+             SPLICE="Host: Time=${HOST_TIME}s, Exit=${HOST_EXIT}, LogSize=${HOST_LOG_SIZE} | Guest: SKIPPED (kernel missing)"
+             MSG="chore(receipt): splice actuals (SKIPPED) [skip ci]"
+             PASS="TRUE"
+          else
+             SPLICE="Host: Time=${HOST_TIME}s, Exit=${HOST_EXIT}, LogSize=${HOST_LOG_SIZE} | Guest: Time=${GUEST_TIME}s, Exit=${GUEST_EXIT}, LogSize=${GUEST_LOG_SIZE}, HasDecomp=${GUEST_HAS_DECOMP}"
+             MSG="chore(receipt): splice actuals [skip ci]"
+             PASS="TRUE"
+             
+             # FAIL exits red: check discriminator logic
+             if [ "$HOST_EXIT" -eq 0 ] || (( $(echo "$HOST_TIME > 0.5" | bc -l) )) || [ "$HOST_LOG_SIZE" -ne 0 ]; then PASS="FALSE"; fi
+             if [ "$GUEST_EXIT" -eq 0 ] || (( $(echo "$GUEST_TIME <= $HOST_TIME" | bc -l) )) || [ "$GUEST_LOG_SIZE" -eq 0 ] || [ "$GUEST_HAS_DECOMP" != "YES" ]; then PASS="FALSE"; fi
+          fi
+          
+          # Splice into RECEIPT.md
+          sed -i "s/\*\*\[AWAITING RUNNER SPLICE\]\*\*/$SPLICE/g" RECEIPT.md
+          
+          # Commit and push (runner publishes itself)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add RECEIPT.md
+          git commit -m "$MSG"
+          git push
+          
+          if [ "$PASS" == "FALSE" ]; then
+            echo "FAIL: Boundary discriminator failed." >> GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "PASS: Boundary successfully discriminated." >> GITHUB_STEP_SUMMARY
+            exit 0
+          fi
