@@ -1,0 +1,31 @@
+name: Qcoder Reproducibility Test
+
+on:
+  push:
+    branches:
+      - sandbox/qcoder-lab-20261110
+    paths:
+      - 'sandbox/qcoder-lab-20261110/**'
+      - 'puppy-p0a/**'
+
+jobs:
+  test-reproducibility:
+    # Guard: skip when the actor is github-actions[bot] to prevent receipt-push loops
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Reproducibility Test
+        run: |
+          chmod +x sandbox/qcoder-lab-20261110/test-reproducibility.sh
+          bash sandbox/qcoder-lab-20261110/test-reproducibility.sh
+
+      - name: Upload Evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qcoder-reproducibility-evidence
+          path: /tmp/puppf-repro-*
+          retention-days: 3
