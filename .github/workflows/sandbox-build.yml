@@ -1,18 +1,18 @@
-# PUPPF SANDBOX — one-static-binary floor, round 3 + receipt publication (2026-11-10).
+# PUPPF SANDBOX — one-static-binary floor, run #2 wiring (2026-11-10).
 # Source: Gemini seat proposals; verbatim copies under sandbox/incoming/.
-# Z annotations carried from rounds 2-3 (workflow completion, permissions, timeout,
-# chmod +x, pipefail, computed non-blocking gate, compile step, AGENT RESULT check)
-# plus this round:
-#   6. Receipt publication to the sandbox branch: after every run the QEMU log is
-#      committed to sandbox/receipts/ so receipts live in the repo, readable by every
-#      seat (bus precedent: island failure publication). This requires contents:write
-#      for the publish step only in practice — sandbox branch is disposable territory
-#      per charter; main route gates unaffected.
-#   7. Loop guard (required): receipt commits carry [skip ci] AND the job skips when
-#      the actor is github-actions[bot]. Without these, receipt-push -> rebuild ->
-#      receipt-push is an unbounded minutes burn loop.
-#      [skip ci] alone is honored by GitHub for push events; the actor guard is
-#      belt-and-braces.
+# Z annotations, cumulative:
+#   rounds 2-5: workflow completion, permissions, timeout, chmod +x /init,
+#   pipefail, computed non-blocking gate, static compile step, AGENT RESULT
+#   check, receipt publication with [skip ci] + actor guard.
+#   This round (after run #1 BUILD_FAILED in 32s):
+#   8. Source fix: git.buildroot.net is not a served git repository (run #1
+#      receipt, exit 128). Now pulls the Buildroot 2026.08 release tarball from
+#      buildroot.org — same source family the main route pins. Tarball sha256
+#      recorded in every receipt (sandbox grade: recorded, not gated).
+#   9. Failure receipts publish: every run commits sandbox/receipts/run-<id>/
+#      with summary.md (outcome, gate, agent result, footprint, source sha256);
+#      build output is teed to build.log so failed compiles are diagnosable
+#      from the branch; build-failure receipts carry the log tail.
 
 name: Puppf Sandbox Build & TCG Run
 
@@ -55,7 +55,14 @@ jobs:
 
       - name: Build Buildroot Image Stack
         run: |
-          git clone --depth 1 --branch 2026.08 https://git.buildroot.net/buildroot /tmp/buildroot
+          set -o pipefail
+          # Source: official Buildroot 2026.08 release tarball (buildroot.org).
+          # Run #1 failed here with git.buildroot.net "repository not found" - see
+          # sandbox/reviews/Z-REVIEW-no-busybox-and-first-run-2026-11-10.md
+          wget -q https://buildroot.org/downloads/buildroot-2026.08.tar.gz
+          sha256sum buildroot-2026.08.tar.gz
+          tar -xzf buildroot-2026.08.tar.gz -C /tmp
+          mv /tmp/buildroot-2026.08 /tmp/buildroot
           cp configs/puppy_agent_defconfig /tmp/buildroot/configs/
 
           # Copy overlay into buildroot tree
@@ -65,7 +72,7 @@ jobs:
 
           cd /tmp/buildroot
           make puppy_agent_defconfig
-          make -j$(nproc)
+          make -j$(nproc) 2>&1 | tee "$GITHUB_WORKSPACE/build.log"
 
       - name: Execute QEMU TCG Acceptance Run & Generate Receipt
         run: |
@@ -82,42 +89,57 @@ jobs:
             -m 256M \
             -append "console=ttyS0 panic=1" | tee qemu_run.log
 
-      - name: Validate Sandbox Gate & Record Receipt
+      - name: Record Receipt (all outcomes)
         if: always()
         run: |
-          echo "=== ARTIFACT & RECEIPT METRICS ==="
+          RECEIPT_DIR="sandbox/receipts/run-${GITHUB_RUN_ID}"
+          mkdir -p "$RECEIPT_DIR"
+          {
+            echo "# Puppf sandbox run receipt"
+            echo ""
+            echo "- Run: ${GITHUB_RUN_ID} (attempt ${GITHUB_RUN_ATTEMPT})"
+            echo "- Date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "- Source: Buildroot 2026.08 release tarball (buildroot.org)"
+            if [ -f buildroot-2026.08.tar.gz ]; then
+              echo "- Buildroot tarball sha256: $(sha256sum buildroot-2026.08.tar.gz | awk '{print $1}')"
+            fi
+          } > "$RECEIPT_DIR/summary.md"
+
           if [ -f /tmp/buildroot/output/images/bzImage ]; then
-            ls -lh /tmp/buildroot/output/images/bzImage /tmp/buildroot/output/images/rootfs.cpio.gz
             KERNEL_BYTES=$(stat -c%s /tmp/buildroot/output/images/bzImage)
             INITRD_BYTES=$(stat -c%s /tmp/buildroot/output/images/rootfs.cpio.gz)
             TOTAL_MB=$(awk -v k="$KERNEL_BYTES" -v i="$INITRD_BYTES" 'BEGIN{printf "%.1f", (k+i)/1048576}')
-            echo "Artifact footprint: ${TOTAL_MB} MB (target < 15 MB)"
-          else
-            echo "Build images missing - build failed before QEMU. See build log."
+            echo "- Artifact footprint: ${TOTAL_MB} MB (target < 15 MB)" >> "$RECEIPT_DIR/summary.md"
           fi
 
-          # Extract uptime line from run log; compute gate PASS/FAIL (non-blocking)
           if [ -f qemu_run.log ]; then
+            cp qemu_run.log "$RECEIPT_DIR/"
             UPTIME_LINE=$(grep "First agent action output at uptime" qemu_run.log | head -n 1)
             if [ -z "$UPTIME_LINE" ]; then
-              echo "GATE RESULT: FAIL (uptime marker missing - guest never reached first agent action)"
+              GATE_RESULT="FAIL (uptime marker missing - guest never reached first agent action)"
             else
               UPTIME_S=$(echo "$UPTIME_LINE" | grep -oE '[0-9.]+' | head -n 1)
               GATE=$(awk -v u="$UPTIME_S" 'BEGIN{print (u < 5.0) ? "PASS" : "FAIL"}')
-              echo "GATE RESULT: $GATE (uptime_s=$UPTIME_S, target < 5.0 on TCG)"
+              GATE_RESULT="$GATE (uptime_s=$UPTIME_S, target < 5.0 on TCG)"
             fi
             if grep -q "PUPPF AGENT-CORE [ONLINE]" qemu_run.log; then
-              echo "AGENT RESULT: ONLINE banner present - genuine agent-boot receipt achieved."
+              AGENT_RESULT="ONLINE banner present - genuine agent-boot receipt achieved."
             else
-              echo "AGENT RESULT: no ONLINE banner - check receipt-error branch in log."
+              AGENT_RESULT="no ONLINE banner - check receipt-error branch in log."
             fi
           else
-            echo "GATE RESULT: NOT RUN (qemu_run.log absent)"
+            GATE_RESULT="NOT RUN (no QEMU log - build or earlier step failed)"
+            AGENT_RESULT="NOT RUN"
+            if [ -f build.log ]; then
+              tail -n 200 build.log > "$RECEIPT_DIR/build-tail.log"
+              echo "- Build log tail: build-tail.log in this directory" >> "$RECEIPT_DIR/summary.md"
+            fi
           fi
-
-          # Archive logs as run receipt (published to the branch by the next step)
-          mkdir -p sandbox/receipts
-          cp qemu_run.log sandbox/receipts/tcg-run-$(date +%s).log 2>/dev/null || true
+          {
+            echo "- GATE RESULT: $GATE_RESULT"
+            echo "- AGENT RESULT: $AGENT_RESULT"
+          } >> "$RECEIPT_DIR/summary.md"
+          cat "$RECEIPT_DIR/summary.md"
 
       - name: Publish run receipt to the sandbox branch
         if: always()
@@ -126,7 +148,7 @@ jobs:
           git config user.email "noreply@github.com"
           git add sandbox/receipts/ 2>/dev/null || true
           if git diff --staged --quiet; then
-            echo "No receipt files to publish (build failed before QEMU produced a log)."
+            echo "No receipt files to publish."
             exit 0
           fi
           git commit -m "sandbox: run receipt ${GITHUB_RUN_ID} [skip ci]"
@@ -139,6 +161,7 @@ jobs:
           name: puppf-sandbox-tcg-receipt
           path: |
             qemu_run.log
+            build.log
             sandbox/receipts/
           retention-days: 7
           if-no-files-found: warn
