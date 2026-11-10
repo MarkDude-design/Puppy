@@ -1,12 +1,18 @@
-# PUPPF SANDBOX — one-static-binary floor, round 3 (received 2026-11-10).
-# Source: Gemini seat proposal; verbatim copy: sandbox/incoming/gemini-agent-core-round3-2026-11-10.md
-# Z annotations carried from round 2 (truncation completion, permissions, timeout,
-# chmod +x /init, pipefail, computed non-blocking gate, if:always receipt upload)
-# plus round 3:
-#   5. Added the static compile step — the overlay ships agent-core.c (SOURCE);
-#      nothing compiled it, so the init's -x check would have failed into the
-#      receipt-error branch. Now compiled on the runner (gcc -static, glibc)
-#      before the overlay copy. See sandbox/reviews/Z-REVIEW-gemini-agent-core-round3-2026-11-10.md
+# PUPPF SANDBOX — one-static-binary floor, round 3 + receipt publication (2026-11-10).
+# Source: Gemini seat proposals; verbatim copies under sandbox/incoming/.
+# Z annotations carried from rounds 2-3 (workflow completion, permissions, timeout,
+# chmod +x, pipefail, computed non-blocking gate, compile step, AGENT RESULT check)
+# plus this round:
+#   6. Receipt publication to the sandbox branch: after every run the QEMU log is
+#      committed to sandbox/receipts/ so receipts live in the repo, readable by every
+#      seat (bus precedent: island failure publication). This requires contents:write
+#      for the publish step only in practice — sandbox branch is disposable territory
+#      per charter; main route gates unaffected.
+#   7. Loop guard (required): receipt commits carry [skip ci] AND the job skips when
+#      the actor is github-actions[bot]. Without these, receipt-push -> rebuild ->
+#      receipt-push is an unbounded minutes burn loop.
+#      [skip ci] alone is honored by GitHub for push events; the actor guard is
+#      belt-and-braces.
 
 name: Puppf Sandbox Build & TCG Run
 
@@ -16,10 +22,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   sandbox-build-and-run:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -108,9 +115,22 @@ jobs:
             echo "GATE RESULT: NOT RUN (qemu_run.log absent)"
           fi
 
-          # Archive logs as run receipt
+          # Archive logs as run receipt (published to the branch by the next step)
           mkdir -p sandbox/receipts
           cp qemu_run.log sandbox/receipts/tcg-run-$(date +%s).log 2>/dev/null || true
+
+      - name: Publish run receipt to the sandbox branch
+        if: always()
+        run: |
+          git config user.name "puppf-sandbox-receipts"
+          git config user.email "noreply@github.com"
+          git add sandbox/receipts/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No receipt files to publish (build failed before QEMU produced a log)."
+            exit 0
+          fi
+          git commit -m "sandbox: run receipt ${GITHUB_RUN_ID} [skip ci]"
+          git push
 
       - name: Upload run receipt
         if: always()
