@@ -1,0 +1,101 @@
+# PUPPF SANDBOX — branch-local experiment workflow.
+# Source: Gemini seat, received 2026-11-10 (verbatim copy: sandbox/incoming/gemini-build-minimal-agent-linux-iso-2026-11-10.yml).
+# Z annotations (everything below is unchanged from the received version except these):
+#   1. Trigger scoped to this sandbox branch only (original had push on main/master +
+#      workflow_dispatch; a branch-only workflow_dispatch cannot be dispatched from the
+#      Actions UI, so push-on-this-branch is the sandbox's actual engine).
+#   2. Added least-privilege permissions block.
+#   3. Added short artifact retention so sandbox ISOs don't pile up in storage.
+# Predicted by Z's review: fails at "Prepare Kernel and Initramfs" (minbase ships no kernel).
+# That failure is the receipt — keep the log, then fix it your way.
+
+name: Gemini Sandbox ISO
+
+on:
+  push:
+    branches: [ "sandbox/gemini-lab-20261110" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            debootstrap \
+            squashfs-tools \
+            xorriso \
+            grub-pc-bin \
+            grub-efi-amd64-bin \
+            mtools \
+            dosfstools
+
+      - name: Bootstrap minimal root filesystem
+        run: |
+          sudo mkdir -p /tmp/rootfs
+          # Bootstrap a minimal Debian/Ubuntu base system
+          sudo debootstrap --arch=amd64 --variant=minbase bookworm /tmp/rootfs http://deb.debian.org/debian/
+
+      - name: Inject agent binaries and configurations
+        run: |
+          # Copy your custom agent scripts, configs, or binaries from the repo into the rootfs
+          if [ -d "./agent-overlay" ]; then
+            sudo cp -r ./agent-overlay/* /tmp/rootfs/
+          fi
+
+          # Set up minimal hostname, resolv.conf, or custom init scripts
+          echo "agent-node" | sudo tee /tmp/rootfs/etc/hostname
+
+          # Clean up unnecessary cached apt packages to shrink size
+          sudo chroot /tmp/rootfs apt-get clean
+
+      - name: Create SquashFS compressed filesystem
+        run: |
+          sudo mkdir -p /tmp/iso/live
+          sudo mksquashfs /tmp/rootfs /tmp/iso/live/filesystem.squashfs -comp xz -b 1048576 -Xbcj x86
+
+      - name: Prepare Kernel and Initramfs
+        run: |
+          # Extract the Linux kernel and initrd from the bootstrapped rootfs
+          # (Alternatively, you can package a custom pre-compiled kernel)
+          KERNEL_VERSION=$(ls /tmp/rootfs/lib/modules | head -n 1)
+          echo "Found kernel version: $KERNEL_VERSION"
+
+          sudo cp /tmp/rootfs/boot/vmlinuz-* /tmp/iso/vmlinuz
+          sudo cp /tmp/rootfs/boot/initrd.img-* /tmp/iso/initrd
+
+          # Normalize names for bootloader config
+          sudo mv /tmp/iso/vmlinuz* /tmp/iso/vmlinuz
+          sudo mv /tmp/iso/initrd* /tmp/iso/initrd
+
+      - name: Configure GRUB Bootloader
+        run: |
+          sudo mkdir -p /tmp/iso/boot/grub
+          cat << 'EOF' | sudo tee /tmp/iso/boot/grub/grub.cfg
+          set timeout=5
+          set default=0
+
+          menuentry "Minimal Agent OS (RAM Mode)" {
+              linux /vmlinuz boot=live quiet splash
+              initrd /initrd
+          }
+          EOF
+
+      - name: Build ISO image with xorriso
+        run: |
+          grub-mkrescue -o agent-os-minimal.iso /tmp/iso
+
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: minimal-agent-iso
+          path: agent-os-minimal.iso
+          retention-days: 7
