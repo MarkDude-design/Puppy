@@ -152,6 +152,12 @@ jobs:
             exit 0
           fi
           git commit -m "sandbox: run receipt ${GITHUB_RUN_ID} [skip ci]"
+          # Z fix #10 (run #2 publish race): the branch moved mid-run (curator
+          # bank commit landed 18:55Z while the run was building), so the plain
+          # push was rejected non-fast-forward and the receipt never reached
+          # the branch — the owner had to extract it from the Actions artifact.
+          # Rebase the receipt commit onto the current remote head before push.
+          git pull --rebase origin sandbox/gemini-lab-20261110
           git push
 
       - name: Upload run receipt
