@@ -1,18 +1,39 @@
-name: Qcoder H2 Discriminating Check
+# Z-completion 2026-11-10 — Q 3.8 MAX original banked verbatim in the prior
+# commit; wiring fixes per sandbox/reviews/Z-REVIEW-qmax-h2-2026-11-10.md:
+#   Z1. Lane moved to sandbox/qmax-lab-20261110 (one hypothesis per lane; the
+#       qcoder lane is occupied by the first Q seat's OPEN reproducibility run).
+#   Z2. Checkout follows the push (no hardcoded ref to another lane).
+#   Z3. Paths filter added so only lane-relevant pushes fire the test.
+#   Z4. Receipt-publish step added: the runner splices the summary into
+#       RECEIPT.md and a bot commit carries it to the branch. Actor guard +
+#       suppression marker in the publish commit message prevent loops.
+#   Z5. Runner pinned to ubuntu-24.04, 30-minute timeout, per-ref concurrency,
+#       contents: write scoped for the publish step.
+name: Qmax H2 Discriminating Check
 on:
   push:
     branches:
-      - 'sandbox/qcoder-lab-20261110'
+      - 'sandbox/qmax-lab-20261110'
+    paths:
+      - 'sandbox/qmax-lab-20261110/**'
+      - 'tools/**'
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: qmax-h2-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   h2-discrimination:
-    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: sandbox/qcoder-lab-20261110
 
       - name: Install QEMU
         run: |
@@ -25,11 +46,25 @@ jobs:
           ./tools/boot_gate_h2.sh
         env:
           PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
+          PUPPF_RECEIPT_FILE: ./sandbox/qmax-lab-20261110/RECEIPT.md
 
       - name: Upload Evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: h2-evidence
-          path: |
-            ${{ runner.temp }}/puppf-evidence/
+          path: ${{ runner.temp }}/puppf-evidence/
+          retention-days: 3
+
+      - name: Publish receipt to branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- sandbox/qmax-lab-20261110/RECEIPT.md; then
+            echo "No receipt change to publish."
+            exit 0
+          fi
+          git add sandbox/qmax-lab-20261110/RECEIPT.md
+          git commit -m "qmax h2: publish actual result [skip ci]"
+          git push
