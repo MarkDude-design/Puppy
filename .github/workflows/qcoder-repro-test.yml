@@ -1,3 +1,13 @@
+# Z-completion 2026-11-10 — QC's original workflow is preserved in the verbatim
+# bank commit; wiring fixes per sandbox/reviews/Z-REVIEW-qcoder-repro-2026-11-10.md:
+#   Z1. Host build dependencies installed (matches the main dispatch; the
+#       driver blocks on missing qemu/gpg/bison/flex/perl/etc.).
+#   Z2. PUPPF_EXPECTED_PACKET_SHA256 pinned at job level (driver packet gate).
+#   Z3. Receipt-publish step added so RESULT-POSTED actually lands on the
+#       branch (bot-authored commit carries the suppression marker; the
+#       actor guard prevents loops).
+#   Z4. Explicit 330-minute timeout (two sequential full build+two-boot
+#       routes), per-ref concurrency, contents:write only for publishing.
 name: Qcoder Reproducibility Test
 
 on:
@@ -8,14 +18,33 @@ on:
       - 'sandbox/qcoder-lab-20261110/**'
       - 'puppy-p0a/**'
 
+permissions:
+  contents: write
+
+concurrency:
+  group: qcoder-repro-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   test-reproducibility:
     # Guard: skip when the actor is github-actions[bot] to prevent receipt-push loops
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    env:
+      # Z2: pinned dispatch digest, same value as the main P0a dispatch workflow.
+      PUPPF_EXPECTED_PACKET_SHA256: b0417934776c214ca3189c8822b85baf1e71fc262f66ada98bce2092f07c9c9b
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Z1: the driver's host_check blocks without these.
+      - name: Install build dependencies (main dispatch list)
+        run: |
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+            build-essential bc bison bzip2 cpio file flex git libncurses-dev patch \
+            perl python3 qemu-system-x86 rsync tar unzip wget xz-utils
 
       - name: Run Reproducibility Test
         run: |
@@ -29,3 +58,17 @@ jobs:
           name: qcoder-reproducibility-evidence
           path: /tmp/puppf-repro-*
           retention-days: 3
+
+      # Z3: publish the receipt so the RESULT-POSTED transition lands on-branch.
+      - name: Publish receipt to branch
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- sandbox/qcoder-lab-20261110/RECEIPT.md; then
+            echo "No receipt change to publish."
+            exit 0
+          fi
+          git add sandbox/qcoder-lab-20261110/RECEIPT.md
+          git commit -m "qcoder repro: publish actual result [skip ci]"
+          git push
