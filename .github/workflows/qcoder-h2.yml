@@ -1,0 +1,35 @@
+name: Qcoder H2 Discriminating Check
+on:
+  push:
+    branches:
+      - 'sandbox/qcoder-lab-20261110'
+  workflow_dispatch:
+
+jobs:
+  h2-discrimination:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: sandbox/qcoder-lab-20261110
+
+      - name: Install QEMU
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-system-x86 wget
+
+      - name: Run H2 Test Script
+        run: |
+          chmod +x ./tools/boot_gate_h2.sh
+          ./tools/boot_gate_h2.sh
+        env:
+          PUPPF_EVIDENCE_DIR: ${{ runner.temp }}/puppf-evidence
+
+      - name: Upload Evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: h2-evidence
+          path: |
+            ${{ runner.temp }}/puppf-evidence/
