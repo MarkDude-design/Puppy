@@ -1,0 +1,200 @@
+Making install in src
+make[2]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13/src'
+make[3]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13/src'
+make[3]: Nothing to be done for 'install-data-am'.
+ /usr/bin/mkdir -p '/tmp/buildroot/output/host/bin'
+  /usr/bin/install -c patchelf '/tmp/buildroot/output/host/bin'
+make[3]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13/src'
+make[2]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13/src'
+Making install in tests
+make[2]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13/tests'
+make[3]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13/tests'
+make[3]: Nothing to be done for 'install-exec-am'.
+make[3]: Nothing to be done for 'install-data-am'.
+make[3]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13/tests'
+make[2]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13/tests'
+make[2]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13'
+make[3]: Entering directory '/tmp/buildroot/output/build/host-patchelf-0.13'
+make[3]: Nothing to be done for 'install-exec-am'.
+ /usr/bin/mkdir -p '/tmp/buildroot/output/host/share/doc/patchelf'
+ /usr/bin/mkdir -p '/tmp/buildroot/output/host/share/man/man1'
+ /usr/bin/install -c -m 644 README.md '/tmp/buildroot/output/host/share/doc/patchelf'
+ /usr/bin/install -c -m 644 patchelf.1 '/tmp/buildroot/output/host/share/man/man1'
+make[3]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13'
+make[2]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13'
+make[1]: Leaving directory '/tmp/buildroot/output/build/host-patchelf-0.13'
+>>> urandom-scripts  Extracting
+>>> urandom-scripts  Patching
+>>> urandom-scripts  Configuring
+>>> urandom-scripts  Building
+>>> urandom-scripts  Installing to target
+/usr/bin/install -D -m 0755 package/urandom-scripts/S01seedrng /tmp/buildroot/output/target/etc/init.d/S01seedrng
+WARNING: no hash file for linux-6.18.7.tar.xz
+>>> linux 6.18.7 Extracting
+xzcat /tmp/buildroot/dl/linux/linux-6.18.7.tar.xz | tar --strip-components=1 -C /tmp/buildroot/output/build/linux-6.18.7   -xf -
+>>> linux 6.18.7 Patching
+for p in  ; do if test -d $p ; then TAR="tar" PATH=/tmp/buildroot/output/host/bin:$PATH support/scripts/apply-patches.sh  /tmp/buildroot/output/build/linux-6.18.7 $p \*.patch || exit 1 ; else TAR="tar" PATH=/tmp/buildroot/output/host/bin:$PATH support/scripts/apply-patches.sh  /tmp/buildroot/output/build/linux-6.18.7 `dirname $p` `basename $p` || exit 1; fi done
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[1]: Entering directory '/tmp/buildroot/output/build/linux-6.18.7'
+  HOSTCC  scripts/basic/fixdep
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/confdata.o
+  HOSTCC  scripts/kconfig/expr.o
+  LEX     scripts/kconfig/lexer.lex.c
+  YACC    scripts/kconfig/parser.tab.[ch]
+  HOSTCC  scripts/kconfig/lexer.lex.o
+  HOSTCC  scripts/kconfig/menu.o
+  HOSTCC  scripts/kconfig/parser.tab.o
+  HOSTCC  scripts/kconfig/preprocess.o
+  HOSTCC  scripts/kconfig/symbol.o
+  HOSTCC  scripts/kconfig/util.o
+  HOSTLD  scripts/kconfig/conf
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/tmp/buildroot/output/build/linux-6.18.7'
+Using /tmp/buildroot/output/build/linux-6.18.7/.config as base
+#
+# merged configuration written to /tmp/buildroot/output/build/linux-6.18.7/.config (needs make)
+#
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[1]: Entering directory '/tmp/buildroot/output/build/linux-6.18.7'
+#
+# No change to .config
+#
+make[1]: Leaving directory '/tmp/buildroot/output/build/linux-6.18.7'
+>>> linux 6.18.7 Updating kernel config with fixups
+make[1]: warning: jobserver unavailable: using -j1.  Add '+' to parent make rule.
+make[1]: Entering directory '/tmp/buildroot/output/build/linux-6.18.7'
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/tmp/buildroot/output/build/linux-6.18.7'
+>>> linux 6.18.7 Configuring
+>>> linux 6.18.7 Building
+GIT_DIR=. PATH="/tmp/buildroot/output/host/bin:/tmp/buildroot/output/host/sbin:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin" PKG_CONFIG="/tmp/buildroot/output/host/bin/pkg-config" PKG_CONFIG_SYSROOT_DIR="/" PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 PKG_CONFIG_LIBDIR="/tmp/buildroot/output/host/lib/pkgconfig:/tmp/buildroot/output/host/share/pkgconfig" BR_BINARIES_DIR=/tmp/buildroot/output/images /usr/bin/make  HOSTCC="/usr/bin/gcc -O2 -isystem /tmp/buildroot/output/host/include -L/tmp/buildroot/output/host/lib -Wl,-rpath,/tmp/buildroot/output/host/lib" ARCH=x86_64 KCFLAGS="-Wno-attribute-alias" INSTALL_MOD_PATH=/tmp/buildroot/output/target CROSS_COMPILE="/tmp/buildroot/output/host/bin/x86_64-buildroot-linux-uclibc-" WERROR=0 REGENERATE_PARSERS=1 DEPMOD=true INSTALL_MOD_STRIP=1 -C /tmp/buildroot/output/build/linux-6.18.7 all
+make[1]: Entering directory '/tmp/buildroot/output/build/linux-6.18.7'
+  SYNC    include/config/auto.conf.cmd
+  HOSTCC  scripts/basic/fixdep
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/confdata.o
+  HOSTCC  scripts/kconfig/expr.o
+  HOSTCC  scripts/kconfig/lexer.lex.o
+  HOSTCC  scripts/kconfig/menu.o
+  HOSTCC  scripts/kconfig/parser.tab.o
+  HOSTCC  scripts/kconfig/preprocess.o
+  HOSTCC  scripts/kconfig/symbol.o
+  HOSTCC  scripts/kconfig/util.o
+  HOSTLD  scripts/kconfig/conf
+  WRAP    arch/x86/include/generated/uapi/asm/bpf_perf_event.h
+  HOSTCC  scripts/basic/fixdep
+  WRAP    arch/x86/include/generated/uapi/asm/errno.h
+  WRAP    arch/x86/include/generated/uapi/asm/fcntl.h
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_32.h
+  WRAP    arch/x86/include/generated/uapi/asm/ioctl.h
+  WRAP    arch/x86/include/generated/uapi/asm/ioctls.h
+  WRAP    arch/x86/include/generated/uapi/asm/ipcbuf.h
+  WRAP    arch/x86/include/generated/uapi/asm/param.h
+  WRAP    arch/x86/include/generated/uapi/asm/poll.h
+  WRAP    arch/x86/include/generated/uapi/asm/resource.h
+  WRAP    arch/x86/include/generated/uapi/asm/socket.h
+  WRAP    arch/x86/include/generated/uapi/asm/sockios.h
+  WRAP    arch/x86/include/generated/uapi/asm/termbits.h
+  WRAP    arch/x86/include/generated/uapi/asm/termios.h
+  WRAP    arch/x86/include/generated/uapi/asm/types.h
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_64.h
+  UPD     arch/x86/include/generated/asm/cpufeaturemasks.h
+  SYSHDR  arch/x86/include/generated/uapi/asm/unistd_x32.h
+  SYSTBL  arch/x86/include/generated/asm/syscalls_32.h
+  SYSHDR  arch/x86/include/generated/asm/unistd_32_ia32.h
+  SYSHDR  arch/x86/include/generated/asm/unistd_64_x32.h
+  SYSTBL  arch/x86/include/generated/asm/syscalls_64.h
+  GEN     arch/x86/include/generated/asm/orc_hash.h
+  WRAP    arch/x86/include/generated/asm/early_ioremap.h
+  WRAP    arch/x86/include/generated/asm/mcs_spinlock.h
+  WRAP    arch/x86/include/generated/asm/fprobe.h
+  WRAP    arch/x86/include/generated/asm/mmzone.h
+  WRAP    arch/x86/include/generated/asm/irq_regs.h
+  WRAP    arch/x86/include/generated/asm/kmap_size.h
+  UPD     include/generated/uapi/linux/version.h
+  WRAP    arch/x86/include/generated/asm/local64.h
+  UPD     include/config/kernel.release
+  WRAP    arch/x86/include/generated/asm/mmiowb.h
+  WRAP    arch/x86/include/generated/asm/module.lds.h
+  WRAP    arch/x86/include/generated/asm/rwonce.h
+  WRAP    arch/x86/include/generated/asm/unwind_user.h
+  UPD     include/generated/utsrelease.h
+  UPD     include/generated/compile.h
+  DESCEND objtool
+  HOSTCC  arch/x86/tools/relocs_32.o
+  HOSTCC  arch/x86/tools/relocs_64.o
+  HOSTCC  scripts/selinux/mdp/mdp
+  HOSTCC  scripts/kallsyms
+  HOSTCC  arch/x86/tools/relocs_common.o
+  INSTALL /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/include/subcmd/exec-cmd.h
+  INSTALL /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/include/subcmd/help.h
+  INSTALL /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/include/subcmd/pager.h
+  INSTALL /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/include/subcmd/parse-options.h
+  HOSTCC  scripts/sorttable
+  INSTALL /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/include/subcmd/run-command.h
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/exec-cmd.o
+  HOSTLD  arch/x86/tools/relocs
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/help.o
+  INSTALL libsubcmd_headers
+  HOSTCC  scripts/asn1_compiler
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/pager.o
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/parse-options.o
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/run-command.o
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/sigchain.o
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/subcmd-config.o
+  CC      scripts/mod/empty.o
+  HOSTCC  scripts/mod/mk_elfconfig
+  CC      scripts/mod/devicetable-offsets.s
+  MKELF   scripts/mod/elfconfig.h
+  HOSTCC  scripts/mod/modpost.o
+  HOSTCC  scripts/mod/sumversion.o
+  UPD     scripts/mod/devicetable-offsets.h
+  HOSTCC  scripts/mod/symsearch.o
+  LD      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/libsubcmd-in.o
+  HOSTCC  scripts/mod/file2alias.o
+  AR      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/libsubcmd/libsubcmd.a
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/weak.o
+  CC      /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/arch/x86/special.o
+In file included from /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/objtool.h:13,
+                 from weak.c:10:
+/tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/elf.h:10:10: fatal error: gelf.h: No such file or directory
+   10 | #include <gelf.h>
+      |          ^~~~~~~~
+compilation terminated.
+In file included from /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/objtool.h:13,
+                 from /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/arch.h:11,
+                 from /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/check.h:11,
+                 from /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/special.h:10,
+                 from arch/x86/special.c:4:
+/tmp/buildroot/output/build/linux-6.18.7/tools/objtool/include/objtool/elf.h:10:10: fatal error: gelf.h: No such file or directory
+   10 | #include <gelf.h>
+      |          ^~~~~~~~
+compilation terminated.
+make[6]: *** [/tmp/buildroot/output/build/linux-6.18.7/tools/build/Makefile.build:86: /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/arch/x86/special.o] Error 1
+make[5]: *** [/tmp/buildroot/output/build/linux-6.18.7/tools/build/Makefile.build:86: /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/weak.o] Error 1
+make[5]: *** Waiting for unfinished jobs....
+make[5]: *** [/tmp/buildroot/output/build/linux-6.18.7/tools/build/Makefile.build:142: arch/x86] Error 2
+make[4]: *** [Makefile:65: /tmp/buildroot/output/build/linux-6.18.7/tools/objtool/objtool-in.o] Error 2
+make[3]: *** [Makefile:73: objtool] Error 2
+make[2]: *** [/tmp/buildroot/output/build/linux-6.18.7/Makefile:1449: tools/objtool] Error 2
+make[2]: *** Waiting for unfinished jobs....
+  HOSTLD  scripts/mod/modpost
+  CC      kernel/bounds.s
+  CHKSHA1 include/linux/atomic/atomic-arch-fallback.h
+  CHKSHA1 include/linux/atomic/atomic-instrumented.h
+  UPD     include/generated/timeconst.h
+  CHKSHA1 include/linux/atomic/atomic-long.h
+  UPD     include/generated/bounds.h
+  CC      arch/x86/kernel/asm-offsets.s
+  UPD     include/generated/asm-offsets.h
+  CC      kernel/sched/rq-offsets.s
+  UPD     include/generated/rq-offsets.h
+  CALL    scripts/checksyscalls.sh
+make[1]: *** [Makefile:248: __sub-make] Error 2
+make[1]: Leaving directory '/tmp/buildroot/output/build/linux-6.18.7'
+make: *** [package/pkg-generic.mk:273: /tmp/buildroot/output/build/linux-6.18.7/.stamp_built] Error 2
