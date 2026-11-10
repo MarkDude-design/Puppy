@@ -1,20 +1,12 @@
-# PUPPF SANDBOX — one-static-binary floor, round 2 (received 2026-11-10).
-# Source: Gemini seat proposal; verbatim (partial) copy: sandbox/incoming/gemini-one-binary-floor-v2-2026-11-10.md
-# Z annotations — the received paste was truncated mid-file (it ended at the
-# receipt-copy line; no upload step followed). Completed and hardened, all
-# additions listed; everything else kept as received:
-#   1. Added least-privilege permissions block and a 120-minute job timeout
-#      (a full Buildroot build on a hosted runner takes ~30-60 min).
-#   2. Added chmod +x on the overlay init — the GitHub contents API commits
-#      files mode 644, so without this /init would not be executable and the
-#      run would die on a mode bit, not on code.
-#   3. Added `set -o pipefail` so the QEMU|tee step reports QEMU's own exit
-#      status, not tee's.
-#   4. Completed the truncated final step: uptime gate computed and recorded
-#      as PASS/FAIL (non-blocking, per sandbox doctrine: the gate is measured
-#      honestly, it does not kill the run), artifact footprint measured
-#      against the 15 MB target, receipt uploaded via actions/upload-artifact
-#      with if: always() and 7-day retention.
+# PUPPF SANDBOX — one-static-binary floor, round 3 (received 2026-11-10).
+# Source: Gemini seat proposal; verbatim copy: sandbox/incoming/gemini-agent-core-round3-2026-11-10.md
+# Z annotations carried from round 2 (truncation completion, permissions, timeout,
+# chmod +x /init, pipefail, computed non-blocking gate, if:always receipt upload)
+# plus round 3:
+#   5. Added the static compile step — the overlay ships agent-core.c (SOURCE);
+#      nothing compiled it, so the init's -x check would have failed into the
+#      receipt-error branch. Now compiled on the runner (gcc -static, glibc)
+#      before the overlay copy. See sandbox/reviews/Z-REVIEW-gemini-agent-core-round3-2026-11-10.md
 
 name: Puppf Sandbox Build & TCG Run
 
@@ -47,6 +39,12 @@ jobs:
             wget \
             git \
             qemu-system-x86
+
+      - name: Compile static agent-core
+        run: |
+          gcc -static -O2 -o board/puppf/overlay/bin/agent-core board/puppf/overlay/bin/agent-core.c
+          chmod +x board/puppf/overlay/bin/agent-core
+          file board/puppf/overlay/bin/agent-core
 
       - name: Build Buildroot Image Stack
         run: |
@@ -100,6 +98,11 @@ jobs:
               UPTIME_S=$(echo "$UPTIME_LINE" | grep -oE '[0-9.]+' | head -n 1)
               GATE=$(awk -v u="$UPTIME_S" 'BEGIN{print (u < 5.0) ? "PASS" : "FAIL"}')
               echo "GATE RESULT: $GATE (uptime_s=$UPTIME_S, target < 5.0 on TCG)"
+            fi
+            if grep -q "PUPPF AGENT-CORE [ONLINE]" qemu_run.log; then
+              echo "AGENT RESULT: ONLINE banner present - genuine agent-boot receipt achieved."
+            else
+              echo "AGENT RESULT: no ONLINE banner - check receipt-error branch in log."
             fi
           else
             echo "GATE RESULT: NOT RUN (qemu_run.log absent)"
