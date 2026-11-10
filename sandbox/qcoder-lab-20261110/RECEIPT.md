@@ -19,5 +19,13 @@ The builds will produce **non-identical** digests due to subtle non-determinism 
 The test halts immediately after the second build completes and the digest comparison is evaluated and logged. No third build or automatic retry is attempted.
 
 ## Actual Result
-*PENDING EXECUTION*
+ACTUAL RESULT:
+- bzImage Match: YES
+- rootfs Match: YES
+- Run 1 bzImage: `75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7`
+- Run 2 bzImage: `75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7`
+- Run 1 rootfs: `2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e`
+- Run 2 rootfs: `2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e`
+
+Conclusion: REFUTED: digests are bit-identical across clean builds; the non-determinism hypothesis is not supported.
 *(To be populated by the GitHub Actions runner upon execution of `test-reproducibility.sh`. Negative results are welcome and preserved.)*
