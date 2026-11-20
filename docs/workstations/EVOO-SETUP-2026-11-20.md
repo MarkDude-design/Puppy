@@ -2,7 +2,8 @@
 
 Status: prepared instructions; nothing installed on Mark's laptop by this session.
 6.1 Astra review REQUESTED / NOT PERFORMED: exact model unavailable in this session.
-6.2 Astra review: pending review of this document.
+6.2 Astra review: completed on prepared document; two requested corrections incorporated below.
+Review is advisory; no laptop installation or real WSL boot was observed.
 No hardware formatting, Windows replacement, credential changes, merge or build dispatch.
 
 ## Hardware and corrected project state
@@ -67,6 +68,9 @@ wsl --list --verbose
 
 If WSL is absent, errors from the last three commands are useful evidence, not a broken laptop.
 Check Windows version with **Win+R**, enter **winver**.
+The supported install command needs Windows 10 build 19041 or later, or Windows 11.
+If Windows Terminal is absent, use Start > Windows PowerShell for Windows commands
+and Start > Ubuntu 24.04 for Linux commands.
 Open **Task Manager > Performance > CPU**, record **Virtualization: Enabled/Disabled**.
 If disabled, stop before changing firmware and identify the exact EVOO model and its instructions.
 Do not publish device/product IDs, account names or personal file listings.
@@ -90,6 +94,7 @@ Restart if prompted. Open **Ubuntu 24.04** from Start and create its Linux usern
 The Windows administrator prompt and Linux password are entered on the laptop, never in chat.
 If the current WSL app is too old for the distribution package, use Microsoft's supported
 `wsl --update` route and retry only after reading the actual error.
+Canonical's current tar-format Ubuntu package requires WSL app 2.4.10 or newer.
 Confirm with `wsl --list --verbose` that Ubuntu runs as VERSION 2.
 
 Optional starting resource budget for this 4 GB machine:
@@ -131,13 +136,16 @@ Keep the ZIP unchanged; do not unzip/re-zip it.
 
 In Ubuntu, obtain the reviewed launcher candidate without merging:
 
+If Puppy already exists there, stop and choose a separate directory before running this block.
+The commands stop advancing if clone, fetch or checkout fails:
+
 ~~~sh
-mkdir -p "$HOME/puppf-work"
-cd "$HOME/puppf-work"
-git clone --no-checkout https://github.com/MarkDude-design/Puppy.git
-cd Puppy
-git fetch origin work/puppf-m2-launcher-20261104
-git checkout --detach 320ed447f8b951d2215f0b7ac5967874b616750e
+mkdir -p "$HOME/puppf-work" &&
+cd "$HOME/puppf-work" &&
+git clone --no-checkout https://github.com/MarkDude-design/Puppy.git &&
+cd Puppy &&
+git fetch origin refs/pull/21/head &&
+git checkout --detach 320ed447f8b951d2215f0b7ac5967874b616750e &&
 git rev-parse HEAD
 ~~~
 
@@ -166,10 +174,14 @@ not actual QEMU compatibility. Record versions and exact errors; do not bypass h
 
 The requested 6.1 Astra review remains outstanding until a real review is supplied.
 Record 6.2's disposition separately. Reviews do not establish host readiness.
-When review findings are resolved and the laptop prechecks pass, in an interactive Ubuntu terminal:
+When review findings are resolved and the laptop prechecks pass, in an interactive Ubuntu terminal,
+record existing QEMU processes before launching:
 
 ~~~sh
+pgrep -af '[q]emu-system-x86_64'
 python3 puppy-p0a/launch.py --evidence "$HOME/puppf-work/puppf-build-11-evidence.zip"
+printf 'Launcher exit status: %s\n' "$?"
+pgrep -af '[q]emu-system-x86_64'
 ~~~
 
 At PUPPF#, type `stty echo` once (that first command is invisible while typing), then:
@@ -180,11 +192,15 @@ cat /proc/uptime
 echo Hello_Puppf
 ~~~
 
-Press **Ctrl+C** to return to Ubuntu. Confirm host typing works and no QEMU instance survives.
+Press **Ctrl+C** to return to Ubuntu. Confirm host typing works and no new QEMU instance survives (compare the process lists).
+The exit-status and process-list commands above execute after the launcher returns.
+A pgrep exit of 1 with no output means no matching process.
 Record real guest output, host/QEMU versions, exit status and terminal cleanup.
 Failure or unresponsive interaction means STOP with the actual error; not M2 acceptance.
 A 128 MiB offline guest is used, with no host disks/shared directories.
-No physical media is written. M2 acceptance remains Mark's decision.
+The guest receives no host disks or shared folders. Host installation, downloads,
+swap and temporary files do write laptop storage. No bootable media is flashed.
+M2 acceptance remains Mark's decision.
 
 ## Step 6 — later source build
 
@@ -217,7 +233,10 @@ No such adaptation or source build is claimed by this setup document.
 Prepared in ChatGPT; no connection to the EVOO's operating system has been established.
 Installing in this cloud workspace would not install anything on the laptop.
 Astra 6.1: REQUESTED, exact model unavailable; no substitute is represented as that review.
-Astra 6.2: requested on the concrete prepared document; disposition recorded separately.
+Astra 6.2: read-only review completed on the concrete document. Requested fail-fast
+checkout commands and precise host-storage wording; both incorporated. Recommended
+capturing launcher exit status and before/after QEMU process lists; incorporated.
+Native review billing telemetry: null/unknown; no external provider API call initiated.
 Laptop installs / artifact verification / real demo / local source build: NOT RUN here.
 
 Official references:
