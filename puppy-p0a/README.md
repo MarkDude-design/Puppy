@@ -33,8 +33,7 @@ the successful #11 run used Mark's approval recorded in the issue ledger. The dr
 `PUPPF_EXPECTED_PACKET_SHA256` must match the dispatch's fixed expected digest.
 There is no local build mode, cache reuse, paid fallback or automatic retry.
 
-The workflow installs the host prerequisites. The driver checks QEMU x86
--64,
+The workflow installs the host prerequisites. The driver checks QEMU x86-64,
 gcc/g++, make, cpio, rsync, bc, flex, bison, git, Python 3.12+, GnuPG, binutils,
 file, wget, tar, gzip/bzip2/xz, unzip, Perl, patch and awk. This includes tools
 already provided by the standard hosted image. It records host versions,
@@ -67,8 +66,7 @@ public key into an isolated keyring. It uses normal GPG verification without
 importing a key or starting `gpg-agent`. GPG must exit zero, and a dedicated status
 file must contain one acceptable exact-signer `VALIDSIG`, before quarantined
 plaintext is consumed. The manifest must contain exactly one well-formed SHA256
-entry for the exact ex
-pected archive basename. That digest, the reviewed archive
+entry for the exact expected archive basename. That digest, the reviewed archive
 pin, and the calculated downloaded-byte digest must agree before extraction.
 Missing/changed fixtures, bad signatures, ambiguous entries and hash mismatches
 fail closed. No GPG algorithm-policy overrides or alternate verification tools
@@ -99,8 +97,7 @@ The runtime consists of a compressed initramfs, static BusyBox and `/init`.
 
 `/init` mounts proc/sys/devtmpfs, binds the serial terminal, emits an init marker,
 starts the 120-second heartbeat and provides an interactive serial shell. HELLO
-uses integer **absolute kernel uptime from `/
-proc/uptime`**, never wall time.
+uses integer **absolute kernel uptime from `/proc/uptime`**, never wall time.
 Leading newlines keep asynchronous heartbeat records separate from shell prompts.
 
 The host launches real QEMU with direct kernel/initramfs, TCG, 128 MiB, one vCPU,
@@ -136,8 +133,7 @@ or credentials. Outputs include:
 - `build-manifest.json`, package/version/toolchain logs, resolved `configs/`,
   signature/key verification logs and dependency-download digests.
 - `artifacts.json` and `artifacts/{bzImage,rootfs.cpio.gz}` with individual byte
-  
-sizes and SHA-256; combined size must be strictly below 100,000,000 bytes.
+  sizes and SHA-256; combined size must be strictly below 100,000,000 bytes.
 - `run-1/` and `run-2/`: raw `serial.log`, timestamped `serial-events.jsonl`,
   `qemu-argv.json`, `shell-probe.json` and `test-results.json`.
 - `fixture-results.json`, `checker-fixtures.log`, cross-run comparison and an
@@ -174,5 +170,4 @@ boots' timing. Minimum RAM, guest resident memory, independent bit-identical
 rebuild, hardware boot and complete ISO size remain unmeasured. The serial logs
 contain ACPI table-initialization warnings that did not block frozen acceptance.
 M2's local interactive wrapper demo remains pending on a QEMU-equipped host.
-Shellche
-ck was unavailable in the source-authoring environment.
+Shellcheck was unavailable in the source-authoring environment.

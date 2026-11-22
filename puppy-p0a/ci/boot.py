@@ -49,8 +49,7 @@ def boot_once(kernel, initramfs, directory):
     try:
         with (directory / "serial.log").open("wb") as raw, \
                 (directory / "serial-events.jsonl").open("w") as arrivals:
-            proc = subprocess.Popen(argv,
- stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+            proc = subprocess.Popen(argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                     stderr=subprocess.STDOUT, start_new_session=True)
             with selectors.DefaultSelector() as selector:
                 os.set_blocking(proc.stdout.fileno(), False)
@@ -86,8 +85,7 @@ def boot_once(kernel, initramfs, directory):
                             event = {"at_s": at, "text": line.rstrip(b"\r").decode("utf-8", errors="replace")}
                             events.append(event)
                             arrivals.write(json.dumps(event) + "\n")
-                
-        arrivals.flush()
+                        arrivals.flush()
                         count = sum(e["text"].startswith("HELLO") for e in events)
                         if count >= 3 and any(e["text"] == token for e in events):
                             complete_at = complete_at if complete_at is not None else at
@@ -133,8 +131,7 @@ def boot_once(kernel, initramfs, directory):
                    "ram_allocation_mib": 128, "artifact_sha256_before": hashes,
                    "artifact_sha256_after": {"kernel": sha256(kernel), "initramfs": sha256(initramfs)},
                    "serial_sha256": sha256(directory / "serial.log"),
-           
-        "guest_resident_memory_bytes": None, "minimum_ram_mib": None})
+                   "guest_resident_memory_bytes": None, "minimum_ram_mib": None})
     if result["artifact_sha256_after"] != hashes:
         result["status"] = "FAIL"
         result["errors"].append("artifact bytes changed during boot")
