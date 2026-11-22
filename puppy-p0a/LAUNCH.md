@@ -1,8 +1,10 @@
 # Try Puppf in a terminal
 
 M1 is accepted: build #11 compiled and passed both real serial-shell boots. This
-M2 launcher is a review candidate. A first-user interactive demo through this
-wrapper is still required before calling M2 accepted.
+M2 launcher is a review candidate. The human-interactive M2 acceptance gate is
+RETIRED by owner ruling (2026-11-22, issue #15): automated testing covers this
+generation and the next, and the recorded owner-mediated interactive evidence
+stands as-is.
 
 ## What you need
 
@@ -87,6 +89,9 @@ No ISO, hardware boot, persistence, networking, GUI, or model API is added.
 M1's two boots prove the accepted image under its hosted command. Launcher tests
 prove byte rejection, argument construction and cleanup of real local child
 processes through a pseudo-terminal. Those child processes are Python fixtures,
-not QEMU. This workspace lacks QEMU, so the first real interactive wrapper demo
-is explicitly pending. Record host OS/QEMU version, the three guest responses,
-and return to the host after Ctrl+C; do not infer that demo from test counts.
+not QEMU. The owner-mediated interactive wrapper demo stands on record (2026-11-22,
+bus receipt 7073341890). The human-interactive acceptance gate itself was
+retired by the 2026-11-22 owner ruling (issue #15): acceptance for image
+revisions proceeds through the automated pipeline (mechanical byte and hash
+gates, seat cross-reviews, outside-human review passes). Do not infer host
+compatibility from test counts.

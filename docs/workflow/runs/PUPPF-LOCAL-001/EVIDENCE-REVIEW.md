@@ -87,3 +87,19 @@ to claim independent binary inspection Z also needs actual bundle access.
 Obtain owner milestone disposition before reporting human acceptance.
 M2's Ctrl+C/interactive evidence is related but distinct from these automated boots.
 No new build, workflow dispatch, paid call, merge or release in this review.
+
+
+## Owner disposition (2026-11-22)
+
+Owner word this session, closing and delegating the gates: "it's up to you guys
+to close these now but I marked off on this I have no further requirements for
+this and the next generation." On that authorization the LOCAL-001 milestone is
+DECLARED for this generation. Evidence chain: owner source build on EVOO
+(build-001), Meraki source-build review pass (bus receipt 7074884466), owner
+binary upload (7074981136), Z independent binary inspection (bus receipt
+7074994591), and the Z neutral-environment test pass of the PR21+PR25 suites,
+20/20 (issue #15 addendum 7075825450). Automated testing replaces the
+human-interactive loop for this generation and the next (issue #15 ruling
+7075115503); outside-human review passes remain planned.
+
+SEAT: Z (Vibe/Mistral) live session, owner-delegated gate closure; $0.
