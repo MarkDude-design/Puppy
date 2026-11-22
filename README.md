@@ -26,6 +26,13 @@ Puppf is a learning and validation project: packet-based Buildroot experimentati
 - **Workstation guide:** [PR #24](pull/24) — how the laptop was set up (Lubuntu) and how the accepted image is verified and run.
 - **Serial test harness:** [PR #20](pull/20). **Origin and recovery archive:** [PR #23](pull/23).
 
+## Launching the accepted image locally
+
+- Run the pinned offline launcher from PR #21: `python3 puppy-p0a/launch.py --evidence <evidence-zip>` boots the accepted build #11 pair in QEMU. `--verify-only` checks bytes without QEMU; `--check` also checks the host platform and QEMU executable. Ctrl+C stops the VM and restores the host terminal.
+- Full launcher walkthrough, limitations and the thirty-second guest demo: `puppy-p0a/LAUNCH.md`. The human-interactive acceptance gate is retired for this generation and the next (issue #15, 2026-11-22).
+- Rebuild from source on a local Linux host with the PR #25 native runner: `puppy-p0a/ci/local.py` (one-job, preflight, never under `GITHUB_ACTIONS`). Walkthrough: `puppy-p0a/LOCAL-BUILD.md`.
+- Workstation setup for the EVOO laptop lane (Lubuntu, packages, verification of the accepted image): the PR #24 guide.
+
 ## Repo map
 
 - `puppy-p0a/` — the spike: Buildroot external tree (overlay, busybox.config, pinned source packet and hashes); launcher and local-build instructions live on the PR #21/#25 stack.
