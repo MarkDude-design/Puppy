@@ -1,0 +1,39 @@
+{
+  "status": "FAIL",
+  "unit_tests": 0,
+  "test_exit": 0,
+  "packet_sha256": "7f80843cb214413532c13258e1ca29c093e82d48a8d09c078289175f6b46a611",
+  "guest_boot_proved": false,
+  "evidence_kind": "host_mock_only"
+}
+{
+  "status": "FAIL",
+  "unit_tests": null,
+  "test_exit": 0,
+  "packet_sha256": "7f80843cb214413532c13258e1ca29c093e82d48a8d09c078289175f6b46a611",
+  "guest_boot_proved": false,
+  "evidence_kind": "host_mock_only"
+}
+test_cli_result_and_existing_directory_no_retry (test_diode.MockRunTests.test_cli_result_and_existing_directory_no_retry) ... ok
+test_two_fresh_seeded_runs_match_without_network (test_diode.MockRunTests.test_two_fresh_seeded_runs_match_without_network) ... ok
+test_verifier_refuses_empty_or_unparsed_suite_without_mock_runs (test_diode.MockRunTests.test_verifier_refuses_empty_or_unparsed_suite_without_mock_runs) ... ok
+test_duplicate_wrong_round_and_direction_rejected (test_diode.RelayTests.test_duplicate_wrong_round_and_direction_rejected) ... ok
+test_existing_root_never_overwritten (test_diode.RelayTests.test_existing_root_never_overwritten) ... ok
+test_leftover_and_stalled_spool_are_preserved (test_diode.RelayTests.test_leftover_and_stalled_spool_are_preserved) ... ok
+test_modes_and_umask_restoration (test_diode.RelayTests.test_modes_and_umask_restoration) ... ok
+test_removed_message_and_extra_spool_file_refused (test_diode.RelayTests.test_removed_message_and_extra_spool_file_refused) ... ok
+test_six_round_cap_and_post_stop_are_enforced (test_diode.RelayTests.test_six_round_cap_and_post_stop_are_enforced) ... ok
+test_spool_symlink_and_hardlink_do_not_write_target (test_diode.RelayTests.test_spool_symlink_and_hardlink_do_not_write_target) ... ok
+test_stop_before_send_and_between_send_receive (test_diode.RelayTests.test_stop_before_send_and_between_send_receive) ... ok
+test_stop_checked_immediately_before_transcript_append (test_diode.RelayTests.test_stop_checked_immediately_before_transcript_append) ... ok
+test_stop_refuses_replaced_root_without_external_write (test_diode.RelayTests.test_stop_refuses_replaced_root_without_external_write) ... ok
+test_transcript_appends_without_replacing_inode_or_prefix (test_diode.RelayTests.test_transcript_appends_without_replacing_inode_or_prefix) ... ok
+test_transcript_replacement_or_hardlink_rejected (test_diode.RelayTests.test_transcript_replacement_or_hardlink_rejected) ... ok
+test_bad_utf8_duplicate_keys_and_multiline (test_diode.WireTests.test_bad_utf8_duplicate_keys_and_multiline) ... ok
+test_exact_byte_limit_ascii_and_multibyte (test_diode.WireTests.test_exact_byte_limit_ascii_and_multibyte) ... ok
+test_invalid_schema_types_and_rounds (test_diode.WireTests.test_invalid_schema_types_and_rounds) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.109s
+
+OK

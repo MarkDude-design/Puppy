@@ -1,0 +1,12 @@
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":1,"text":"A:618a9261","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":1,"text":"B:1629a816:A","v":0}}
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":2,"text":"A:550caef9","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":2,"text":"B:9feac055:A","v":0}}
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":3,"text":"A:3b106980","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":3,"text":"B:089601b3:A","v":0}}
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":4,"text":"A:fe1b1434","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":4,"text":"B:4341b1ef:A","v":0}}
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":5,"text":"A:2a8161e5","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":5,"text":"B:5e1618a2:A","v":0}}
+{"direction":"a_to_b","message":{"kind":"MESSAGE","round":6,"text":"A:e6e9d6a1","v":0}}
+{"direction":"b_to_a","message":{"kind":"MESSAGE","round":6,"text":"B:1a6d9e6e:A","v":0}}
