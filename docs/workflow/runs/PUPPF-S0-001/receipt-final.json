@@ -1,0 +1,131 @@
+{
+  "acceptance": {
+    "authority": "Owner-delegated agent pipeline for this generation and next",
+    "decision": "PENDING",
+    "evidence": "Owner direction in Puppy#15 comments7075115503/7075977777 and current2026-11-22 instruction supersedes older frozen packet PENDING/human-gate fields without modifying packet."
+  },
+  "aggregate_cost_per_accepted_result_usd": null,
+  "artifact_manifest": [
+    {
+      "bytes": 3432,
+      "path": "diode-s0/README.md",
+      "sha256": "4ccdf50b0fa3efae8ff43e77fe35e48710b6290b5279421940a1c28adcbde150"
+    },
+    {
+      "bytes": 8932,
+      "path": "diode-s0/diode.py",
+      "sha256": "645223ac8f082ef3a79e85ba58241afdd510fed3e90f9d6a01b80509bb3806a1"
+    },
+    {
+      "bytes": 12103,
+      "path": "diode-s0/tests/test_diode.py",
+      "sha256": "ac66cce5913d205ea1a99987d54f4cf36de05c348697ed374eb030666d92a5d7"
+    },
+    {
+      "bytes": 2153,
+      "path": "diode-s0/verify.py",
+      "sha256": "88f9485f06d357245b1bbf4b74a69d2089ff1a1a2b746e3903acc29f9236b30c"
+    },
+    {
+      "bytes": 97,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/packet-check.txt",
+      "sha256": "63d414983f432a27d7a17efbfb4dc001f57b266270652328676a933ee361f288"
+    },
+    {
+      "bytes": 5,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/run-1/STOP",
+      "sha256": "2af183be253fd571e13dd3d310357f3a1ccc7b18502a83ed918e0b88a1e5355f"
+    },
+    {
+      "bytes": 1068,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/run-1/transcript.log",
+      "sha256": "4d50acc459eefd94675125c4d8efb9f5182ba58d3604760b7c85c9a9827530cf"
+    },
+    {
+      "bytes": 5,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/run-2/STOP",
+      "sha256": "2af183be253fd571e13dd3d310357f3a1ccc7b18502a83ed918e0b88a1e5355f"
+    },
+    {
+      "bytes": 1068,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/run-2/transcript.log",
+      "sha256": "4d50acc459eefd94675125c4d8efb9f5182ba58d3604760b7c85c9a9827530cf"
+    },
+    {
+      "bytes": 884,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/test-results.json",
+      "sha256": "ea355b9d7c1e80aaec1eae1f8056300163676d2672b3946ec68a57d072ec244d"
+    },
+    {
+      "bytes": 2813,
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/tests.log",
+      "sha256": "c0f37dd239e3c082e7ce87f5e07a0023da6b9c662a3accb129106de37385dc83"
+    }
+  ],
+  "attempt_count": 1,
+  "cost_coverage": "unknown",
+  "cost_coverage_explanation": "No external model/API call or dependency install. Native authoring/reviewer cost telemetry unavailable; zero spend or savings not inferred.",
+  "cost_items": [],
+  "elapsed_seconds": null,
+  "finished_at_utc": "2026-11-22T14:25:07.629330+00:00",
+  "human_minutes_self_reported": null,
+  "implementation_start_commit": "ca06a4dbb70858f132f469ce3b71de9f453a98ef",
+  "merge_authority": "Mark",
+  "model_identity_source": "Exact runtime model identity telemetry unavailable",
+  "model_observed": null,
+  "model_requested": null,
+  "packet_hash_provenance": "verified",
+  "packet_hash_verification": {
+    "actual_sha256": "7f80843cb214413532c13258e1ca29c093e82d48a8d09c078289175f6b46a611",
+    "tool": "tools/workflow/check_packet.py, independently conveyed handoff digest; verify.py exact-byte recheck",
+    "verified_at_utc": null
+  },
+  "packet_sha256": "7f80843cb214413532c13258e1ca29c093e82d48a8d09c078289175f6b46a611",
+  "related_receipts": [],
+  "repair_attempt_count": 2,
+  "result_commit": null,
+  "review": {
+    "decision": "PENDING",
+    "reason": "Native read-only reviewer independently reproduced and rechecked both fixes; final18/18PASS. Same model family/shared workspace; Z Mistral-family review still pending.",
+    "reviewer": "Z (Mistral family)"
+  },
+  "review_findings": [
+    {
+      "disposition": "fixed and independently rechecked; external STOP absent",
+      "id": "STOP_ROOT_REPLACEMENT"
+    },
+    {
+      "disposition": "fixed and independently rechecked; count0/missing produce FAIL, no mocks",
+      "id": "ZERO_TEST_FALSE_PASS"
+    }
+  ],
+  "schema_version": "work-receipt/0.2",
+  "source_base_commit": "15e458aa99b3f1345d9120b476f8c23301a2e235",
+  "started_at_utc": null,
+  "status": "PASS",
+  "stop_reason": "Final verification-002:18tests PASS and two fresh byte-identical six-round transcripts; native read-only review PASS after two verified fixes. STOP implementation for Z cross-family review.",
+  "supersedes": "receipt.json (17-test initial checkpoint retained)",
+  "task_id": "PUPPF-S0-001",
+  "test_evidence": [
+    {
+      "path": "docs/workflow/runs/PUPPF-S0-001/verification-002/test-results.json",
+      "scope": "18tests and two fresh deterministic host mocks",
+      "status": "PASS"
+    }
+  ],
+  "usage": {
+    "cached_input_tokens": null,
+    "captured_by": "calling_client_or_Mark",
+    "cost_usd": null,
+    "input_tokens": null,
+    "output_tokens": null,
+    "price_source_and_effective_date": null,
+    "provider_response_reference": null,
+    "reasoning_tokens": null,
+    "source": "unavailable",
+    "status": "unavailable",
+    "tool_compute_cost_usd": null
+  },
+  "worker_role": "Codex",
+  "worker_seat": "Meraki (sole implementation worker in current session)"
+}
