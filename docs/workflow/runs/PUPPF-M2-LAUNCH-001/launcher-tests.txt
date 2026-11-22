@@ -1,0 +1,23 @@
+$ python -B -m unittest discover -s tests/launcher -v
+test_bounded_zip_rejected_before_hash (test_launcher.BundleTests.test_bounded_zip_rejected_before_hash) ... ok
+test_changed_bundle_rejected_before_member_writes (test_launcher.BundleTests.test_changed_bundle_rejected_before_member_writes) ... ok
+test_duplicate_image_rejected (test_launcher.BundleTests.test_duplicate_image_rejected) ... ok
+test_existing_output_not_overwritten (test_launcher.BundleTests.test_existing_output_not_overwritten) ... ok
+test_host_argv_preserves_offline_serial_contract (test_launcher.BundleTests.test_host_argv_preserves_offline_serial_contract) ... ok
+test_missing_image_rejected (test_launcher.BundleTests.test_missing_image_rejected) ... ok
+test_missing_qemu_clear_error_and_no_boot (test_launcher.BundleTests.test_missing_qemu_clear_error_and_no_boot) ... ok
+test_noninteractive_launch_rejected (test_launcher.BundleTests.test_noninteractive_launch_rejected) ... ok
+test_unexpected_size_rejected (test_launcher.BundleTests.test_unexpected_size_rejected) ... ok
+test_verified_images_only_no_archive_path_extraction (test_launcher.BundleTests.test_verified_images_only_no_archive_path_extraction) ... ok
+test_verify_only_does_not_need_qemu (test_launcher.BundleTests.test_verify_only_does_not_need_qemu) ... ok
+test_wrong_image_hash_rejected_even_when_bundle_hash_matches (test_launcher.BundleTests.test_wrong_image_hash_rejected_even_when_bundle_hash_matches) ... ok
+test_ctrl_c_reaps_child_and_restores_terminal (test_launcher.RealConsoleTests.test_ctrl_c_reaps_child_and_restores_terminal) ... ok
+test_real_child_failure_exit_is_returned (test_launcher.RealConsoleTests.test_real_child_failure_exit_is_returned) ... ok
+test_repeated_ctrl_c_kills_stubborn_child_and_restores_terminal (test_launcher.RealConsoleTests.test_repeated_ctrl_c_kills_stubborn_child_and_restores_terminal) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 3.870s
+
+OK
+
+exit_code=0

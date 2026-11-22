@@ -1,0 +1,16 @@
+$ python -B -m unittest discover -s tests/workflow -v
+test_duplicate_task_rejected (test_workflow.CostFixtures.test_duplicate_task_rejected) ... ok
+test_mark_and_reviewer_both_required (test_workflow.CostFixtures.test_mark_and_reviewer_both_required) ... ok
+test_no_accepted_result_not_divided (test_workflow.CostFixtures.test_no_accepted_result_not_divided) ... ok
+test_one_accepted_plus_failed_attempt_costs (test_workflow.CostFixtures.test_one_accepted_plus_failed_attempt_costs) ... ok
+test_unknown_cost_not_zero (test_workflow.CostFixtures.test_unknown_cost_not_zero) ... ok
+test_bad_digest_format (test_workflow.IntegrityFixtures.test_bad_digest_format) ... ok
+test_hash_correct_and_wrong (test_workflow.IntegrityFixtures.test_hash_correct_and_wrong) ... ok
+test_matching_hash_invalid_packet (test_workflow.IntegrityFixtures.test_matching_hash_invalid_packet) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.458s
+
+OK
+
+exit_code=0

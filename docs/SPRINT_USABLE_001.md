@@ -1,5 +1,13 @@
 # Puppf: usable-system sprint / Codex Agent Kit v0.1
 
+**Current checkpoint, 2026-11-04:** M1 accepted by Mark after Z review of
+[build #11](https://github.com/MarkDude-design/Puppy/actions/runs/41773110103).
+[Owner record](https://github.com/MarkDude-design/Puppy/issues/15#issuecomment-6630735320)
+authorizes M2's easy terminal launcher. [Local launch instructions](../puppy-p0a/LAUNCH.md)
+describe the candidate and pending first-user demo. The dated architecture
+proposal below remains historical; its original approval status does not erase
+later explicit owner decisions. Frozen P0a packet bytes remain unchanged.
+
 **Prepared:** 2026-10-27. **Status:** candidate for Z and independent Astra-class review; no code execution or spend authorization implied. **Baseline examined:** `main` at `2eabc0e96b846d1f83235350c820c71a286d04a7`.
 
 ## Outcome and honest baseline

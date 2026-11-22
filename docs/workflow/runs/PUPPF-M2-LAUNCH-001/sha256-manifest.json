@@ -1,0 +1,21 @@
+{
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/acceptance-tests.txt": "61b6a390e18110c818acb74346586b8d50517d42ee91054dce5853e8dad85c17",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/diff-check.txt": "fa77ab6dcf895a30623113e37b6ee812c6cd35b0cbb9693a0c18de550e6b1cf6",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/core-tests.txt": "dabf6a17c32d9b008df4221c7c3d01b8a39314f126a6e1f87d19e15046e8e59e",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/workflow-tests.txt": "df53f085f8fa72c1bdf2ab1dea24e5d6800b4a6a800bd13cae202ab9523b08a5",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/agent-desk-tests.txt": "939bcae1ac3d6157f3efebe6c592d4242a8ff1cc5ee38cedb304b3dcabcd77de",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/host-preflight.txt": "e77f825ad38e9eff077b793efb520e54a09c23c13c971f67c6ec4182999573e8",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/packet-check.txt": "930feef5e807d6e9cd0516b1268183935bcafc77420fa0c89561a481f2acd057",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/launcher-tests.txt": "1bb5c030b4e49b2695657a02c50b4bcf34dca34381a7db8cdaf2086330318466",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/accepted-zip-check.txt": "40350784ec00825d75e966b7bbb443a487ee27a48850ca419cfca4556b770a14",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/receipt.json": "f918e07b8ff679c84e5c413cf155df44672768b8d57f214ea425efca2a9cd179",
+  "docs/workflow/runs/PUPPF-M2-LAUNCH-001/README.md": "4a04fe9c33188cb48640788a57a5e6427ef59a427e405671acf7cabb43b269b2",
+  "README.md": "01545ce555fe3014a23e0804824694badd9a89ed92f5a7ec36106f33753c91fc",
+  "docs/SPRINT_USABLE_001.md": "674c4f41847058aeff5db4f74f63f8dab060e301355376f3f51ca4f814aac70e",
+  "puppy-p0a/README.md": "d3418aaf41bd4fbbd8c968b196707e854919983f9645d5be5cb9b0c202e71535",
+  "puppy-p0a/LAUNCH.md": "0f07d4a44eb5acd836d45927801a4a0f5aac1a6a9f07bae96af87c15fe60468a",
+  "puppy-p0a/launch.py": "b72dc57ed7a60501029b8335093a74e6df2bc06645a992f49d4da59a73b48c08",
+  "puppy-p0a/accepted-build.json": "3cd0e8df7d707a16aabfb3b392dd3ff0d2673d122f197e1bc52d8198e4fb8b46",
+  "tests/launcher/test_launcher.py": "2a10723c08fe9b76ba8c5ab29d30cbd78b5550d9e6bb92e746632d71d79aed8a",
+  "docs/workflow/PUPPF-LOGIN-POSTMORTEM-2026-11-04.md": "639143aa3d78e7a0d1cacaafc7036fe941ac134c15c491a882c02b022b1037b3"
+}

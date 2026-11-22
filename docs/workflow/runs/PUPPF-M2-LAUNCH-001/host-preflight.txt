@@ -1,0 +1,5 @@
+$ python puppy-p0a/launch.py --evidence /workspace/scratch/a9f884a0f071/puppf-build-11-evidence.zip --check
+Verified accepted build #11: kernel + initramfs = 4,040,866 bytes.
+Puppf: qemu-system-x86_64 is missing. Install QEMU using your host's package manager; see LAUNCH.md.
+
+exit_code=2
