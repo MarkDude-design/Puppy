@@ -1,11 +1,16 @@
 # Puppf P0a — disposable Buildroot/QEMU implementation
 
-This implementation awaits Mark's merge/manual GitHub Actions build decision.
-The November 3 source repair was checked by Meraki and Astra against the real
-release archive, including authentication and extraction. Compilation, payload
-size, memory-use measurement and guest boots remain unproven. Synthetic fixture
-results are checker self-tests only and remain separate from that real-source
-verification evidence.
+**M1 accepted, November 4:** [build #11](https://github.com/MarkDude-design/Puppy/actions/runs/41773110103)
+compiled the reviewed source and passed both real QEMU boots. Meraki inspected
+the artifact, Z reviewed the evidence/code/digest, and Mark accepted the milestone.
+The image pair totals 4,040,866 bytes; QEMU allocated 128 MiB. Actual guest
+resident memory and minimum RAM were not measured. The original runner receipt's
+pending-at-creation fields remain historical; [Mark's acceptance](https://github.com/MarkDude-design/Puppy/issues/15#issuecomment-6630735320)
+is a separate owner record.
+
+For local use, see [LAUNCH.md](LAUNCH.md). M2's launcher candidate verifies the
+accepted ZIP and images without sign-in or downloads. A real interactive demo
+through that wrapper remains pending; M1's hosted boots are separate evidence.
 
 Puppy Linux and Barry Kauler inform the small, rebuildable method. This artifact
 is not designated a Puppy/Fedora distribution or a security containment system.
@@ -20,14 +25,16 @@ The existing, route-owned workflow on `ubuntu-24.04` invokes:
 bash puppy-p0a/ci/run-ci.sh
 ```
 
-Mark selects **build** in the manual workflow after reviewing/merging or selecting
-the reviewed branch. Codex does not dispatch it. The driver requires
+Mark authorizes **build** in the manual workflow after reviewing/merging or selecting
+the reviewed branch. An operator can dispatch under that explicit authorization;
+the successful #11 run used Mark's approval recorded in the issue ledger. The driver requires
 `GITHUB_ACTIONS=true`, `PUPPF_MODE=build`, `RUNNER_TEMP` and a fresh external
 `PUPPF_EVIDENCE_DIR`; it refuses an existing receipt or first-run directory.
 `PUPPF_EXPECTED_PACKET_SHA256` must match the dispatch's fixed expected digest.
 There is no local build mode, cache reuse, paid fallback or automatic retry.
 
-The workflow installs the host prerequisites. The driver checks QEMU x86-64,
+The workflow installs the host prerequisites. The driver checks QEMU x86
+-64,
 gcc/g++, make, cpio, rsync, bc, flex, bison, git, Python 3.12+, GnuPG, binutils,
 file, wget, tar, gzip/bzip2/xz, unzip, Perl, patch and awk. This includes tools
 already provided by the standard hosted image. It records host versions,
@@ -60,7 +67,8 @@ public key into an isolated keyring. It uses normal GPG verification without
 importing a key or starting `gpg-agent`. GPG must exit zero, and a dedicated status
 file must contain one acceptable exact-signer `VALIDSIG`, before quarantined
 plaintext is consumed. The manifest must contain exactly one well-formed SHA256
-entry for the exact expected archive basename. That digest, the reviewed archive
+entry for the exact ex
+pected archive basename. That digest, the reviewed archive
 pin, and the calculated downloaded-byte digest must agree before extraction.
 Missing/changed fixtures, bad signatures, ambiguous entries and hash mismatches
 fail closed. No GPG algorithm-policy overrides or alternate verification tools
@@ -91,7 +99,8 @@ The runtime consists of a compressed initramfs, static BusyBox and `/init`.
 
 `/init` mounts proc/sys/devtmpfs, binds the serial terminal, emits an init marker,
 starts the 120-second heartbeat and provides an interactive serial shell. HELLO
-uses integer **absolute kernel uptime from `/proc/uptime`**, never wall time.
+uses integer **absolute kernel uptime from `/
+proc/uptime`**, never wall time.
 Leading newlines keep asynchronous heartbeat records separate from shell prompts.
 
 The host launches real QEMU with direct kernel/initramfs, TCG, 128 MiB, one vCPU,
@@ -127,7 +136,8 @@ or credentials. Outputs include:
 - `build-manifest.json`, package/version/toolchain logs, resolved `configs/`,
   signature/key verification logs and dependency-download digests.
 - `artifacts.json` and `artifacts/{bzImage,rootfs.cpio.gz}` with individual byte
-  sizes and SHA-256; combined size must be strictly below 100,000,000 bytes.
+  
+sizes and SHA-256; combined size must be strictly below 100,000,000 bytes.
 - `run-1/` and `run-2/`: raw `serial.log`, timestamped `serial-events.jsonl`,
   `qemu-argv.json`, `shell-probe.json` and `test-results.json`.
 - `fixture-results.json`, `checker-fixtures.log`, cross-run comparison and an
@@ -156,18 +166,13 @@ missing/late/early/duplicate shell output, echo-only false positives, panic/rebo
 modified checker, incorrect signer, unsafe archive paths and missing QEMU.
 Its QEMU-launch failure test mocks the process; it does not start a guest.
 
-`test_serial_process.py` also exercises the real serial reader and process-group
-cleanup using a local Python child, real OS pipes and a host shell `printf`.
-A separate control pipe releases fragments under a scripted monotonic clock,
-so prompt/token fragmentation, echo-only rejection, deadline crossings, reader
-failure, early exit, duplicate HELLO, a partial panic and watchdog cleanup are
-tested without four-minute sleeps. These are harness integration fixtures,
-not QEMU execution, guest timing measurements or boot acceptance.
+## Remaining gaps after accepted build #11
 
-## Honest gaps before manual runner evidence
-
-Release/keyserver accessibility and archive signature validation, Buildroot
-Kconfig resolution, compilation, runner disk fit, actual payload size, first
-guest uptime, shell availability and both boots' timing are unmeasured. These
-are runner tasks, not local-environment blockers or passing fixture results.
-Shellcheck is optional and was unavailable in the authoring environment.
+The accepted run measured source authentication, Kconfig resolution, compilation,
+runner disk fit, payload size, first guest uptime, shell availability and both
+boots' timing. Minimum RAM, guest resident memory, independent bit-identical
+rebuild, hardware boot and complete ISO size remain unmeasured. The serial logs
+contain ACPI table-initialization warnings that did not block frozen acceptance.
+M2's local interactive wrapper demo remains pending on a QEMU-equipped host.
+Shellche
+ck was unavailable in the source-authoring environment.
