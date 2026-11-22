@@ -102,6 +102,14 @@ def boot_once(kernel, initramfs, directory):
                   "elapsed_s": time.monotonic() - start}
     finally:
         if proc is not None:
+            if proc.poll() is None and exited:
+                # EOF was already observed: the child is exiting on its own, and
+                # its descriptors close before the kernel reports the exit. Wait
+                # briefly so host_stopped_qemu is reported honestly.
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    pass
             if proc.poll() is None:
                 host_stopped = True
                 os.killpg(proc.pid, signal.SIGTERM)
