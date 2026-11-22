@@ -28,10 +28,10 @@ Puppf is a learning and validation project: packet-based Buildroot experimentati
 
 ## Launching the accepted image locally
 
-- Run the pinned offline launcher from PR #21: `python3 puppy-p0a/launch.py --evidence <evidence-zip>` boots the accepted build #11 pair in QEMU. `--verify-only` checks bytes without QEMU; `--check` also checks the host platform and QEMU executable. Ctrl+C stops the VM and restores the host terminal.
-- Full launcher walkthrough, limitations and the thirty-second guest demo: `puppy-p0a/LAUNCH.md`. The human-interactive acceptance gate is retired for this generation and the next (issue #15, 2026-11-22).
-- Rebuild from source on a local Linux host with the PR #25 native runner: `puppy-p0a/ci/local.py` (one-job, preflight, never under `GITHUB_ACTIONS`). Walkthrough: `puppy-p0a/LOCAL-BUILD.md`.
-- Workstation setup for the EVOO laptop lane (Lubuntu, packages, verification of the accepted image): the PR #24 guide.
+- **One command, offline:** see [`puppy-p0a/LAUNCH.md`](puppy-p0a/LAUNCH.md). The launcher (`puppy-p0a/launch.py`) hash-verifies the original accepted build #11 evidence ZIP and both image members (64 MiB input bound, no archive-path extraction), copies only the two known images into a private temp directory, and starts QEMU under the same 128 MiB serial-only guest contract.
+- **Without booting:** `--verify-only` checks accepted bytes with Python alone; `--check` also confirms host and QEMU presence. Neither starts the VM.
+- **Cleanup contract:** Ctrl+C stops the VM, restores host terminal settings, and removes the temp copies. Guest `exit` only restarts the guest shell.
+- **Status:** the first-user interactive demo is retired for this generation by the owner ruling recorded above; this launcher is the mechanical offline path.
 
 ## Repo map
 
