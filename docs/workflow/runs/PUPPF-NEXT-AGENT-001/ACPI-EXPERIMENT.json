@@ -1,0 +1,35 @@
+{
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "status": "BLOCKED_RUNTIME_NOT_EXECUTED",
+  "reason": "qemu-system-x86_64 absent in this workspace; apt-cache returned no candidate with an unreadable apt-config warning. No dependency installed, no real boot claimed.",
+  "source_commit": "8f43250dd4bf4d26dffa8a8e263ec11522fafb89",
+  "authority": "Owner roadmap Rewrite1 ACPI cleanup and current NEXT instruction; exploratory verification only, not blanket artifact acceptance.",
+  "one_variable": "Append acpi=off to the existing kernel -append value. Do not filter log output, swap firmware/machine or change memory/devices.",
+  "baseline_images": {
+    "kernel": {
+      "bytes": 3286016,
+      "sha256": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7"
+    },
+    "initramfs": {
+      "bytes": 754850,
+      "sha256": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+    }
+  },
+  "artifact_commit": "9869e68317312ee3f615ce0a333b5b6678bf0c3d",
+  "resolved_config_observation": "Owner-uploaded EVOO evidence/configs/linux.config has CONFIG_ACPI=y; no deliberate ACPI setting in source fragment.",
+  "execution_steps": [
+    "Use a disposable agent host with real QEMU; verify exact image hashes, current boot.py and frozen acceptance gates.",
+    "Two control boots with original argv. Retain raw serial, timing, hashes, split-token shell output and teardown results.",
+    "If control does not reproduce ACPI warnings, report NOT_REPRODUCED and stop; do not claim warning cleanup.",
+    "Two candidate boots, exactly same images/argv except append acpi=off to kernel command line. All frozen functional/timing checks still must pass; retain unfiltered logs.",
+    "Compare warnings and before/after image hashes. Successful suppression establishes only a QEMU-serial-only feature-disable candidate, not root-cause repair or physical-hardware ACPI correctness.",
+    "Stop for cross-family review before changing accepted runtime/config or initiating a source rebuild."
+  ],
+  "stop_rules": [
+    "No silent warning filtering, source-pin changes or new hardware/network devices.",
+    "No guest S0 integration inferred or authorized by this experiment.",
+    "On failure retain evidence; no automatic rerun or longer watchdog.",
+    "If QEMU cannot be made available through an already-authorized route, report blocked rather than substitute fixtures for a boot."
+  ],
+  "focused_review_request": "QC/Qwen reviewer, when its authorized route is available: exactly boot.py EOF/teardown change merged via PR20. Model routing/usage must be receipted; not invoked here."
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "ACPI-EXPERIMENT.json",
+    "bytes": 2599,
+    "sha256": "66e0780ad31321185c1250d30350dc11548857669ba9381f8799b3c1d7850083"
+  },
+  {
+    "path": "S0.log",
+    "bytes": 2813,
+    "sha256": "7c96ca770bc1afa032ee1039dc7ec3b7c383d47c6e0df8f78dd2daf1f639d9c1"
+  },
+  {
+    "path": "agent_desk.log",
+    "bytes": 1998,
+    "sha256": "f5806b9545ba6c557e29df68f04b85ddb0fce38529306ed5e0a77b7be7096ade"
+  },
+  {
+    "path": "launcher.log",
+    "bytes": 1921,
+    "sha256": "3bfa0639742b449712bc0a16c5a2fa818d782e77b7e264fdd0a9796ca1b058ad"
+  },
+  {
+    "path": "receipt.json",
+    "bytes": 3472,
+    "sha256": "94fe865aaa080cce23b3984df632204a499b8ccf40c778c7c0ef62bd21f46224"
+  },
+  {
+    "path": "serial_and_build.log",
+    "bytes": 11326,
+    "sha256": "986ced6ac0d5c29fba2d4da59bd4dbc5646929fe12cb0b202fc4fa7ffeb02f6f"
+  },
+  {
+    "path": "workflow.log",
+    "bytes": 917,
+    "sha256": "203cb6687879625295f06217c7714915ca790378a0518408f039e42c98a55f5f"
+  }
+]

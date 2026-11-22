@@ -1,0 +1,123 @@
+{
+  "task": "PUPPF-NEXT-AGENT-001",
+  "seat": "Meraki",
+  "source_commit": "8f43250dd4bf4d26dffa8a8e263ec11522fafb89",
+  "recorded_at_utc": "2026-11-22T15:14:14.905240+00:00",
+  "status": "PASS",
+  "test_scope": "merged-main agent-side smoke test; fixtures/real local child processes, not QEMU",
+  "distinct_suite_tests": 135,
+  "suites": [
+    {
+      "suite": "serial_and_build",
+      "exit": 0,
+      "elapsed_s": 0.7020141680000052,
+      "tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 73 tests in 0.559s",
+        "",
+        "OK"
+      ],
+      "log": "serial_and_build.log"
+    },
+    {
+      "suite": "launcher",
+      "exit": 0,
+      "elapsed_s": 3.9011589030000096,
+      "tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 15 tests in 3.785s",
+        "",
+        "OK"
+      ],
+      "log": "launcher.log"
+    },
+    {
+      "suite": "S0",
+      "exit": 0,
+      "elapsed_s": 0.2205278069999963,
+      "tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 18 tests in 0.097s",
+        "",
+        "OK"
+      ],
+      "log": "S0.log"
+    },
+    {
+      "suite": "workflow",
+      "exit": 0,
+      "elapsed_s": 0.32619042100000684,
+      "tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 8 tests in 0.250s",
+        "",
+        "OK"
+      ],
+      "log": "workflow.log"
+    },
+    {
+      "suite": "agent_desk",
+      "exit": 0,
+      "elapsed_s": 0.16803124699998762,
+      "tail": [
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 21 tests in 0.097s",
+        "",
+        "OK"
+      ],
+      "log": "agent_desk.log"
+    },
+    {
+      "suite": "S0_agent_cli",
+      "exit": 0,
+      "result": {
+        "status": "PASS",
+        "unit_tests": 18,
+        "test_exit": 0,
+        "packet_sha256": "7f80843cb214413532c13258e1ca29c093e82d48a8d09c078289175f6b46a611",
+        "guest_boot_proved": false,
+        "evidence_kind": "host_mock_only",
+        "run_1": {
+          "status": "PASS",
+          "seed": 41,
+          "rounds": 6,
+          "messages": 12,
+          "transcript_bytes": 1068,
+          "transcript_sha256": "4d50acc459eefd94675125c4d8efb9f5182ba58d3604760b7c85c9a9827530cf",
+          "stop_present": true,
+          "evidence_kind": "deterministic_host_mock",
+          "guest_boot_proved": false,
+          "model_calls": 0,
+          "network_calls": 0,
+          "security_containment_proved": false
+        },
+        "run_2": {
+          "status": "PASS",
+          "seed": 41,
+          "rounds": 6,
+          "messages": 12,
+          "transcript_bytes": 1068,
+          "transcript_sha256": "4d50acc459eefd94675125c4d8efb9f5182ba58d3604760b7c85c9a9827530cf",
+          "stop_present": true,
+          "evidence_kind": "deterministic_host_mock",
+          "guest_boot_proved": false,
+          "model_calls": 0,
+          "network_calls": 0,
+          "security_containment_proved": false
+        },
+        "transcripts_byte_identical": true
+      }
+    }
+  ],
+  "qemu_executable": null,
+  "new_boots": 0,
+  "new_builds": 0,
+  "native_usage_cost": null,
+  "metered_external_model_calls": 0,
+  "acceptance": "Agent-side verification under current owner delegation; no human-interactive gate reinstated."
+}
