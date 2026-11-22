@@ -1,0 +1,13 @@
+{"at_s": 1.8584689290000824, "text": "ACPI Error: AE_BAD_PARAMETER, During Region initialization (20250807/tbxfload-52)"}
+{"at_s": 1.859936975997698, "text": "ACPI: Unable to load the System Description Tables"}
+{"at_s": 1.8608513770013815, "text": "ACPI Error: Could not remove SCI handler (20250807/evmisc-251)"}
+{"at_s": 2.942449034002493, "text": ""}
+{"at_s": 2.9478820779986563, "text": "PUPPF_INIT"}
+{"at_s": 3.0100154879983165, "text": ""}
+{"at_s": 3.01698875099828, "text": "HELLO seq=1 uptime_s=1"}
+{"at_s": 3.058135505001701, "text": "PUPPF# "}
+{"at_s": 3.0586585229975753, "text": "PUPPF_TOKEN_dd4b6b60bf432bf35b83d31f3d034c6f"}
+{"at_s": 123.04906896500324, "text": "PUPPF# "}
+{"at_s": 123.05134433800413, "text": "HELLO seq=2 uptime_s=121"}
+{"at_s": 243.07544091100135, "text": ""}
+{"at_s": 243.07700830799877, "text": "HELLO seq=3 uptime_s=241"}

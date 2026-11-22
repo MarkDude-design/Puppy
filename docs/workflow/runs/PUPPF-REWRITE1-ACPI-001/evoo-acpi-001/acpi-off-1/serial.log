@@ -1,0 +1,10 @@
+
+PUPPF_INIT
+
+HELLO seq=1 uptime_s=1
+PUPPF# 
+PUPPF_TOKEN_4c0175dc62019638520816d3f89b8759
+PUPPF# 
+HELLO seq=2 uptime_s=121
+
+HELLO seq=3 uptime_s=241

@@ -1,0 +1,13 @@
+ACPI Error: AE_BAD_PARAMETER, During Region initialization (20250807/tbxfload-52)
+ACPI: Unable to load the System Description Tables
+ACPI Error: Could not remove SCI handler (20250807/evmisc-251)
+
+PUPPF_INIT
+
+HELLO seq=1 uptime_s=1
+PUPPF# 
+PUPPF_TOKEN_7a969a8706df433a6d688c4ded130d8a
+PUPPF# 
+HELLO seq=2 uptime_s=121
+
+HELLO seq=3 uptime_s=241

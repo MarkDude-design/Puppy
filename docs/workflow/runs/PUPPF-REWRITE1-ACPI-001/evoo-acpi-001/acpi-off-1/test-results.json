@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "errors": [],
+  "hello": [
+    {
+      "seq": 1,
+      "uptime_s": 1,
+      "at_s": 2.7673694800032536
+    },
+    {
+      "seq": 2,
+      "uptime_s": 121,
+      "at_s": 122.80152410300798
+    },
+    {
+      "seq": 3,
+      "uptime_s": 241,
+      "at_s": 242.82913364699925
+    }
+  ],
+  "guest_gaps_s": [
+    120,
+    120
+  ],
+  "host_gaps_s": [
+    120.03415462300472,
+    120.02760954399128
+  ],
+  "shell_prompt_at_s": 2.7875418290059315,
+  "shell_token_output_at_s": [
+    2.800195244999486
+  ],
+  "elapsed_s": 243.83318685200356,
+  "watchdog_s": 390,
+  "timed_out": false,
+  "qemu_exited_before_host_stop": false,
+  "evidence_kind": "actual_qemu_serial_observation",
+  "qemu_argv": [
+    "qemu-system-x86_64",
+    "-machine",
+    "pc,accel=tcg",
+    "-cpu",
+    "qemu64",
+    "-smp",
+    "1",
+    "-m",
+    "128",
+    "-nodefaults",
+    "-display",
+    "none",
+    "-monitor",
+    "none",
+    "-serial",
+    "stdio",
+    "-nic",
+    "none",
+    "-no-reboot",
+    "-kernel",
+    "/home/dude/puppf-runs/build-001/evidence/artifacts/bzImage",
+    "-initrd",
+    "/home/dude/puppf-runs/build-001/evidence/artifacts/rootfs.cpio.gz",
+    "-append",
+    "console=ttyS0,115200 rdinit=/init panic=-1 quiet acpi=off"
+  ],
+  "host_stopped_qemu": true,
+  "qemu_returncode": 0,
+  "ram_allocation_mib": 128,
+  "artifact_sha256_before": {
+    "kernel": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7",
+    "initramfs": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+  },
+  "artifact_sha256_after": {
+    "kernel": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7",
+    "initramfs": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+  },
+  "serial_sha256": "326fedf5b48bc61fcd30e51ebba97a4d0d3ba58f1ae6d8705cd01d99ad1a7fe4",
+  "guest_resident_memory_bytes": null,
+  "minimum_ram_mib": null
+}
