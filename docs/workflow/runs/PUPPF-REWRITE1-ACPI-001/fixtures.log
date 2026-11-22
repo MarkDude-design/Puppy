@@ -1,0 +1,54 @@
+test_candidate_changes_exactly_kernel_append (test_acpi_ab.AcpiExperimentTests.test_candidate_changes_exactly_kernel_append) ... ok
+test_candidate_functional_fail_or_warning_is_failure (test_acpi_ab.AcpiExperimentTests.test_candidate_functional_fail_or_warning_is_failure) ... Starting control-1 (about four minutes)
+Starting control-2 (about four minutes)
+Starting acpi-off-1 (about four minutes)
+Starting control-1 (about four minutes)
+Starting control-2 (about four minutes)
+Starting acpi-off-1 (about four minutes)
+ok
+test_control_cannot_already_disable_acpi (test_acpi_ab.AcpiExperimentTests.test_control_cannot_already_disable_acpi) ... ok
+test_existing_evidence_preserved (test_acpi_ab.AcpiExperimentTests.test_existing_evidence_preserved) ... BLOCKED: [Errno 17] File exists: '/tmp/tmpznr85z5p'
+ok
+test_failed_control_prevents_candidate (test_acpi_ab.AcpiExperimentTests.test_failed_control_prevents_candidate) ... Starting control-1 (about four minutes)
+ok
+test_four_functional_boots_and_warning_comparison (test_acpi_ab.AcpiExperimentTests.test_four_functional_boots_and_warning_comparison) ... Starting control-1 (about four minutes)
+Starting control-2 (about four minutes)
+Starting acpi-off-1 (about four minutes)
+Starting acpi-off-2 (about four minutes)
+ok
+test_missing_qemu_and_hash_mismatch_never_boot (test_acpi_ab.AcpiExperimentTests.test_missing_qemu_and_hash_mismatch_never_boot) ... {
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "status": "BLOCKED",
+  "boots": [],
+  "run_requested": true,
+  "source_builds": 0,
+  "acceptance": "NOT_DECLARED",
+  "comparison": "Kernel acpi=off only; raw logs retained, no output filtering",
+  "limits": "Serial-only QEMU feature-disable candidate, not hardware/root-cause repair",
+  "image_sha256": {
+    "bzImage": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7",
+    "rootfs.cpio.gz": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+  },
+  "reason": "ValueError: qemu-system-x86_64 missing; no boot attempted",
+  "elapsed_seconds": 4.7110000195971224e-05
+}
+{
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "status": "BLOCKED",
+  "boots": [],
+  "run_requested": true,
+  "source_builds": 0,
+  "acceptance": "NOT_DECLARED",
+  "comparison": "Kernel acpi=off only; raw logs retained, no output filtering",
+  "limits": "Serial-only QEMU feature-disable candidate, not hardware/root-cause repair",
+  "reason": "ValueError: fixture hash mismatch",
+  "elapsed_seconds": 2.6599999955578824e-05
+}
+ok
+test_no_reproduction_stops_before_candidate (test_acpi_ab.AcpiExperimentTests.test_no_reproduction_stops_before_candidate) ... Starting control-1 (about four minutes)
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.008s
+
+OK

@@ -1,0 +1,17 @@
+{
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "status": "BLOCKED",
+  "boots": [],
+  "run_requested": false,
+  "source_builds": 0,
+  "acceptance": "NOT_DECLARED",
+  "comparison": "Kernel acpi=off only; raw logs retained, no output filtering",
+  "limits": "Serial-only QEMU feature-disable candidate, not hardware/root-cause repair",
+  "image_sha256": {
+    "bzImage": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7",
+    "rootfs.cpio.gz": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+  },
+  "reason": "ValueError: qemu-system-x86_64 missing; no boot attempted",
+  "elapsed_seconds": 0.0033916570000656066,
+  "evidence_kind": "actual preflight with real accepted image files; QEMU absent, zero boots"
+}
