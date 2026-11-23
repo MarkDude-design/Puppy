@@ -1,0 +1,5 @@
+{
+  "token": "PUPPF_TOKEN_dd4b6b60bf432bf35b83d31f3d034c6f",
+  "command": "printf '\\n%s%s\\n' 'PUPPF_TOKEN_dd4b6b60bf' '432bf35b83d31f3d034c6f'\n",
+  "not_p0b_ack": true
+}

@@ -1,0 +1,107 @@
+[
+  {
+    "path": "acpi-off-1/qemu-argv.json",
+    "bytes": 477,
+    "sha256": "09672390602f596116209e220f5a2900bd43ce4a0653a7ebe99b52399af05ed4"
+  },
+  {
+    "path": "acpi-off-1/serial-events.jsonl",
+    "bytes": 541,
+    "sha256": "6f36abde3bee61dac2c06a95eed0503c2c3f4f7baa6ae888f4d14922552eaad1"
+  },
+  {
+    "path": "acpi-off-1/serial.log",
+    "bytes": 158,
+    "sha256": "326fedf5b48bc61fcd30e51ebba97a4d0d3ba58f1ae6d8705cd01d99ad1a7fe4"
+  },
+  {
+    "path": "acpi-off-1/shell-probe.json",
+    "bytes": 173,
+    "sha256": "203d9be559bc10c7d86c7e854ec08e11d032b757f7bd03b343e85a61c74da45a"
+  },
+  {
+    "path": "acpi-off-1/test-results.json",
+    "bytes": 1876,
+    "sha256": "1ec1f8395ceaacccbceaf6b7c0dfe474d6e1cc0b19e1cd0b21b8f3eb0b991677"
+  },
+  {
+    "path": "acpi-off-2/qemu-argv.json",
+    "bytes": 477,
+    "sha256": "09672390602f596116209e220f5a2900bd43ce4a0653a7ebe99b52399af05ed4"
+  },
+  {
+    "path": "acpi-off-2/serial-events.jsonl",
+    "bytes": 547,
+    "sha256": "cc1b6a0f3b15a9e11d224e825fc50baad0940a0662f433b612f0226c9389e514"
+  },
+  {
+    "path": "acpi-off-2/serial.log",
+    "bytes": 158,
+    "sha256": "a9f1d2cd2d228f1ab30a8a6d87c0d1387763e86da05942cde6238b9195784cbc"
+  },
+  {
+    "path": "acpi-off-2/shell-probe.json",
+    "bytes": 173,
+    "sha256": "e8d8fe4bdcf74c3530bde9053fbf700056368440451f2e9f5e05352fb8856fe5"
+  },
+  {
+    "path": "acpi-off-2/test-results.json",
+    "bytes": 1876,
+    "sha256": "5730731eb7d1b86305b34aeed2bf0b174e2ba9ec718a43e9ee91391f666139bc"
+  },
+  {
+    "path": "control-1/qemu-argv.json",
+    "bytes": 468,
+    "sha256": "3a857601696682be4dae23ac864f2dd0f74c82f03e42a64c224cf5fb675057cc"
+  },
+  {
+    "path": "control-1/serial-events.jsonl",
+    "bytes": 859,
+    "sha256": "3b9a531e562b869b2d7c546a1f8f3dfac611524bd72abc7370c0561dfb980ebb"
+  },
+  {
+    "path": "control-1/serial.log",
+    "bytes": 357,
+    "sha256": "31341a2f13c4c687c5df0781e0b0856bf6b4fd835246b267191f59c9bd038890"
+  },
+  {
+    "path": "control-1/shell-probe.json",
+    "bytes": 173,
+    "sha256": "46f01cb10d78c77d14ccf86fba1d19e3910003ae55437dbba59b1fdb56bc16d4"
+  },
+  {
+    "path": "control-1/test-results.json",
+    "bytes": 1864,
+    "sha256": "f901c115c211793f237c39c854db03a9cf8729531e7f0b5c730b1bea450a5f49"
+  },
+  {
+    "path": "control-2/qemu-argv.json",
+    "bytes": 468,
+    "sha256": "3a857601696682be4dae23ac864f2dd0f74c82f03e42a64c224cf5fb675057cc"
+  },
+  {
+    "path": "control-2/serial-events.jsonl",
+    "bytes": 859,
+    "sha256": "42b32ea975bdda44823b8c821e2586c0e048308866299fff42d74c7ca38305c7"
+  },
+  {
+    "path": "control-2/serial.log",
+    "bytes": 357,
+    "sha256": "1de010120f196a164e0f31b01db297f730e01f300b34f1088c98e8dc4e590a17"
+  },
+  {
+    "path": "control-2/shell-probe.json",
+    "bytes": 173,
+    "sha256": "fc31e8f2ce730e212c904729ac9d839c714783bee42c8e44403eef0458acefa6"
+  },
+  {
+    "path": "control-2/test-results.json",
+    "bytes": 1864,
+    "sha256": "4eaed1b69344a8c893356865c6fcfabf3b734f42a49e6b76345e5f6262c09906"
+  },
+  {
+    "path": "receipt.json",
+    "bytes": 1454,
+    "sha256": "2362fd6284fb405b1acda5c02c3a66597f7e18c509e3915217bba55952687608"
+  }
+]

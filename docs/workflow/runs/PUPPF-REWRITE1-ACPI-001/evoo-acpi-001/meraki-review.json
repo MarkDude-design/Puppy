@@ -1,0 +1,107 @@
+{
+  "reviewer": "Meraki",
+  "archive_sha256": "890ed3cfe7a48e4887f1965b71be2abeb4521fe251a1d714cd34909945d72cac",
+  "manifest_entries_verified": 21,
+  "raw_boots_checked": [
+    {
+      "boot": "control-1",
+      "warnings": 3,
+      "guest_hello": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          121
+        ],
+        [
+          3,
+          241
+        ]
+      ],
+      "host_gaps_s": [
+        120.03435558700585,
+        120.02566396999464
+      ],
+      "serial_sha256": "31341a2f13c4c687c5df0781e0b0856bf6b4fd835246b267191f59c9bd038890",
+      "status": "PASS"
+    },
+    {
+      "boot": "control-2",
+      "warnings": 3,
+      "guest_hello": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          121
+        ],
+        [
+          3,
+          241
+        ]
+      ],
+      "host_gaps_s": [
+        120.031438678001,
+        120.01897183499386
+      ],
+      "serial_sha256": "1de010120f196a164e0f31b01db297f730e01f300b34f1088c98e8dc4e590a17",
+      "status": "PASS"
+    },
+    {
+      "boot": "acpi-off-1",
+      "warnings": 0,
+      "guest_hello": [
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          121
+        ],
+        [
+          3,
+          241
+        ]
+      ],
+      "host_gaps_s": [
+        120.03415462300472,
+        120.02760954399128
+      ],
+      "serial_sha256": "326fedf5b48bc61fcd30e51ebba97a4d0d3ba58f1ae6d8705cd01d99ad1a7fe4",
+      "status": "PASS"
+    },
+    {
+      "boot": "acpi-off-2",
+      "warnings": 0,
+      "guest_hello": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          122
+        ],
+        [
+          3,
+          242
+        ]
+      ],
+      "host_gaps_s": [
+        120.04474040800415,
+        120.0349609679979
+      ],
+      "serial_sha256": "a9f1d2cd2d228f1ab30a8a6d87c0d1387763e86da05942cde6238b9195784cbc",
+      "status": "PASS"
+    }
+  ],
+  "only_argv_change": "acpi=off appended to -append value",
+  "image_hash_scope": "Recorded before/after hashes match previously independently rehashed build-001 images; image bytes are not included in this archive.",
+  "acceptance": "NOT_DECLARED",
+  "limits": "QEMU serial-only feature-disable comparison; no hardware or ACPI root-cause repair claim. No new QEMU boots performed in this review."
+}

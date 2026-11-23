@@ -1,0 +1,25 @@
+{
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "seat": "Meraki",
+  "source_baseline": "8f43250dd4bf4d26dffa8a8e263ec11522fafb89",
+  "status": "PREPARED_FOR_EVOO",
+  "recorded_at_utc": "2026-11-22T15:32:44.218266+00:00",
+  "fixture_tests": {
+    "count": 8,
+    "status": "PASS",
+    "real_qemu_boots": 0
+  },
+  "native_read_only_review": {
+    "agent": "s0_review",
+    "family": "shared GPT-family/workspace, not Z cross-family review",
+    "disposition": "PASS",
+    "actually_executed": "8fixture tests; no realQEMU or live signal cleanup here",
+    "limits": "Feature-disable comparison only, not root-cause/hardware repair"
+  },
+  "cloud_preflight": "Real accepted-image hashes verified; BLOCKED because QEMU absent; zero boots.",
+  "owner_reported_execution_host": "EVOO QEMU10.2.1 available; existing build001 images retained.",
+  "planned_execution": "Owner launches one prepared command; all four boot checks and warning comparison are automated.",
+  "acceptance": "NOT_DECLARED",
+  "metered_external_calls": 0,
+  "native_cost": null
+}

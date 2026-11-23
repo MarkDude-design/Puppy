@@ -1,0 +1,47 @@
+{
+  "task": "PUPPF-REWRITE1-ACPI-001",
+  "status": "PASS",
+  "boots": [
+    {
+      "mode": "control",
+      "run": 1,
+      "status": "PASS",
+      "acpi_warning_lines": 3,
+      "test_results": "control-1/test-results.json"
+    },
+    {
+      "mode": "control",
+      "run": 2,
+      "status": "PASS",
+      "acpi_warning_lines": 3,
+      "test_results": "control-2/test-results.json"
+    },
+    {
+      "mode": "acpi-off",
+      "run": 1,
+      "status": "PASS",
+      "acpi_warning_lines": 0,
+      "test_results": "acpi-off-1/test-results.json"
+    },
+    {
+      "mode": "acpi-off",
+      "run": 2,
+      "status": "PASS",
+      "acpi_warning_lines": 0,
+      "test_results": "acpi-off-2/test-results.json"
+    }
+  ],
+  "run_requested": true,
+  "source_builds": 0,
+  "acceptance": "NOT_DECLARED",
+  "comparison": "Kernel acpi=off only; raw logs retained, no output filtering",
+  "limits": "Serial-only QEMU feature-disable candidate, not hardware/root-cause repair",
+  "image_sha256": {
+    "bzImage": "75bb3de22351a5e97c601650210dcbdcbf385ad69c9bd1bfb90b4832a628bfe7",
+    "rootfs.cpio.gz": "2d51be705deca6b606c6e2de15311d7669576b52d12e83801e670981aa1c089e"
+  },
+  "qemu_version": "QEMU emulator version 10.2.1 (Debian 1:10.2.1+ds-1ubuntu3.3)",
+  "checkout_commit": "8b77d9a0f9eda74cb09589970cce39859606bd1a",
+  "reason": "Two controls reproduce warnings; two acpi=off boots pass with no target warnings",
+  "elapsed_seconds": 976.2172813770012
+}
