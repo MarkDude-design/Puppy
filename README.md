@@ -19,12 +19,12 @@ Puppf is a learning and validation project: packet-based Buildroot experimentati
 
 ## Start here
 
-- **[Evidence and acceptance thread — issue #15](issues/15)** — the chronological record of every build, review, and ruling. Read from the top.
-- **Actual binaries:** the accepted images live on the immutable [`artifacts/evoo-build-001`](tree/artifacts/evoo-build-001) branch with pinned `SHA256SUMS`.
-- **Launcher:** [PR #21](pull/21) — pinned offline terminal launcher. Hash-verifies the evidence ZIP, copies images to a temp dir, restores the host terminal on Ctrl+C. Merged.
-- **Native build runner:** [PR #25](pull/25) — explicit local Linux entrypoint. Preflight by default, one-job enforcement, resource checks, and it refuses to run when `GITHUB_ACTIONS` is set. Merged.
-- **Workstation guide:** [PR #24](pull/24) — how the laptop was set up (Lubuntu) and how the accepted image is verified and run.
-- **Serial test harness:** [PR #20](pull/20). **Origin and recovery archive:** [PR #23](pull/23).
+- **[Evidence and acceptance thread — issue #15](https://github.com/MarkDude-design/Puppy/issues/15)** — the chronological record of every build, review, and ruling. Read from the top.
+- **Actual binaries:** the accepted images live on the immutable [`artifacts/evoo-build-001`](https://github.com/MarkDude-design/Puppy/tree/artifacts/evoo-build-001) branch with pinned `SHA256SUMS`.
+- **Launcher:** [PR #21](https://github.com/MarkDude-design/Puppy/pull/21) — pinned offline terminal launcher. Hash-verifies the evidence ZIP, copies images to a temp dir, restores the host terminal on Ctrl+C. Merged.
+- **Native build runner:** [PR #25](https://github.com/MarkDude-design/Puppy/pull/25) — explicit local Linux entrypoint. Preflight by default, one-job enforcement, resource checks, and it refuses to run when `GITHUB_ACTIONS` is set. Merged.
+- **Workstation guide:** [PR #24](https://github.com/MarkDude-design/Puppy/pull/24) — how the laptop was set up (Lubuntu) and how the accepted image is verified and run.
+- **Serial test harness:** [PR #20](https://github.com/MarkDude-design/Puppy/pull/20). **Origin and recovery archive:** [PR #23](https://github.com/MarkDude-design/Puppy/pull/23).
 
 ## Launching the accepted image locally
 
